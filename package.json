@@ -2,7 +2,7 @@
   "name": "harmony",
   "version": "1.0.0",
   "description": "Group music creation application",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js"
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/iProgYou/harmony.git"
   },
-  "author": "Zack Barbieri, Charles Coombs, Issac Yoon, William B Sexton",
+  "author": "Zack Barbieri, Charles Coombs, Isaac Yoon, William B Sexton",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/iProgYou/harmony/issues"
@@ -29,5 +29,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
-  }
+  },
+  "keywords": []
 }
