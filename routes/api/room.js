@@ -47,3 +47,5 @@ router.post('/',
     newRoom.save().then(room => res.json(room));
   }
 );
+
+module.exports = router;
