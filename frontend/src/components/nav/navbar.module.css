@@ -1,0 +1,37 @@
+.navbar{
+  display: flex;
+  background-color: gray;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 3vw;
+  margin: 0;
+}
+.navbar h1{
+  font-size: 45px;
+  color: white;
+}
+.userLinks{
+  display: flex;
+  align-items: center;
+}
+
+.userLinks > * {
+  background-color: green;
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: solid black 3px;
+  margin: 3px;
+}
+.joinRoom{
+  font-size: 18px;
+  font-weight: normal;
+  background-color: green;
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: solid black 3px;
+  margin: 3px; 
+}
+.joinDiv{
+  display: flex;
+  align-items: center;
+}
