@@ -3,12 +3,20 @@ import GridColumn from './grid_col';
 import styles from './grid.module.css';
 import * as Tone from 'tone';
 
-import A1 from "../../notes/a_pentatonic/A1.mp3";
-import B1 from "../../notes/a_pentatonic/B1.mp3";
-import Cs2 from "../../notes/a_pentatonic/Cs2.mp3";
-import E2 from "../../notes/a_pentatonic/E2.mp3";
-import Fs2 from "../../notes/a_pentatonic/Fs2.mp3";
-import A2 from "../../notes/a_pentatonic/A2.mp3";
+// import A1 from "../../notes/a_pentatonic/A1.mp3";
+// import B1 from "../../notes/a_pentatonic/B1.mp3";
+// import Cs2 from "../../notes/a_pentatonic/Cs2.mp3";
+// import E2 from "../../notes/a_pentatonic/E2.mp3";
+// import Fs2 from "../../notes/a_pentatonic/Fs2.mp3";
+// import A2 from "../../notes/a_pentatonic/A2.mp3";
+
+
+import A1 from "../../notes/piano_a_pentatonic/A1.mp3";
+import B1 from "../../notes/piano_a_pentatonic/B1.mp3";
+import Cs2 from "../../notes/piano_a_pentatonic/Cs2.mp3";
+import E2 from "../../notes/piano_a_pentatonic/E2.mp3";
+import Fs2 from "../../notes/piano_a_pentatonic/Fs2.mp3";
+import A2 from "../../notes/piano_a_pentatonic/A2.mp3";
 
 export default class Grid extends React.Component {
   constructor(props){
@@ -124,7 +132,11 @@ export default class Grid extends React.Component {
     />
     )
     return(
-      <div className={styles.grid}>
+
+      <div className={styles.gridOuter}>
+        <div className={styles.grid}>
+        {cols}
+        </div>
         <button onClick={this.handleStart} disabled={!this.state.isLoaded || this.state.disableStart}>
           start
         </button>
@@ -136,7 +148,6 @@ export default class Grid extends React.Component {
         <button disabled={!this.state.isLoaded} onClick={this.handleRestart}>
           restart
         </button>
-        {cols}
       </div>
     )
   }
