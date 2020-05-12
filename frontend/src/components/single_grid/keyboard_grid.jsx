@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from './grid';
+import Grid from './grid_partial';
 import * as Tone from 'tone';
 
 import A1 from "../../notes/keyboard_a_pentatonic/A1.mp3";
@@ -15,7 +15,6 @@ export default class KeyboardGrid extends React.Component {
 
     this.state = {
       isLoaded: false,
-
     }
 
     this.sampler = new Tone.Sampler(
@@ -29,19 +28,16 @@ export default class KeyboardGrid extends React.Component {
 
   }
   
-
   render(){
     if (!this.state.isLoaded) return null;
-    
     return(
 
       <Grid 
         isLoaded={ this.state.isLoaded }
-        cols={ 8 }
+        cols={ this.props.cols }
         sampler={ this.sampler }
       />
       
     )
   }
-
 }
