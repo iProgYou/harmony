@@ -13,13 +13,7 @@ import A2 from "../../notes/a_pentatonic/A2.mp3";
 export default class Grid extends React.Component {
   constructor(props){
     super(props);
-    this.state = { isLoaded: false ,selected: [
-      "", "", "", "", "", "", "", "",
-      "", "", "", "", "", "", "", "",
-      "", "", "", "", "", "", "", "",
-      "", "", "", "", "", "", "", "",
-    ]
-    }
+    this.state = { isLoaded: false }
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
@@ -34,12 +28,14 @@ export default class Grid extends React.Component {
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
   }
-  // noteMap(notes){
-  //  notes.map((noteName, i) => {
-  //   if (noteName) {
-  //     return { time: i * Tone.time('4n'), note: noteName, dur: '4n' }
-  //   }
-  // })
+  
+  componentDidMount() {
+    let arrCols = [];
+    for (let i = 0; i < this.props.cols; i++) {
+      arrCols.push("")
+    }
+    this.setState({ selected: arrCols })
+  }
 
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
@@ -75,6 +71,7 @@ export default class Grid extends React.Component {
   }
 
   render(){
+    if (!this.state.selected) return null;
     const cols = this.state.selected.map( (ele, colNumber) => 
     <GridColumn
         key={colNumber}

@@ -6,7 +6,9 @@ class MainPage extends React.Component {
   render() {
     return (
       <div>
-        <Grid />
+        <Grid 
+          cols={ 8 }
+        />
         <h1>Harmony</h1>
         <footer>
           Copyright &copy; 2020 Harmony
