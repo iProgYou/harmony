@@ -21,7 +21,7 @@ class GridColumn extends React.Component{
 
   render() {
     const selected = this.state.selected;
-    return (<div>
+    return (<div className={styles.gridCol}>
       {this.props.noteNames.map((note, idx) => (
         <GridItem
           key={idx}

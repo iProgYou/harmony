@@ -132,7 +132,11 @@ export default class Grid extends React.Component {
     />
     )
     return(
-      <div className={styles.grid}>
+
+      <div className={styles.gridOuter}>
+        <div className={styles.grid}>
+        {cols}
+        </div>
         <button onClick={this.handleStart} disabled={!this.state.isLoaded || this.state.disableStart}>
           start
         </button>
@@ -144,7 +148,6 @@ export default class Grid extends React.Component {
         <button disabled={!this.state.isLoaded} onClick={this.handleRestart}>
           restart
         </button>
-        {cols}
       </div>
     )
   }
