@@ -1,6 +1,6 @@
 .gridCol{
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 
 .gridItem{
@@ -17,14 +17,6 @@
   width: 85vw;
   overflow-x: auto;
   margin: auto;
-  justify-content: center;
-}
-.gridOuter{
-  display: flex;
-  align-items: center;
-  width: 100vw;
-  flex-direction: column;
-  padding-top: 50px;
 }
 .gridItem.selected{
   border-style: inset;
@@ -54,10 +46,21 @@ html  {
 .gridItem.A1.selected{
   background-color: rgb(225, 37, 225);
 }
-
-.startButton{
-  margin-top: 7px;
-  width: 608px;
-  height: 30px;
-  max-width: 85vw;
+.gridItem.A2.selected:hover{
+  background-color: rgb(254, 138, 138);
+}
+.gridItem.F\#2.selected:hover{
+  background-color: rgb(255, 212, 132);
+}
+.gridItem.C\#2.selected:hover{
+  background-color: rgb(183, 254, 183);
+}
+.gridItem.E2.selected:hover{
+  background-color: rgb(249, 249, 176);
+}
+.gridItem.B1.selected:hover{
+  background-color: rgb(173, 250, 240);
+}
+.gridItem.A1.selected:hover{
+  background-color: rgb(216, 138, 216);
 }
