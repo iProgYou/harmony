@@ -22,14 +22,18 @@ export default class Grid extends React.Component {
       "", "", "", "", "", "", "", "",
     ],
     last: 0,
-    playing: false
+    playing: false,
+    disableStart: false,
+    scheduleInterval: null
     }
-    console.log(Tone.state === "paused") 
 
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
-    this.handlePause = this.handlePause.bind(this)
+    this.handlePause = this.handlePause.bind(this);
+    this.updateLast = this.updateLast.bind(this)
+    this.handleRestart = this.handleRestart.bind(this)
+
     this.sampler = new Tone.Sampler(
       { A1, B1, "C#2": Cs2, E2, "F#2": Fs2, A2 },
       {
@@ -38,6 +42,7 @@ export default class Grid extends React.Component {
         }
       }
     ).toMaster();
+
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
   }
@@ -54,43 +59,64 @@ export default class Grid extends React.Component {
   }
 
   handleClick(note) {
-
-    console.log("here")
     this.sampler.triggerAttack(note);
   }
 
   handleStart() {
     Tone.Transport.toggle();
-    this.setState({ playing: !this.state.playing })
-    let i = 0
+    this.setState({ playing: !this.state.playing, disableStart: true});
+    let i = 0;
     const interval = Tone.Transport.scheduleRepeat((time) => {
-      this.sampler.triggerAttackRelease(this.state.selected[i],"8n")
+      if (i === 0 ) {
+        this.setState({ scheduleInterval: interval  });
+      }
+      if (this.state.selected[i]) {
+        this.sampler.triggerAttackRelease(this.state.selected[i], "8n");
+      }
       i += 1
-      this.setState({last: this.state.last+1})
-      if (this.state.selected[i] == "") {
-        Tone.Transport.clear(interval)
-        Tone.Transport.toggle()
-        this.setState({ playing: !this.state.playing })
-
+      if (i === this.state.last + 1) {
+        Tone.Transport.clear(interval);
+        Tone.Transport.toggle();
+        this.setState({ playing: !this.state.playing, disableStart: false});
       }
     }, "8n");
-  
-
   }
 
   handlePause() {
+
     if (this.state.playing) {
-    Tone.Transport.pause()
+      Tone.Transport.pause();
     }else {
-      Tone.Transport.start()
-
+      Tone.Transport.start();
     }
-    this.setState({ playing: !this.state.playing })
+    this.setState({ playing: !this.state.playing });
+  }
 
+  handleRestart() {
+
+    if (this.state.scheduleInterval) {
+      Tone.Transport.clear(this.state.scheduleInterval);
+      Tone.Transport.toggle();
+      this.setState({ playing: !this.state.playing, disableStart: false, scheduleInterval: null });   
+     } 
 
   }
 
+
+  updateLast() {
+    let lastIdx = 0
+    for (let i = this.state.selected.length-1; i>=0; i--) {
+      if (this.state.selected[i] !== "") {
+        lastIdx = i;
+        break;
+      }
+    }
+    this.setState( { last: lastIdx })
+  }
+
+
   render(){
+
     const cols = this.state.selected.map( (ele, colNumber) => 
     <GridColumn
         key={colNumber}
@@ -98,16 +124,21 @@ export default class Grid extends React.Component {
         noteNames={this.noteNames}
         handleClick={this.handleClick}
         isLoaded={this.state.isLoaded}
+        updateLast = {this.updateLast}
     />
     )
     return(
       <div className={styles.grid}>
-        <button disabled={!this.state.isLoaded} onClick={this.handleStart}>
+        <button onClick={this.handleStart} disabled={!this.state.isLoaded || this.state.disableStart}>
           start
         </button>
 
         <button disabled={!this.state.isLoaded} onClick={this.handlePause}>
           pause
+        </button>
+
+        <button disabled={!this.state.isLoaded} onClick={this.handleRestart}>
+          restart
         </button>
         {cols}
       </div>
