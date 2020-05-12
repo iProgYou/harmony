@@ -9,9 +9,9 @@ class MainPage extends React.Component {
         <Grid 
           cols={ 8 }
         />
-        <h1>Harmony</h1>
+        <h1>Harmony-Music</h1>
         <footer>
-          Copyright &copy; 2020 Harmony
+          Copyright &copy; 2020 Harmony-Music
         </footer>
       </div>
     );
