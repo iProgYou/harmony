@@ -1,0 +1,48 @@
+.gridCol{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.gridItem{
+  width: 70px;
+  height:70px;
+  margin: 3px;
+  background-color: white;
+  border-style: outset;
+  border: 4px #dadce0;
+  border-radius: 5px;
+}
+.grid{
+  display: flex;
+  width: 85vw;
+  overflow-x: auto;
+  margin: auto;
+}
+.gridItem.selected{
+  border-style: inset;
+}
+
+html  {
+  background-color: black;
+}
+.grid{
+  display: flex;
+}
+.gridItem.A2.selected{
+  background-color: red;
+}
+.gridItem.F\#2.selected{
+  background-color: orange;
+}
+.gridItem.C\#2.selected{
+  background-color: rgb(9, 225, 9);
+}
+.gridItem.E2.selected{
+  background-color: yellow;
+}
+.gridItem.B1.selected{
+  background-color: rgb(12, 244, 213);
+}
+.gridItem.A1.selected{
+  background-color: rgb(225, 37, 225);
+}
