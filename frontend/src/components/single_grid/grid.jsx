@@ -63,7 +63,7 @@ export default class Grid extends React.Component {
       console.log(i)
       this.sampler.triggerAttackRelease(this.state.selected[i],"8n")
       i += 1
-      if (i == this.state.selected.length) {
+      if (i === this.state.selected.length) {
         // Tone.Transport.cancel()
         Tone.Transport.clear(interval)
         Tone.Transport.toggle()
