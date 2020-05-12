@@ -13,7 +13,7 @@ module.exports = function validateRoomInput(data) {
   if (Validator.isEmpty(data.text)) {
     errors.text = 'Text field is required';
   }
-
+  // possibly add a validation where the number of members is capped at 4
   return {
     errors,
     isValid: Object.keys(errors).length === 0
