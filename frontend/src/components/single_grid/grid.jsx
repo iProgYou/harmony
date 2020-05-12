@@ -13,16 +13,23 @@ import A2 from "../../notes/a_pentatonic/A2.mp3";
 export default class Grid extends React.Component {
   constructor(props){
     super(props);
-    this.state = { isLoaded: false ,selected: [
+    this.state = { 
+      isLoaded: false,
+      selected: [
       "", "", "", "", "", "", "", "",
       "", "", "", "", "", "", "", "",
       "", "", "", "", "", "", "", "",
       "", "", "", "", "", "", "", "",
-    ]
+    ],
+    last: 0,
+    playing: false
     }
+    console.log(Tone.state === "paused") 
+
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
+    this.handlePause = this.handlePause.bind(this)
     this.sampler = new Tone.Sampler(
       { A1, B1, "C#2": Cs2, E2, "F#2": Fs2, A2 },
       {
@@ -34,12 +41,7 @@ export default class Grid extends React.Component {
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
   }
-  // noteMap(notes){
-  //  notes.map((noteName, i) => {
-  //   if (noteName) {
-  //     return { time: i * Tone.time('4n'), note: noteName, dur: '4n' }
-  //   }
-  // })
+
 
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
@@ -49,7 +51,6 @@ export default class Grid extends React.Component {
       arr[column] = this.noteNames[index];
     } else arr[column] = "";
     this.setState({selected: arr})
-    // console.log(this.noteMap(this.state.selected))
   }
 
   handleClick(note) {
@@ -59,19 +60,34 @@ export default class Grid extends React.Component {
   }
 
   handleStart() {
+    Tone.Transport.toggle();
+    this.setState({ playing: !this.state.playing })
     let i = 0
     const interval = Tone.Transport.scheduleRepeat((time) => {
-      console.log(i)
       this.sampler.triggerAttackRelease(this.state.selected[i],"8n")
       i += 1
-      if (i === this.state.selected.length) {
-        // Tone.Transport.cancel()
+      this.setState({last: this.state.last+1})
+      if (this.state.selected[i] == "") {
         Tone.Transport.clear(interval)
         Tone.Transport.toggle()
+        this.setState({ playing: !this.state.playing })
+
       }
     }, "8n");
-    Tone.Transport.bpm.value = 100;
-    Tone.Transport.toggle();
+  
+
+  }
+
+  handlePause() {
+    if (this.state.playing) {
+    Tone.Transport.pause()
+    }else {
+      Tone.Transport.start()
+
+    }
+    this.setState({ playing: !this.state.playing })
+
+
   }
 
   render(){
@@ -88,6 +104,10 @@ export default class Grid extends React.Component {
       <div className={styles.grid}>
         <button disabled={!this.state.isLoaded} onClick={this.handleStart}>
           start
+        </button>
+
+        <button disabled={!this.state.isLoaded} onClick={this.handlePause}>
+          pause
         </button>
         {cols}
       </div>
