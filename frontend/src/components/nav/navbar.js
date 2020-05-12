@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import styles from './navbar.module.css';
+
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,7 @@ class NavBar extends React.Component {
   logoutUser(e) {
     e.preventDefault();
     this.props.logout();
+    this.props.history.push('/');
   }
 
   // Selectively render links dependent on whether the user is logged in
@@ -45,4 +48,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
