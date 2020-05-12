@@ -67,7 +67,7 @@ export default class DrumGrid extends React.Component {
     handleClick(note) {
       this.sampler.triggerAttack(note);
     }
-  
+   
     handleStart() {
       if (this.state.last !== 0) {
         Tone.Transport.toggle();
@@ -144,16 +144,16 @@ export default class DrumGrid extends React.Component {
           {
             this.state.scheduleInterval === null ? (
             <button onClick={this.handleStart} disabled={!this.state.isLoaded || this.state.disableStart}>
-              start
+              START
             </button>
               ) : (
             <button disabled={!this.state.isLoaded} onClick={this.handlePause}>
-              pause
+              PAUSE
             </button>
               )
           }
             <button disabled={!this.state.isLoaded} onClick={this.handleRestart}>
-              restart
+              RESTART
             </button>
         </div>
       )

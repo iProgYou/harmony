@@ -1,66 +1,114 @@
 .gridCol{
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
+.gridOuter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.gridOuter > button{
+  margin: 3px;
+  max-width: 85vw;
+  width: 607px;
+  height: 30px;
+  background-color: #002147;
+  color: #dadce0;
+  font-size: 19px;
+  border-radius:5px;
+}
+.gridOuter > button:hover{
+  background-color: #053265;
+  border-style:outset;
+  transition: .2s;
+}
+.gridOuter > button:active{
+  background-color: #000f21;
+  border-style:inset;
 
+  transition: .2s;
+}
 .gridItem{
   width: 70px;
   height:70px;
   margin: 3px;
-  background-color: white;
+  background-color: #c2cfe9;
   border-style: outset;
   border: 4px #dadce0;
   border-radius: 5px;
+  transition: .2s;
+}
+.gridItem:hover{
+  background-color: #d5e3fe;
+  transition: .2s;
 }
 .grid{
   display: flex;
   width: 85vw;
   overflow-x: auto;
   margin: auto;
+  justify-content: center;
 }
 .gridItem.selected{
   border-style: inset;
+  transition: .2s;
 }
 
 html  {
-  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle 50vw at bottom right, #AA45AC, #712F79, transparent),
+            radial-gradient(circle 50vw at bottom left, #4487E0, #004BA8, black);
 }
 .grid{
   display: flex;
 }
 .gridItem.A2.selected{
   background-color: red;
+  transition: .2s;
 }
 .gridItem.F\#2.selected{
   background-color: orange;
+  transition: .2s;
 }
 .gridItem.C\#2.selected{
   background-color: rgb(9, 225, 9);
+  transition: .2s;
 }
 .gridItem.E2.selected{
   background-color: yellow;
+  transition: .2s;
 }
 .gridItem.B1.selected{
   background-color: rgb(12, 244, 213);
+  transition: .2s;
 }
 .gridItem.A1.selected{
   background-color: rgb(225, 37, 225);
+  transition: .2s;
 }
-.gridItem.A2.selected:hover{
+.gridItem.A2.selected:hover{ 
   background-color: rgb(254, 138, 138);
+  transition: .2s;
 }
 .gridItem.F\#2.selected:hover{
   background-color: rgb(255, 212, 132);
+  transition: .2s;
 }
 .gridItem.C\#2.selected:hover{
   background-color: rgb(183, 254, 183);
+  transition: .2s;
 }
 .gridItem.E2.selected:hover{
   background-color: rgb(249, 249, 176);
+  transition: .2s;
 }
 .gridItem.B1.selected:hover{
   background-color: rgb(173, 250, 240);
+  transition: .2s;
 }
 .gridItem.A1.selected:hover{
   background-color: rgb(216, 138, 216);
+  transition: .2s;
 }
