@@ -3,8 +3,12 @@
   background-color: gray;
   justify-content: space-between;
   align-items: center;
-  padding: 0 3vw;
+  padding: 10px 3vw;
   margin: 0;
+}
+.navbar h1{
+  font-size: 45px;
+  color: white;
 }
 .userLinks{
   display: flex;
