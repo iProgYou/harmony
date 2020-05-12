@@ -1,6 +1,6 @@
 import React from 'react';
 import GridItem from './grid_item'
-import styles from './grid.module.css'
+import styles from './grid.module.css';
 
 class GridColumn extends React.Component{
   constructor(props){
@@ -29,7 +29,7 @@ class GridColumn extends React.Component{
           handleSelect={()=>this.handleSelect(note, idx)}
           note={note}
           isLoaded={this.props.isLoaded}
-          />
+        />
           ))}
           </div>
       

@@ -1,5 +1,6 @@
 import React from 'react';
 import GridColumn from './grid_col';
+import styles from './grid.module.css';
 import * as Tone from 'tone';
 
 import A1 from "../../notes/a_pentatonic/A1.mp3";
@@ -84,7 +85,7 @@ export default class Grid extends React.Component {
     />
     )
     return(
-      <div className="grid">
+      <div className={styles.grid}>
         <button disabled={!this.state.isLoaded} onClick={this.handleStart}>
           start
         </button>
