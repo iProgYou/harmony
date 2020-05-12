@@ -10,6 +10,7 @@ class MainPage extends React.Component {
         <Grid 
           cols={ 8 }
         />
+
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
           Copyright &copy; 2020 Harmony
