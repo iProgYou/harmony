@@ -10,7 +10,7 @@ import E2 from "../../notes/drums/hho.mp3";
 import Fs2 from "../../notes/drums/agogoHigh.mp3";
 import A2 from "../../notes/drums/agogoLow.mp3";
 
-export default class BassGrid extends React.Component {
+export default class DrumGrid extends React.Component {
     constructor(props){
       super(props);
   
