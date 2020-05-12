@@ -21,7 +21,16 @@ import A2 from "../../notes/piano_a_pentatonic/A2.mp3";
 export default class Grid extends React.Component {
   constructor(props){
     super(props);
-    this.state = { isLoaded: false }
+
+    this.state = {
+      isLoaded: false,
+      selected: null,
+      last: 0,
+      playing: false,
+      disableStart: false,
+      scheduleInterval: null
+    }
+
    
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -67,23 +76,25 @@ export default class Grid extends React.Component {
   }
 
   handleStart() {
-    Tone.Transport.toggle();
-    this.setState({ playing: !this.state.playing, disableStart: true});
-    let i = 0;
-    const interval = Tone.Transport.scheduleRepeat((time) => {
-      if (i === 0 ) {
-        this.setState({ scheduleInterval: interval  });
-      }
-      if (this.state.selected[i]) {
-        this.sampler.triggerAttackRelease(this.state.selected[i], "8n");
-      }
-      i += 1
-      if (i === this.state.last + 1) {
-        Tone.Transport.clear(interval);
-        Tone.Transport.toggle();
-        this.setState({ playing: !this.state.playing, disableStart: false});
-      }
-    }, "8n");
+    if (this.state.last !== 0) {
+      Tone.Transport.toggle();
+      this.setState({ playing: !this.state.playing, disableStart: true});
+      let i = 0;
+      const interval = Tone.Transport.scheduleRepeat((time) => {
+        if (i === 0 ) {
+          this.setState({ scheduleInterval: interval  });
+        }
+        if (this.state.selected[i]) {
+          this.sampler.triggerAttackRelease(this.state.selected[i], "8n");
+        }
+        i += 1
+        if (i === this.state.last + 1) {
+          Tone.Transport.clear(interval);
+          Tone.Transport.toggle();
+          this.setState({ playing: !this.state.playing, disableStart: false, scheduleInterval: null});
+        }
+      }, "8n");
+    }
   }
 
   handlePause() {
@@ -93,7 +104,7 @@ export default class Grid extends React.Component {
     }else {
       Tone.Transport.start();
     }
-    this.setState({ playing: !this.state.playing });
+    this.setState({playing: !this.state.playing });
   }
 
   handleRestart() {
@@ -135,21 +146,26 @@ export default class Grid extends React.Component {
 
       <div className={styles.gridOuter}>
         <div className={styles.grid}>
-        {cols}
+          {cols}
         </div>
-        <button onClick={this.handleStart} disabled={!this.state.isLoaded || this.state.disableStart}>
-          start
-        </button>
-
-        <button disabled={!this.state.isLoaded} onClick={this.handlePause}>
-          pause
-        </button>
-
-        <button disabled={!this.state.isLoaded} onClick={this.handleRestart}>
-          restart
-        </button>
+        {
+          this.state.scheduleInterval === null ? (
+          <button onClick={this.handleStart} disabled={!this.state.isLoaded || this.state.disableStart}>
+            start
+          </button>
+            ) : (
+          <button disabled={!this.state.isLoaded} onClick={this.handlePause}>
+            pause
+          </button>
+            )
+        }
+          <button disabled={!this.state.isLoaded} onClick={this.handleRestart}>
+            restart
+          </button>
       </div>
     )
   }
 
 }
+
+
