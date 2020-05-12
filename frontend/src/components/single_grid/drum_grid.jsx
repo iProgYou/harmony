@@ -55,12 +55,13 @@ export default class BassGrid extends React.Component {
   
     //handle update updates the state of the grid, taking in the number of the column,
     //and the selected index
-    handleUpdate(column, index){
-      let arr = this.state.selected
-      if(index !== -1){
-        arr[column] = this.noteNames[index];
-      } else arr[column] = "";
-      this.setState({selected: arr})
+    handleUpdate(column, arr){
+      let selected = this.state.selected
+      selected[column] = arr;
+    //   if(arr.length === 0){
+    //     selected[column] = [];
+    //   } else selected[column] = arr;
+      this.setState({ selected })
     }
   
     handleClick(note) {
