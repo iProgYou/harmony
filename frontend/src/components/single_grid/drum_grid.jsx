@@ -144,7 +144,7 @@ export default class DrumGrid extends React.Component {
           </div>
           {
             this.state.scheduleInterval === null ? (
-            <button onClick={this.handleStart} disabled={!this.state.isLoaded || this.state.disableStart}>
+            <button onClick={this.handleStart} disabled={!this.state.isLoaded}>
               START
             </button>
               ) : (
