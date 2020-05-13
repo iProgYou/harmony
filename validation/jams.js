@@ -4,14 +4,14 @@ const validText = require('./valid-text');
 module.exports = function validateJamInput(data) {
   let errors = {};
 
-  data.text = validText(data.text) ? data.text : '';
+  data.name = validText(data.name) ? data.name : '';
 
-  if (!Validator.isLength(data.text, { min: 5, max: 140 })) {
-    errors.text = 'Tweet must be between 5 and 140 characters';
+  if (!Validator.isLength(data.name, { min: 5, max: 100 })) {
+    errors.name = 'Name must be between 5 and 100 characters';
   }
 
-  if (Validator.isEmpty(data.text)) {
-    errors.text = 'Text field is required';
+  if (Validator.isEmpty(data.name)) {
+    errors.name = 'Jam Name field is required';
   }
 
   return {
