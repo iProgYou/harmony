@@ -23,8 +23,17 @@ class MainPage extends React.Component {
             [ 'B3', 'B4', 'D4' ]
           ]
           }
-          mainGridNotes={["","","C#2","B1","","","C#2","B1"]}
-          instrument={"keyboard"}
+          mainGridNotes={ [
+            ["A1", "F#2"],
+            ["A1"],
+            ["B1", "F#2"],
+            ["A1"],
+            ["F#2"],
+            ["A1"],
+            ["F#2", "B1"],
+            ["B1", "E2"]
+        ]}
+          instrument={"drums"}
         />
 
         <h1 className={styles.blurb}>Make Music</h1>

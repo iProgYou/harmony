@@ -6,6 +6,7 @@ class GridColumn extends React.Component{
   constructor(props){
     super(props);
     this.state = { selected: [] };
+    // this.state = {  }
   }
   
   handleSelect(note){

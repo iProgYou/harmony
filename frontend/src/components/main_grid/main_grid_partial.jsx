@@ -1,5 +1,6 @@
 import React from 'react';
 import GridColumn from '../single_grid/grid_col';
+import MultiGridColumn from '../single_grid/grid_col_multi';
 import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
 
@@ -54,8 +55,14 @@ export default class Grid extends React.Component {
   }
 
   handleClick(note) {
-    
-    this.props.sampler.triggerAttack(note);
+    let encodeNotes = {
+      "keyboard": {"A1":"A3", "B1":"B3", "C#2":"C3", "E2": "D3", "F#2":"E3", "A2":"F3"},
+      "piano": {"A1":"A2", "B1":"B2", "C#2":"C2", "E2": "D2", "F#2":"E2", "A2":"F2"},
+      "bass": {"A1":"A1", "B1":"B1", "C#2":"C1", "E2": "D1", "F#2":"E1", "A2":"F1"},
+      "drums": {"A1":"A4", "B1":"B4", "C#2":"C4", "E2": "D4", "F#2":"E4", "A2":"F4"}
+
+    }
+    this.props.sampler.triggerAttack(encodeNotes[this.props.instrument][note]);
   }
 
   // TEST 
@@ -145,17 +152,32 @@ export default class Grid extends React.Component {
   render(){
 
     if (!this.state.selected) return null;
-    const cols = this.state.selected.map( (ele, colNumber) => 
-    <GridColumn
-        selected={ele}
-        idx = {colNumber}
-        key={colNumber}
-        handleUpdate = {index => this.handleUpdate(colNumber, index)}
-        noteNames={this.noteNames}
-        handleClick={this.handleClick}
-        isLoaded={this.props.isLoaded}
-        updateLast = {this.updateLast}
-    />
+    const cols = this.props.instrument === "drums" ? (
+      this.state.selected.map( (ele, colNumber) => 
+        <MultiGridColumn
+            selected={ele}
+            idx = {colNumber}
+            key={colNumber}
+            handleUpdate = {index => this.handleUpdate(colNumber, index)}
+            noteNames={this.noteNames}
+            handleClick={this.handleClick}
+            isLoaded={this.props.isLoaded}
+            updateLast = {this.updateLast}
+        />
+      )
+    ) : (
+      this.state.selected.map( (ele, colNumber) => 
+        <GridColumn
+            selected={ele}
+            idx = {colNumber}
+            key={colNumber}
+            handleUpdate = {index => this.handleUpdate(colNumber, index)}
+            noteNames={this.noteNames}
+            handleClick={this.handleClick}
+            isLoaded={this.props.isLoaded}
+            updateLast = {this.updateLast}
+        />
+      )
     )
     return(
 
