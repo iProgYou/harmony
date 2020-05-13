@@ -1,6 +1,7 @@
 import React from 'react';
-import Grid from '../single_grid/grid_partial';
-import MiniGrid from './mini_grid';
+import MainGridPartial from './main_grid_partial';
+import * as Tone from 'tone';
+// import MiniGrid from './mini_grid';
 
 // bass
 import bA1 from "../../notes/bass_a_pentatonic/A1.mp3";
@@ -31,6 +32,13 @@ import dE2 from "../../notes/drums/hho.mp3";
 import dFs2 from "../../notes/drums/agogoHigh.mp3";
 import dA2 from "../../notes/drums/agogoLow.mp3";
 
+// {
+//     A1: bA1, B1: bB1, C1: bCs2, D1: bE2, E1: bFs2, F1: bA2, 
+//     A2: pA1, B2: pB1, C2: pCs2, D2: pE2, E2: pFs2, F2: pA2,
+//     A3: kA1, B3: kB1, C3: kCs2, D3: kE2, E3: kFs2, F3: kA2, 
+//     A4: dA1, B4: dB1, C4: dCs2, D4: dE2, E4: dFs2, F4: dA2, 
+// }
+
 class MainGrid extends React.Component {
     constructor(props) {
         super(props)
@@ -38,11 +46,11 @@ class MainGrid extends React.Component {
             isLoaded: false,
         }
         this.sampler = new Tone.Sampler(
-            { 
-                bA1, bB1, "bC#2": bCs2, bE2, "bF#2": bFs2, bA2,
-                pA1, pB1, "pC#2": pCs2, pE2, "pF#2": pFs2, pA2,
-                kA1, kB1, "kC#2": kCs2, kE2, "kF#2": kFs2, kA2,
-                dA1, dB1, "dC#2": dCs2, dE2, "dF#2": dFs2, dA2
+            {
+                A1: bA1, B1: bB1, C1: bCs2, D1: bE2, E1: bFs2, F1: bA2, 
+                A2: pA1, B2: pB1, C2: pCs2, D2: pE2, E2: pFs2, F2: pA2,
+                A3: kA1, B3: kB1, C3: kCs2, D3: kE2, E3: kFs2, F3: kA2, 
+                A4: dA1, B4: dB1, C4: dCs2, D4: dE2, E4: dFs2, F4: dA2, 
             },
             {
               onload: () => {
@@ -57,18 +65,21 @@ class MainGrid extends React.Component {
 
         return(
             <div>
-                <Grid 
-                    mainGridNotes={}
+                <MainGridPartial
+                    mainGridNotes={this.props.mainGridNotes}
                     allNotes={this.props.allNotes}
                     sampler={this.sampler}
                     instrument={this.props.instrument}
+                    isLoaded={this.state.isLoaded}
                 />
-                <MiniGrid 
+                {/* <MiniGrid 
                     // notes={this.props.grids[?]}
                 />
                 <MiniGrid />
-                <MiniGrid />
+                <MiniGrid /> */}
             </div>
         )
     }
-}
+};
+
+export default MainGrid;

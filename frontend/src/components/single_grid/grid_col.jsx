@@ -5,7 +5,8 @@ import styles from './grid.module.css';
 class GridColumn extends React.Component{
   constructor(props){
     super(props);
-    this.state = { selected: -1};
+    this.state = { selected: props.noteNames.indexOf(props.selected) } 
+    
   }
   handleSelect(note, idx){
     if (this.state.selected === idx){
