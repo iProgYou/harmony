@@ -3,7 +3,7 @@ import React from 'react';
 // import PianoGrid from '../single_grid/piano_grid'
 // import DrumGrid from '../single_grid/drum_grid'
 // import BassGrid from '../single_grid/bass_grid'
-import MainGrid from '../main_grid/main_grid';
+import MainGrid from '../room/room';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
 
