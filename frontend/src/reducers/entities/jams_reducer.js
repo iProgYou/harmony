@@ -1,7 +1,7 @@
 import {
   RECEIVE_JAMS,
   RECEIVE_JAM
-} from "../actions/jams_actions";
+} from "../../actions/jams_actions";
 
 //  jam = { id: { gridIds:[], userIds: [], hostId: 0 } }
 
