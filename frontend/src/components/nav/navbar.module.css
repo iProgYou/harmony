@@ -6,8 +6,13 @@
   padding: 10px 3vw;
   box-shadow: cornflowerblue 2px 2px 5px;
   margin: 0;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  box-sizing: border-box;
 }
-.navbar h1{
+
+.title{
   font-size: 45px;
   color: #dadce0;
   font-family: 'Parisienne', cursive;
@@ -62,4 +67,125 @@
 .joinDiv{
   display: flex;
   align-items: center;
+  flex-direction: column-reverse;
+}
+
+
+.outerModal{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgb(0, 0, 0, .7);
+  animation: showAnimation .2s linear;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.outerModal.hidden{
+  animation: hideAnimation .3s;
+  opacity: 0;
+}
+
+.innerModal{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 300px;
+  border-radius: 15px;
+  background-color: #dadce0;
+  position: relative;
+}
+.xIcon{
+  position: absolute;
+  top:10px;
+  right: 10px;
+  border: black 1px solid;
+  border-radius: 50%;
+  padding: 2px 4px;
+  background-color: #878787;
+}
+
+@keyframes showAnimation {
+  0%   {opacity: 0;}
+ 
+  100% {opacity: 1;}
+}
+
+@keyframes hideAnimation {
+  0%   {display:flex; opacity: 1;}
+ 
+  100% {display:flex; opacity: 0;}
+}
+
+
+#searchbar{
+ display: none;
+ position:fixed;
+ top:100px;
+ transition: 1s;
+ height: 30px;
+ border-radius: 10px;
+}
+#searchbar.shown{
+  display: flex;
+  animation: showAnimation .2s linear;
+}
+#searchbar.hidden{
+  display: flex;
+  
+  animation: hideAnimation .3s linear;
+}
+#searchbar button {
+  background-color: rgb(31, 31, 121);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+#searchbar input{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#searchbar img{
+  height: 25px;
+}
+
+.formBlurb{
+  color: #002147;
+  font-size: 45px;
+  margin-bottom: 20px;
+}
+select{
+  background-color: white;
+    border-color: #dbdbdb;
+    color: #363636;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    max-width: 100%;
+    outline: none;
+    position: relative;
+    border-radius: 0;
+    -webkit-appearance: none;
+    padding: 10px 20px;
+    width: 90px
+}
+.selector::after{
+  position: absolute;
+  content: "⌄";
+  color:black;
+  font-size: 30px;
+  right: 8px;
+  top: -3px;
+  pointer-events: none;
+}
+.selector{
+  display:flex;
+  border: solid 1px black;
+  width: 80px;
+  position: relative;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
