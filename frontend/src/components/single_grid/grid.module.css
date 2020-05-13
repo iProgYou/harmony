@@ -14,7 +14,8 @@
 }
 .grid{
   display: flex;
-  width: 85vw;
+  position: relative;
+  /* width: 85vw; */
   overflow-x: auto;
   margin: auto;
   justify-content: center;
@@ -33,9 +34,7 @@
 html  {
   background-color: black;
 }
-.grid{
-  display: flex;
-}
+
 .gridItem.A2.selected{
   background-color: red;
 }
@@ -61,3 +60,5 @@ html  {
   height: 30px;
   max-width: 85vw;
 }
+
+
