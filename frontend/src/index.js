@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // TESTING
     window.dispatch = store.dispatch;
     window.fetchJams = fetchJams;
+    window.getState = store.getState;
   // END TESTING
 
 
