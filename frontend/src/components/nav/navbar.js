@@ -68,7 +68,7 @@ class NavBar extends React.Component {
           <SearchBar/>
         </div>
         {(this.state.formDisplay) ? <RoomForm hideModal ={()=>this.hideModal()}/> : null}
-        <h1 className={styles.title}>harmony</h1>
+        <Link to={'/'}><h1 className={styles.title}>harmony</h1></Link>
         {this.getLinks()}
       </div>
     );
