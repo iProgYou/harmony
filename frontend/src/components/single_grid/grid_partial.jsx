@@ -11,8 +11,10 @@ export default class Grid extends React.Component {
       selected: null,
       last: 0,
       playing: false,
-      disableStart: false,
-      scheduleInterval: null
+      scheduleInterval: null,
+      pauseSlide: false,
+      pauseNote: 0,
+      pauseInt: null
     }
    
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -21,6 +23,9 @@ export default class Grid extends React.Component {
     this.handlePause = this.handlePause.bind(this);
     this.updateLast = this.updateLast.bind(this)
     this.handleRestart = this.handleRestart.bind(this)
+    this.animateNote = this.animateNote.bind(this)
+
+    this.pauseBtn = React.createRef()
 
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
@@ -52,9 +57,11 @@ export default class Grid extends React.Component {
   handleStart() {
     if (this.state.last !== 0) {
       Tone.Transport.toggle();
-      this.setState({ playing: !this.state.playing, disableStart: true});
+      this.setState({ playing: !this.state.playing});
       let i = 0;
-      const interval = Tone.Transport.scheduleRepeat((time) => {
+      const interval = Tone.Transport.scheduleRepeat(() => {
+        this.animateNote(i)
+
         if (i === 0 ) {
           this.setState({ scheduleInterval: interval  });
         }
@@ -65,30 +72,45 @@ export default class Grid extends React.Component {
         if (i === this.state.last + 1) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
-          this.setState({ playing: !this.state.playing, disableStart: false, scheduleInterval: null});
+          this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
         }
       }, "8n");
     }
   }
 
-  handlePause() {
+  animateNote(i) {
+    document.getElementById(`${i}`).style.opacity = ".7"
+    let k = i
+    const pauseInt = setTimeout(() => {
+      document.getElementById(`${k}`).style.opacity = "1"
+    }, 250)
+    this.setState({ startSlide: true, pauseNote: i, pauseInt: pauseInt })
+  }
 
+  handlePause() {
+  
     if (this.state.playing) {
       Tone.Transport.pause();
-    }else {
+      clearTimeout(this.state.pauseInt)
+      document.getElementById(`${this.state.pauseNote}`).style.opacity = ".7"
+      this.pauseBtn.current.innerHTML = 'PLAY'
+    } else {
       Tone.Transport.start();
+      document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
+      this.pauseBtn.current.innerHTML = 'PAUSE'
+
     }
     this.setState({playing: !this.state.playing });
   }
 
   handleRestart() {
-
-    if (this.state.scheduleInterval) {
+    if (this.state.scheduleInterval || this.state.scheduleInterval === 0) {
+      Tone.Transport.start();
       Tone.Transport.clear(this.state.scheduleInterval);
       Tone.Transport.toggle();
-      this.setState({ playing: !this.state.playing, disableStart: false, scheduleInterval: null });   
+      document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
+      this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
      } 
-
   }
 
 
@@ -105,9 +127,11 @@ export default class Grid extends React.Component {
 
 
   render(){
+
     if (!this.state.selected) return null;
     const cols = this.state.selected.map( (ele, colNumber) => 
     <GridColumn
+        idx = {colNumber}
         key={colNumber}
         handleUpdate = {index => this.handleUpdate(colNumber, index)}
         noteNames={this.noteNames}
@@ -124,16 +148,16 @@ export default class Grid extends React.Component {
         </div>
         {
           this.state.scheduleInterval === null ? (
-          <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded || this.state.disableStart}>
+          <button className={styles.button} onClick={this.handleStart} disabled={!this.state.isLoaded}>
             START
           </button>
             ) : (
-              <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+          <button className={styles.button} ref = {this.pauseBtn} disabled={!this.state.isLoaded} onClick={this.handlePause}>
             PAUSE
           </button>
             )
         }
-        <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
+          <button className={styles.button} disabled={!this.state.isLoaded} onClick={this.handleRestart}>
             RESTART
           </button>
       </div>
