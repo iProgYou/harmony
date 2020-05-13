@@ -4,8 +4,10 @@ import Root from './components/root';
 import configureStore from './store/store';
 
 // TESTING
-import { fetchJams } from './util/jam_api_util';
+// import { fetchJams } from './util/jam_api_util';
+import { fetchJams } from './actions/jams_actions';
 // END TESTING
+
 
 //use this to parse the user's session token
 import jwt_decode from 'jwt-decode';

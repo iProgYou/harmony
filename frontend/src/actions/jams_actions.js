@@ -9,6 +9,7 @@ export const receiveJams = jams => ({
   jams
 });
 
+
 export const fetchJams = () => (dispatch) => {
   return JamsAPIUtil.fetchJams()
     .then(jams => dispatch(receiveJams(jams)))
