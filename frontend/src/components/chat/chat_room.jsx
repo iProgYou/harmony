@@ -1,6 +1,7 @@
 import React from 'react'
 import socketIOClient from "socket.io-client";
 import styles from './chat_room.module.css'
+import {connect} from 'react-redux'
 const ENDPOINT = "http://10.0.0.69:5000";
 
 
@@ -36,13 +37,13 @@ class ChatRoom extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault(); 
-        this.socket.emit('chat message', this.state.message);
+        this.socket.emit('chat message', {username: this.props.currentUser, message: this.state.message});
         this.setState({message: ''})
     }
 
     render() {
-        const messageList = this.state.messageList.map((msg) => {
-            return <li>{msg}</li>
+        const messageList = this.state.messageList.map((data) => {
+        return <li>{data['username']}  {data['message']}</li>
         })
 
 
@@ -50,7 +51,6 @@ class ChatRoom extends React.Component {
             <div className = {styles.chatContainer}>
 
                 {messageList}
-
 
                 <form className={styles.messageForm} onSubmit = {this.handleSubmit} action="">
 
@@ -68,4 +68,23 @@ class ChatRoom extends React.Component {
 
 }
 
-export default ChatRoom
+const mSTP = (state) => {
+    let currentUser;
+    if (state.entities.users) {
+        currentUser = state.entities.users[state.session.id]
+    }
+    return {
+        currentUser: currentUser
+    }
+}
+
+// const mDTP = (dispatch) => {
+//     return {
+//         currentUser: state.entities.users[state.session.id]
+//     }
+// }
+
+
+
+
+export default connect(mSTP, null)(ChatRoom)

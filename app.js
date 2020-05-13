@@ -44,9 +44,9 @@ const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
   console.log("a user has connected")
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
-    console.log('message: ' + msg);
+  socket.on('chat message', (data) => {
+    io.emit('chat message', data);
+    console.log('message: ' + data);
   });
 });
 
