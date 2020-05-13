@@ -44,7 +44,7 @@ class ChatRoom extends React.Component {
     render() {
         const messageList = this.state.messageList.map((data) => {
         return <li>
-                    <span>{data['username']}</span>
+                    <span className = {styles.username}>{data['username'] + ":"}</span>
                     <span>{data['message']}</span>
                 </li>
         })
@@ -73,7 +73,7 @@ class ChatRoom extends React.Component {
 
 const mSTP = (state) => {
     return {
-        currentUser: state.entities.users[state.session.user.id]
+        currentUser: state.session.user
     }
 }
 
