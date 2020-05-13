@@ -8,6 +8,7 @@
     height: 50vh;
     padding-top: 50px;
     background-color: white;
+    z-index: 0;
 }
 
 .messageForm {

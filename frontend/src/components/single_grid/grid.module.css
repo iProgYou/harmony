@@ -17,6 +17,7 @@
   color: #dadce0;
   font-size: 19px;
   border-radius:5px;
+  z-index: 0;
 }
 .gridOuter > button:hover{
   background-color: #053265;
@@ -51,6 +52,7 @@
   position: relative;
   /* width: 85vw; */
   overflow-x: auto;
+  z-index: 0;
   margin: auto;
   justify-content: center;
 }
