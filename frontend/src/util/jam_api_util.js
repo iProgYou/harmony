@@ -4,6 +4,6 @@ export const fetchJams = () => {
   return axios.get('/api/jams/')
 }
 
-export const createJams = (jamData) => {
+export const createJam = (jamData) => {
   return axios.post('/api/jams/', jamData)
 }
