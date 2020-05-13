@@ -1,0 +1,1 @@
+//  jam = { id: { gridIds:[], userIds: [], hostId: 0 } }

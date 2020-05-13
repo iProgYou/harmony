@@ -41,7 +41,7 @@ class NavBar extends React.Component {
         <div className={styles.joinDiv}>
           <h2 className={styles.joinRoom}> Join a room</h2> 
         </div>
-        <h1>Harmony</h1>
+        <h1>harmony</h1>
         {this.getLinks()}
       </div>
     );

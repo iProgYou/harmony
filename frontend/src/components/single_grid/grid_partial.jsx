@@ -3,19 +3,11 @@ import GridColumn from './grid_col';
 import styles from './grid.module.css';
 import * as Tone from 'tone';
 
-import A1 from "../../notes/a_pentatonic/A1.mp3";
-import B1 from "../../notes/a_pentatonic/B1.mp3";
-import Cs2 from "../../notes/a_pentatonic/Cs2.mp3";
-import E2 from "../../notes/a_pentatonic/E2.mp3";
-import Fs2 from "../../notes/a_pentatonic/Fs2.mp3";
-import A2 from "../../notes/a_pentatonic/A2.mp3";
-
 export default class Grid extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
-      isLoaded: false,
       selected: null,
       last: 0,
       playing: false,
@@ -24,7 +16,6 @@ export default class Grid extends React.Component {
       pauseNote: 0,
       pauseInt: null
     }
-
    
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -36,15 +27,7 @@ export default class Grid extends React.Component {
 
     this.pauseBtn = React.createRef()
 
-    this.sampler = new Tone.Sampler(
-      { A1, B1, "C#2": Cs2, E2, "F#2": Fs2, A2 },
-      {
-        onload: () => {
-          this.setState({ isLoaded: true });
-        }
-      }
-    ).toMaster();
-
+    // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
   }
   
@@ -68,7 +51,7 @@ export default class Grid extends React.Component {
   }
 
   handleClick(note) {
-    this.sampler.triggerAttack(note);
+    this.props.sampler.triggerAttack(note);
   }
 
   handleStart() {
@@ -83,7 +66,7 @@ export default class Grid extends React.Component {
           this.setState({ scheduleInterval: interval  });
         }
         if (this.state.selected[i]) {
-          this.sampler.triggerAttackRelease(this.state.selected[i], "8n");
+          this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
         }
         i += 1
         if (i === this.state.last + 1) {
@@ -110,11 +93,11 @@ export default class Grid extends React.Component {
       Tone.Transport.pause();
       clearTimeout(this.state.pauseInt)
       document.getElementById(`${this.state.pauseNote}`).style.opacity = ".7"
-      this.pauseBtn.current.innerHTML = 'Play'
+      this.pauseBtn.current.innerHTML = 'PLAY'
     } else {
       Tone.Transport.start();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-      this.pauseBtn.current.innerHTML = 'Pause'
+      this.pauseBtn.current.innerHTML = 'PAUSE'
 
     }
     this.setState({playing: !this.state.playing });
@@ -153,7 +136,7 @@ export default class Grid extends React.Component {
         handleUpdate = {index => this.handleUpdate(colNumber, index)}
         noteNames={this.noteNames}
         handleClick={this.handleClick}
-        isLoaded={this.state.isLoaded}
+        isLoaded={this.props.isLoaded}
         updateLast = {this.updateLast}
     />
     )
@@ -165,17 +148,17 @@ export default class Grid extends React.Component {
         </div>
         {
           this.state.scheduleInterval === null ? (
-          <button onClick={this.handleStart} disabled={!this.state.isLoaded}>
-            Start
+          <button className={styles.button} onClick={this.handleStart} disabled={!this.state.isLoaded}>
+            START
           </button>
             ) : (
-          <button ref = {this.pauseBtn} disabled={!this.state.isLoaded} onClick={this.handlePause}>
-            Pause
+          <button className={styles.button} ref = {this.pauseBtn} disabled={!this.state.isLoaded} onClick={this.handlePause}>
+            PAUSE
           </button>
             )
         }
-          <button disabled={!this.state.isLoaded} onClick={this.handleRestart}>
-            Restart
+          <button className={styles.button} disabled={!this.state.isLoaded} onClick={this.handleRestart}>
+            RESTART
           </button>
       </div>
     )

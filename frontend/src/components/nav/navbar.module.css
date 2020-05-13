@@ -1,14 +1,16 @@
 .navbar{
   display: flex;
-  background-color: gray;
+  background-color: #002147;
   justify-content: space-between;
   align-items: center;
   padding: 10px 3vw;
+  box-shadow: cornflowerblue 2px 2px 5px;
   margin: 0;
 }
 .navbar h1{
   font-size: 45px;
-  color: white;
+  color: #dadce0;
+  font-family: 'Parisienne', cursive;
 }
 .userLinks{
   display: flex;
@@ -16,20 +18,46 @@
 }
 
 .userLinks > * {
-  background-color: green;
+  background-color: #712F79;
   border-radius: 10px;
   padding: 5px 10px;
-  border: solid black 3px;
+  border: solid rgb(71, 31, 75) 3px;
   margin: 3px;
+  color: #dadce0;
 }
+.userLinks > *:hover {
+  background-color: rgb(177, 67, 189);
+  transition: .2s;
+  border-style: outset;
+}
+.userLinks > *:active{
+  background-color: rgb(83, 33, 89);
+  transition: .2s;
+  border-style: inset;
+
+}
+
 .joinRoom{
   font-size: 18px;
   font-weight: normal;
-  background-color: green;
+  background-color: #004BA8;
   border-radius: 10px;
   padding: 5px 10px;
-  border: solid black 3px;
+  border: solid rgb(2, 40, 87) 3px;
   margin: 3px; 
+  color: #dadce0;
+}
+.joinRoom:hover{
+  background-color: rgb(15, 102, 208);
+  transition: .2s;
+  border-style: outset;
+
+}
+.joinRoom:active{
+  background-color: rgb(12, 77, 157);
+  transition: .2s;
+  border-style: inset;
+
 }
 .joinDiv{
   display: flex;
