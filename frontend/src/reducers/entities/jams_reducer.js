@@ -10,13 +10,9 @@ const jamsReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_JAMS:
-      return Object.assign({}, state, {
-        [action.jams.id]: action.jams
-      });
+      return Object.assign({}, action.jams);
     case RECEIVE_JAM:
-      return Object.assign({}, state, {
-        [action.jam.id]: action.jam
-      });
+      return Object.assign({}, action.jam);
     default:
       return state;
   }
