@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RoomSchema = new Schema({
-  user: {
+  host: {
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
