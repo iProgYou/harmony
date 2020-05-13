@@ -32,10 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
       session: { isAuthenticated: true, user: decodedUser },
     };
 
-    if (localStorage.jwtToken) {
-      preloadedState = { session: { isAuthenticated: true, user: decodedUser } }
-    }
-
     store = configureStore(preloadedState);
 
     const currentTime = Date.now() / 1000;
