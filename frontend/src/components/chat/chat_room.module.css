@@ -1,0 +1,22 @@
+.chatContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 200px;
+    width: 350px;
+    height: 50vh;
+    background-color: white;
+}
+
+.messageForm {
+    position: absolute;
+    right: 0px;
+    bottom: 0;
+    width: 300px;
+}
+
+.messageForm > label {
+    display: flex;
+    flex-direction: column;
+}
