@@ -1,0 +1,1 @@
+// room = id: { id: 0, hostId: 0, jamId:  }
