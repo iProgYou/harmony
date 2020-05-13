@@ -6,6 +6,8 @@ const users = require('./routes/api/users');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
+// const io = require('socket.io')(http);
+
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
@@ -32,5 +34,29 @@ require('./config/passport')(passport);
 app.use('/api/users', users);
 
 const port = process.env.PORT || 5000;
+const server = app.listen(port, () => console.log(`Server is running on port ${port}`));
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+
+
+////////////// Web Sockets ///////////////
+
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  console.log("a user has connected")
+  socket.on('chat message', (data) => {
+    io.emit('chat message', data);
+    console.log('message: ' + data);
+  });
+});
+
+// io.on('connection', (socket) => {
+//   console.log('a user connected');
+//   socket.on('disconnect', () => {
+//     console.log('user disconnected');
+//   });
+// });
+
+// http.listen(3001, () => {
+//   console.log('listening on *:3001');
+// });

@@ -5,6 +5,7 @@ import React from 'react';
 // import BassGrid from '../single_grid/bass_grid'
 import MainGrid from '../main_grid/main_grid';
 import styles from './main.module.css'
+import ChatRoom from '../chat/chat_room'
 
 class MainPage extends React.Component {
 
@@ -48,6 +49,7 @@ class MainPage extends React.Component {
           cols={ 8 }
         /> */}
 
+        <ChatRoom> </ChatRoom>
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
           Copyright &copy; 2020 Harmony
