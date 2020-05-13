@@ -5,8 +5,8 @@ import styles from './grid.module.css';
 class GridColumn extends React.Component{
   constructor(props){
     super(props);
-    this.state = { selected: [] };
-    // this.state = {  }
+    // this.state = { selected: [] };
+    this.state = { selected: props.selected }
   }
   
   handleSelect(note){
