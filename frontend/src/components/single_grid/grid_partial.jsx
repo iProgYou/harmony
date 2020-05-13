@@ -124,17 +124,17 @@ export default class Grid extends React.Component {
         </div>
         {
           this.state.scheduleInterval === null ? (
-          <button onClick={this.handleStart} disabled={!this.props.isLoaded || this.state.disableStart}>
-            start
+          <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded || this.state.disableStart}>
+            START
           </button>
             ) : (
-          <button disabled={!this.props.isLoaded} onClick={this.handlePause}>
-            pause
+              <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+            PAUSE
           </button>
             )
         }
-          <button disabled={!this.props.isLoaded} onClick={this.handleRestart}>
-            restart
+        <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
+            RESTART
           </button>
       </div>
     )
