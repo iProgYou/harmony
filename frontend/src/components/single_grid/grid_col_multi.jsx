@@ -7,11 +7,14 @@ class GridColumn extends React.Component{
     super(props);
     this.state = { selected: [] };
   }
+  
   handleSelect(note){
+    // debugger
     if (this.state.selected.includes(note)){
         let temp = this.state.selected.filter(ele => note !== ele);
+        // debugger
         this.setState({ selected: temp })
-        this.props.handleUpdate(this.state.selected)
+        this.props.handleUpdate(temp)
     } else {
         let selected = this.state.selected;
         selected.push(note)

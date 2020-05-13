@@ -56,6 +56,7 @@ export default class DrumGrid extends React.Component {
     //handle update updates the state of the grid, taking in the number of the column,
     //and the selected index
     handleUpdate(column, arr){
+      // debugger
       let selected = this.state.selected
       selected[column] = arr;
     //   if(arr.length === 0){
