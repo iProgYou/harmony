@@ -6,6 +6,7 @@
     top: 200px;
     width: 350px;
     height: 50vh;
+    padding-top: 50px;
     background-color: white;
 }
 
@@ -20,3 +21,17 @@
     display: flex;
     flex-direction: column;
 }
+
+
+.chatContainer > li { 
+    list-style: none;
+}
+
+
+.username{ 
+    color: #923C96;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+

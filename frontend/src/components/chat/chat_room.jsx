@@ -37,13 +37,16 @@ class ChatRoom extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault(); 
-        this.socket.emit('chat message', {username: this.props.currentUser, message: this.state.message});
+        this.socket.emit('chat message', {username: this.props.currentUser.handle, message: this.state.message});
         this.setState({message: ''})
     }
 
     render() {
         const messageList = this.state.messageList.map((data) => {
-        return <li>{data['username']}  {data['message']}</li>
+        return <li>
+                    <span className = {styles.username}>{data['username'] + ":"}</span>
+                    <span>{data['message']}</span>
+                </li>
         })
 
 
@@ -69,12 +72,8 @@ class ChatRoom extends React.Component {
 }
 
 const mSTP = (state) => {
-    let currentUser;
-    if (state.entities.users) {
-        currentUser = state.entities.users[state.session.id]
-    }
     return {
-        currentUser: currentUser
+        currentUser: state.session.user
     }
 }
 
