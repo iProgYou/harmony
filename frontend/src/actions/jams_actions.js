@@ -21,5 +21,5 @@ export const fetchJams = () => (dispatch) => {
 
 export const createJam = (jam) => (dispatch) => (
   JamsAPIUtil.createJam(jam)
-    .then(jam => dispatch(receiveJam))
+    .then(jam => dispatch(receiveJam(jam)))
 )
