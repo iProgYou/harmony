@@ -58,7 +58,7 @@ class RoomForm extends React.Component {
   render() {
     let options = [] 
     for (let i=8; i <= 64; i*=2){
-      options.push(<option value = {i}> {i} </option>)
+      options.push(<option value = {i}> {i} beats </option>)
     }
 
     return (
@@ -66,7 +66,7 @@ class RoomForm extends React.Component {
       <div className={styles.outerModal} id="modal-form" onClick={e=> (e.target===e.currentTarget) ? this.props.hideModal() : undefined}>
         <div className={styles.innerModal}> 
               <div onClick={()=>this.props.hideModal()} className={styles.xIcon}> X </div>
-              <h1 className={styles.formBlurb}> Harmonize </h1>
+              <h1 className={styles.formBlurb}> Create a Room </h1>
           <form className={styles.actualForm} onSubmit={(e) => this.handleSubmit(e)}>
             <div> <div> Room Name: </div>
               <input type="text"
@@ -75,7 +75,7 @@ class RoomForm extends React.Component {
                 placeholder="Room Name"
               />
               <br />
-              <div> Song Length: </div>
+              <div> Jam Length: </div>
               <div className={styles.selector}>
               <select className={styles.dropdown}
               defaultValue={this.state.beats}
@@ -84,7 +84,7 @@ class RoomForm extends React.Component {
               </select>
               </div>
               <br />
-              <input type="submit" value="Submit" />
+              <button className={styles.joinRoom} type="submit" >Harmonize </button>
               {/* {this.renderErrors()} */}
             </div>
           </form>

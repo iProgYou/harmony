@@ -25,7 +25,7 @@ class NavBar extends React.Component {
   hideModal(){
     const modal = document.getElementById("modal-form")
     modal.classList.add(styles.hidden)
-    window.setTimeout(() => this.setState({ formDisplay: false }), 700)
+    window.setTimeout(() => this.setState({ formDisplay: false }), 150)
   }
 
   toggleSearch(){
@@ -35,7 +35,7 @@ class NavBar extends React.Component {
     }else{ 
       searchBar.classList.remove(styles.shown)
       searchBar.classList.add(styles.hidden)
-      window.setTimeout(() => searchBar.classList.remove(styles.hidden), 300)
+      window.setTimeout(() => searchBar.classList.remove(styles.hidden), 200)
     }
     this.setState({searchbarDisplay:!this.state.searchbarDisplay})
   }
