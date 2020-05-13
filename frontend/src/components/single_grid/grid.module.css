@@ -22,10 +22,12 @@
   background-color: #053265;
   border-style:outset;
   transition: .2s;
+  cursor: pointer;
 }
 .gridOuter > button:active{
   background-color: #000f21;
   border-style:inset;
+  cursor: pointer;
 
   transition: .2s;
 }
@@ -42,6 +44,7 @@
 .gridItem:hover{
   background-color: #d5e3fe;
   transition: .2s;
+  cursor: pointer;
 }
 .grid{
   display: flex;
