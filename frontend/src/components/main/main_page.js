@@ -1,8 +1,8 @@
 import React from 'react';
 // import KeyboardGrid from '../single_grid/keyboard_grid'
 // import PianoGrid from '../single_grid/piano_grid'
-import DrumGrid from '../single_grid/drum_grid'
-// import BassGrid from '../single_grid/bass_grid'
+// import DrumGrid from '../single_grid/drum_grid'
+import BassGrid from '../single_grid/bass_grid'
 import styles from './main.module.css'
 
 class MainPage extends React.Component {
@@ -10,7 +10,7 @@ class MainPage extends React.Component {
   render() {
     return (
       <div>
-        <DrumGrid
+        <BassGrid
           cols={8}
         />
 
