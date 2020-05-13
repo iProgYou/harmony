@@ -1,5 +1,5 @@
 import React from 'react';
-import MainGridPartial from './main_grid_partial';
+import MasterGrid from './master_grid';
 import * as Tone from 'tone';
 // import MiniGrid from './mini_grid';
 
@@ -65,7 +65,7 @@ class MainGrid extends React.Component {
 
         return(
             <div>
-                <MainGridPartial
+                <MasterGrid
                     mainGridNotes={this.props.mainGridNotes}
                     allNotes={this.props.allNotes}
                     sampler={this.sampler}
