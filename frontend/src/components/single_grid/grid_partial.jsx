@@ -129,8 +129,10 @@ export default class Grid extends React.Component {
   render(){
 
     if (!this.state.selected) return null;
+    console.log(this.state.selected)
     const cols = this.state.selected.map( (ele, colNumber) => 
     <GridColumn
+        selected={ele}
         idx = {colNumber}
         key={colNumber}
         handleUpdate = {index => this.handleUpdate(colNumber, index)}
