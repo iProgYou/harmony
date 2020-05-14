@@ -60,11 +60,44 @@ class Room extends React.Component {
           ).toMaster();
     }
 
+    componentDidMount() {
+        debugger
+        let cols = this.props.match.params.cols;
+        let notes = new Array(cols).fill("");
+        let drumNotes = [];
+        for (let i = 0; i < cols; i++) {
+            drumNotes.push([])
+        }
+        let grids = {
+            "piano": {
+                notes,
+                instrument: "piano",
+                beats: cols
+            },
+            "keyboard": {
+                notes,
+                instrument: "keyboard",
+                beats: cols
+            },
+            "bass": {
+                notes,
+                instrument: "bass",
+                beats: cols
+            },
+            "drums": {
+                notes: drumNotes,
+                instrument: "drums",
+                beats: cols
+            }
+        }
+        this.props.receiveGrids(grids)
+    }
+
     render() {
-        // debugger
-        if(!this.state.isLoaded) return null;
-        if (!this.props.instrument) return null;
-        if (!this.props.mainGridNotes) return null;
+        debugger
+        if (!this.state.isLoaded) return null;
+        // if (!this.props.instrument) return null;
+        // if (!this.props.mainGridNotes) return null;
 
         return(
             <div>

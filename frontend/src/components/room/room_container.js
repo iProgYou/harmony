@@ -24,7 +24,8 @@ const mapSTP = (state, ownProps) => {
 const mapDTP = dispatch => {
 
     return{
-        receiveGrid: grid => dispatch(receiveGrid(grid))
+        receiveGrid: grid => dispatch(receiveGrid(grid)),
+        receiveGrids: grids => dispatch(receiveGrids(grids))
     }
 }
 
