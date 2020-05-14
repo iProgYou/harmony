@@ -17,7 +17,6 @@ const mapSTP = (state, ownProps) => {
         allNotes: samplerReadableNotes(state,state.entities.room),
         instrument: ownProps.instrument,
         mainGridNotes: mainGridNotes
-
     }
 };
 
