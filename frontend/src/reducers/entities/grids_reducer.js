@@ -9,7 +9,7 @@ const gridReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_GRID:
       return Object.assign({}, state, {
-        [action.grid.id]: action.grid
+        [action.grid.instrument]: action.grid
       });
     default:
       return state;

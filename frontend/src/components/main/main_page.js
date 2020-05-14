@@ -9,13 +9,15 @@ import MiniGrid from '../single_grid/mini_grid_partial';
 import Room from '../room/room';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
+import socketIOClient from "socket.io-client";
 
 class MainPage extends React.Component {
-
+  socket = socketIOClient()
   render() {
     return (
       <div>
         <Room
+         socket = {this.socket}
           allNotes={[
             [ 'A2', 'A1', 'A4', 'E4' ],
             [ 'F2', 'A4' ],
@@ -43,7 +45,8 @@ class MainPage extends React.Component {
           cols={ 8 }
         /> */}
         <MiniGrid cols={8} selected={["A2", "A1", "A1", "A1", "A1", "A1", "A1", "A1"]}/>
-        <ChatRoom> </ChatRoom>
+        <ChatRoom socket = {this.socket}> </ChatRoom>
+
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
           Copyright &copy; 2020 Harmony

@@ -20,8 +20,8 @@ class ChatRoom extends React.Component {
     
     componentDidMount() {
 
-        this.socket = socketIOClient();
-        this.socket.on('chat message', (msg) => {
+        // this.socket = socketIOClient();
+        this.props.socket.on('chat message', (msg) => {
             let newMessageList = [...this.state.messageList]
             newMessageList.push(msg)   
             this.setState({messageList: newMessageList});
@@ -37,13 +37,13 @@ class ChatRoom extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault(); 
-        this.socket.emit('chat message', {username: this.props.currentUser.handle, message: this.state.message});
+        this.props.socket.emit('chat message', {username: this.props.currentUser.handle, message: this.state.message});
         this.setState({message: ''})
     }
 
     render() {
-        const messageList = this.state.messageList.map((data) => {
-        return <li>
+        const messageList = this.state.messageList.map((data, idx) => {
+        return <li key = {idx}>
                     <span className = {styles.username}>{data['username'] + ":"}</span>
                     <span>{data['message']}</span>
                 </li>

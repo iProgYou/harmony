@@ -66,6 +66,7 @@ class Room extends React.Component {
         return(
             <div>
                 <MasterGrid
+                    socket = {this.props.socket}
                     mainGridNotes={this.props.mainGridNotes}
                     allNotes={this.props.allNotes}
                     sampler={this.sampler}
