@@ -65,8 +65,8 @@ class Room extends React.Component {
     }
 
     componentDidMount() {
-        debugger
-        let cols = this.props.match.params.cols;
+        // debugger
+        let cols = parseInt(this.props.match.params.cols);
         let notes = new Array(cols).fill("");
         let drumNotes = [];
         for (let i = 0; i < cols; i++) {
@@ -105,15 +105,16 @@ class Room extends React.Component {
         let room = {
             name: this.props.match.params.roomName,
             cols: this.props.match.params.cols,
-            instrumentNames: ["keyboard","piano","drums","bass"].filter((ele) => {
-                return !this.props.availableInstruments.includes(ele)
-            })
+            instrumentNames: ["keyboard","piano","drums","bass"]
+            // .filter((ele) => {
+            //     return !this.props.availableInstruments.includes(ele)
+            // })
         }
         this.props.receiveRoom(room)
     }
 
     render() {
-        debugger
+        // debugger
         if (!this.state.isLoaded) return null;
         // if (!this.props.instrument) return null;
         // if (!this.props.mainGridNotes) return null;

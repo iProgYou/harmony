@@ -1,14 +1,14 @@
 const samplerNoteArr = (state, room) => {
     let samplerNotes = [];
-    for (let i = 0; i < room.beats; i++) {
+    for (let i = 0; i < room.cols; i++) {
         samplerNotes.push([])
-        room.gridNames.forEach(gridId => {
+        room.instrumentNames.forEach(gridId => {
             let notes = state.entities.grids[gridId].notes;
             let inst = state.entities.grids[gridId].instrument;
             if (inst === "drums") {
                 let drumArr = [];
                 // debugger
-                notes[i].forEach(note => {
+                if (notes[i]) notes[i].forEach(note => {
                     drumArr.push(inst[0] + note)
                 });
                 samplerNotes[i].push(...drumArr)
@@ -24,7 +24,7 @@ const samplerNoteArr = (state, room) => {
 };
 
 export const samplerReadableNotes = (state,room) => {
-    debugger
+    // debugger
     let samplerNotes = samplerNoteArr(state,room)
     let encodeNotes = {
         bA1: "A1", bB1: "B1", bCs2: "C1", bE2: "D1", bFs2: "E1", bA2: "F1", 
