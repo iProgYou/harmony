@@ -50,7 +50,7 @@
 .grid{
   display: flex;
   position: relative;
-  /* width: 85vw; */
+  max-width: 85vw;
   overflow-x: auto;
   z-index: 0;
   margin: auto;
@@ -128,3 +128,16 @@ html * {
   background-color: rgb(216, 138, 216);
   transition: .2s;
 }
+
+#mini .grid{
+  max-width: 25vw;
+  max-height: 20vw;  
+}
+ #mini .gridItem{
+  width: 20px;
+  height:20px;
+  margin: 1px;
+  border: 2px;
+  border-radius: 3px;
+
+ }
