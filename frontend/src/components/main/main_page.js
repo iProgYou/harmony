@@ -24,17 +24,8 @@ class MainPage extends React.Component {
             [ 'B3', 'B4', 'D4' ]
           ]
           }
-          mainGridNotes={ [
-            ["A1", "F#2"],
-            ["A1"],
-            ["B1", "F#2"],
-            ["A1"],
-            ["F#2"],
-            ["A1"],
-            ["F#2", "B1"],
-            ["B1", "E2"]
-        ]}
-          instrument={"drums"}
+          mainGridNotes={ ["","","C#2","B1","","","C#2","B1"] }
+          instrument={"piano"}
         />
         {/* <PianoGrid
           cols={ 8 }
