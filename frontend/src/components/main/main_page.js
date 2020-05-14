@@ -9,6 +9,7 @@ import MiniGrid from '../single_grid/mini_grid_partial';
 import Room from '../room/room';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
+import InstrumentSelect from '../room/instrument_select'
 
 class MainPage extends React.Component {
 
@@ -42,8 +43,13 @@ class MainPage extends React.Component {
         <KeyboardGrid
           cols={ 8 }
         /> */}
-        <MiniGrid cols={8} selected={["A2", "A1", "A1", "A1", "A1", "A1", "A1", "A1"]}/>
+        <div className={styles.miniGrids}>
+          <MiniGrid cols={8} selected={["A2", "E2", "A1", "E2", "A1", "C#2", "A1", "E2"]}/>
+          <MiniGrid cols={8} selected={["A2", "C#2", "A1", "C#2", "E2", "A1", "B1", "A1"]}/>
+          <MiniGrid cols={8} selected={["A2", "A1", "B1", "C#2", "A2", "E2", "A1", "A1"]}/>
+        </div>
         <ChatRoom> </ChatRoom>
+        <InstrumentSelect instruments={['banjo', 'cowbell', 'ukelele', 'tamborine']}/>
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
           Copyright &copy; 2020 Harmony

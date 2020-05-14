@@ -1,0 +1,42 @@
+.outerModal{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgb(0, 0, 0, .7);
+  transition: .3s;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.outerModal.hidden{
+  animation: hideAnimation .3s linear;
+/* display: none; */
+visibility: hidden;
+}
+@keyframes hideAnimation {
+    0%   {display:flex; opacity: 1;}
+ 
+  100% {display:flex; opacity: 0;}
+}
+
+.innerModal{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 300px;
+  border-radius: 15px;
+  background-color: #dadce0;
+  position: relative;
+}
+.buttons{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+.selectTitle{
+  font-size: 30px;
+}
