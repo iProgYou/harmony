@@ -43,3 +43,7 @@ table {
 .app{
 	padding-top: 100px;
 }
+
+*:focus {
+  outline: none;
+}

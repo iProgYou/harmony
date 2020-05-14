@@ -1,8 +1,45 @@
+.formcontainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 100px);
+  width: 300px;
+  background-color: #c2cfe9;
+  box-shadow: 0px 2px 10px #dadce0;
 }
 
+.placeholder {
+  width: calc((100vw - 300px)/2);
+  height: calc(100vh -100px);
+}
+
+.formHeader {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.formInputText {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.formInput {
+  width: 200px;
+  height: 40px;
+  background-color: #c2cfe9;
+  border: none;
+  border-bottom: 1px solid white;
+  color: gray;
+}
+
+.formSubmitButton {
+  width: 200px;
+  height: 25px;
+  border-radius: 25px;
+}
