@@ -98,6 +98,7 @@ class Room extends React.Component {
         this.props.receiveGrids(grids)
     }
 
+
     selectInstrument(instrument) {
         this.setState({
             instrumentSelected: true,
@@ -121,6 +122,7 @@ class Room extends React.Component {
         // if (!this.props.mainGridNotes) return null;
         const masterGrid = this.state.instrumentSelected ? (
             <MasterGrid
+                    socket = {this.props.socket}
                     mainGridNotes={this.props.mainGridNotes}
                     allNotes={this.props.allNotes}
                     sampler={this.sampler}

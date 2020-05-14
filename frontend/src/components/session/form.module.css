@@ -9,13 +9,13 @@
   justify-content: center;
   align-items: center;
   height: calc(100vh - 100px);
-  width: 300px;
+  width: 700px;
   background-color: #c2cfe9;
   box-shadow: 0px 2px 10px #dadce0;
 }
 
 .placeholder {
-  width: calc((100vw - 300px)/2);
+  width: calc((100vw - 700px)/2);
   height: calc(100vh -100px);
 }
 
@@ -30,7 +30,7 @@
 }
 
 .formInput {
-  width: 200px;
+  width: 300px;
   height: 40px;
   background-color: #c2cfe9;
   border: none;
@@ -39,7 +39,7 @@
 }
 
 .formSubmitButton {
-  width: 200px;
+  width: 300px;
   height: 25px;
   border-radius: 25px;
   background: linear-gradient(to right, #4487E0 , #AA45AC);

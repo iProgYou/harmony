@@ -24,15 +24,15 @@ export default class InstrumentSelect extends React.Component{
   }
 
   render(){
-    const buttons = this.props.instruments.map( (instrument) => (
-    <label>
-    <input
-        type="radio"
-        checked={this.state.selected=== instrument}
-        onChange={(e) => this.handleChange(e)}
-        value={instrument}
-        name="instrument-select"
-        />{instrument}
+    const buttons = this.props.instruments.map( (instrument, idx) => (
+    <label key={idx}>
+      <input
+          type="radio"
+          checked={this.state.selected=== instrument}
+          onChange={(e) => this.handleChange(e)}
+          value={instrument}
+          name="instrument-select"
+          />{instrument}
       </label>
     ))
     return(

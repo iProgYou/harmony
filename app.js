@@ -48,6 +48,11 @@ io.on('connection', (socket) => {
     io.emit('chat message', data);
     console.log('message: ' + data);
   });
+  socket.on('grid update', (data) => {
+    io.emit('grid update', data);
+    console.log('gridupate: ');
+  });
+
 });
 
 // io.on('connection', (socket) => {
