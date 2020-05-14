@@ -1,5 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import FormStyle from './form.module.css';
+import SignupFormStyle from './signup_form.module.css';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -56,39 +58,47 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div className="signup-form-container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="signup-form">
-            <br />
-            <input type="text"
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder="Email"
-            />
-            <br />
-            <input type="text"
-              value={this.state.handle}
-              onChange={this.update('handle')}
-              placeholder="Handle"
-            />
-            <br />
-            <input type="password"
-              value={this.state.password}
-              onChange={this.update('password')}
-              placeholder="Password"
-            />
-            <br />
-            <input type="password"
-              value={this.state.password2}
-              onChange={this.update('password2')}
-              placeholder="Confirm Password"
-            />
-            <br />
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-          </div>
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <div>
+          <br />
+
+          <input type="text"
+            value={this.state.email}
+            onChange={this.update('email')}
+            placeholder="Email"
+          />
+
+          <br />
+
+          <input type="text"
+            value={this.state.handle}
+            onChange={this.update('handle')}
+            placeholder="Handle"
+          />
+
+          <br />
+
+          <input type="password"
+            value={this.state.password}
+            onChange={this.update('password')}
+            placeholder="Password"
+          />
+
+          <br />
+
+          <input type="password"
+            value={this.state.password2}
+            onChange={this.update('password2')}
+            placeholder="Confirm Password"
+          />
+
+          <br />
+
+          <input type="submit" value="Submit" />
+
+          {this.renderErrors()}
+        </div>
+      </form>
     );
   }
 }
