@@ -3,7 +3,7 @@ import React from 'react';
 // import PianoGrid from '../single_grid/piano_grid'
 // import DrumGrid from '../single_grid/drum_grid'
 // import BassGrid from '../single_grid/bass_grid'
-import MainGrid from '../room/room';
+import Room from '../room/room';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
 
@@ -12,7 +12,7 @@ class MainPage extends React.Component {
   render() {
     return (
       <div>
-        <MainGrid
+        <Room
           allNotes={[
             [ 'A2', 'A1', 'A4', 'E4' ],
             [ 'F2', 'A4' ],
