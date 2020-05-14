@@ -96,7 +96,7 @@ class MasterGrid extends React.Component {
         if (i === 0 ) {
           this.setState({ scheduleInterval: interval  });
         }
-        if (this.state.selected[i]) {
+        if (this.props.allNotes[i]) {
           this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
         }
         i += 1
