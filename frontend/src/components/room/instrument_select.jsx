@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './room.module.css'
-import Radio from '@material-ui/core/Radio';
 
 export default class InstrumentSelect extends React.Component{
 
@@ -27,7 +26,8 @@ export default class InstrumentSelect extends React.Component{
   render(){
     const buttons = this.props.instruments.map( (instrument) => (
     <label>
-    <Radio
+    <input
+        type="radio"
         checked={this.state.selected=== instrument}
         onChange={(e) => this.handleChange(e)}
         value={instrument}

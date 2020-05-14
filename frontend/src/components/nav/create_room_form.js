@@ -40,6 +40,7 @@ class RoomForm extends React.Component {
     let room = { name, beats };
     console.log(`room ${name} created with ${beats} beats`)
     this.props.history.push(`/rooms/${this.state.name}/${this.state.beats}`)
+    this.props.hideModal()
     // dispatch receiveRoom(cols)
 
     // this.props.login(user)

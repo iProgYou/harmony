@@ -54,7 +54,7 @@
   overflow-x: auto;
   z-index: 0;
   margin: auto;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .gridItem.selected{
   border-style: inset;
