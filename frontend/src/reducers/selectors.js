@@ -1,8 +1,8 @@
-const samplerNoteArr = (state, jam) => {
+const samplerNoteArr = (state, room) => {
     let samplerNotes = [];
-    for (let i = 0; i < jam.beats; i++) {
+    for (let i = 0; i < room.beats; i++) {
         samplerNotes.push([])
-        jam.gridIds.forEach(gridId => {
+        room.gridIds.forEach(gridId => {
             let notes = state.entities.grids[gridId].notes;
             let inst = state.entities.grids[gridId].instrument;
             if (inst === "drums") {
