@@ -45,8 +45,18 @@ const samplerReadableNotes = (samplerNotes) => {
     return newNoteArr
 }
 
+
+// notes
+// have rooms also contain gridIds
 const state = {
     entities: {
+        rooms: {
+            1: {
+                id: 1,
+                // etc
+                // etc
+            }
+        }
         jams: {
             1: {
                 id: 1,
