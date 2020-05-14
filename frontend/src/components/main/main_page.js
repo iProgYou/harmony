@@ -3,6 +3,9 @@ import React from 'react';
 // import PianoGrid from '../single_grid/piano_grid'
 // import DrumGrid from '../single_grid/drum_grid'
 // import BassGrid from '../single_grid/bass_grid'
+
+import MainGrid from '../room/room';
+import MiniGrid from '../single_grid/mini_grid_partial';
 import Room from '../room/room';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
@@ -39,7 +42,7 @@ class MainPage extends React.Component {
         <KeyboardGrid
           cols={ 8 }
         /> */}
-
+        <MiniGrid cols={8} selected={["A2", "A1", "A1", "A1", "A1", "A1", "A1", "A1"]}/>
         <ChatRoom> </ChatRoom>
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
