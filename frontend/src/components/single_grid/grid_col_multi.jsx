@@ -31,7 +31,7 @@ class GridColumn extends React.Component{
 
   render() {
     const selected = this.state.selected;
-    return (<div className={styles.gridCol}>
+    return (<div id={this.props.idx} className={styles.gridCol}>
       {this.props.noteNames.map((note, idx) => (
         <GridItem
           key={idx}
@@ -39,7 +39,7 @@ class GridColumn extends React.Component{
           handleSelect={()=>this.handleSelect(note, idx)}
           note={note}
           isLoaded={this.props.isLoaded}
-          updateLast = {this.props.updateLast}
+          // updateLast = {this.props.updateLast}
         />
           ))}
           </div>

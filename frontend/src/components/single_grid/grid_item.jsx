@@ -9,7 +9,7 @@ const GridItem = ({ note, selected, handleClick, handleSelect, isLoaded, updateL
 
     function handleClick() {
         handleSelect()
-        updateLast()
+        // updateLast()
     }
     return (<div onClick ={handleClick}>
         <button
