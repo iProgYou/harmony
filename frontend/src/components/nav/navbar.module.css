@@ -10,6 +10,7 @@
   top: 0px;
   width: 100vw;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .title{
