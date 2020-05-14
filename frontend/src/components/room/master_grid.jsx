@@ -3,14 +3,16 @@ import GridColumn from '../single_grid/grid_col';
 import MultiGridColumn from '../single_grid/grid_col_multi';
 import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
+import { connect } from 'react-redux';
+import {receiveGrid} from '../../actions/grid_actions'
 
-export default class MasterGrid extends React.Component {
+class MasterGrid extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       selected: props.mainGridNotes,
-      last: 0,
+      // last: 7,
       playing: false,
       scheduleInterval: null,
       pauseSlide: false,
@@ -48,10 +50,17 @@ export default class MasterGrid extends React.Component {
   //and the selected index
   handleUpdate(column, index){
     let arr = this.state.selected
-    if(index !== -1){
+    if(index instanceof Array){
+       arr[column] = index 
+    } else if ((index !== -1)) {
       arr[column] = this.noteNames[index];
     } else arr[column] = "";
     this.setState({selected: arr})
+    this.props.receiveGrid({
+      notes: this.state.selected,
+      instrument: this.props.instrument,
+      beats: 8
+    })
   }
 
   handleClick(note) {
@@ -78,27 +87,26 @@ export default class MasterGrid extends React.Component {
   // -TEST
 
   handleStart() {
-    if (this.state.last !== 0) {
+    // if (this.state.last !== 0) {
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
       let i = 0;
       const interval = Tone.Transport.scheduleRepeat(() => {
         this.animateNote(i)
-
         if (i === 0 ) {
           this.setState({ scheduleInterval: interval  });
         }
         if (this.state.selected[i]) {
-          this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
+          this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
         }
         i += 1
-        if (i === this.state.last + 1) {
+        if (i === this.state.selected.length) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
         }
       }, "8n");
-    }
+    // }
   }
 
   animateNote(i) {
@@ -121,7 +129,6 @@ export default class MasterGrid extends React.Component {
       Tone.Transport.start();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
       this.pauseBtn.current.innerHTML = 'PAUSE'
-
     }
     this.setState({playing: !this.state.playing });
   }
@@ -162,7 +169,7 @@ export default class MasterGrid extends React.Component {
             noteNames={this.noteNames}
             handleClick={this.handleClick}
             isLoaded={this.props.isLoaded}
-            updateLast = {this.updateLast}
+            // updateLast = {this.updateLast}
         />
       )
     ) : (
@@ -175,7 +182,7 @@ export default class MasterGrid extends React.Component {
             noteNames={this.noteNames}
             handleClick={this.handleClick}
             isLoaded={this.props.isLoaded}
-            updateLast = {this.updateLast}
+            // updateLast = {this.updateLast}
         />
       )
     )
@@ -187,9 +194,9 @@ export default class MasterGrid extends React.Component {
         </div>
         {
           this.state.scheduleInterval === null ? (
-          // <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded}>
-          // TEST
-          <button className={styles.button} onClick={this.handleTest} disabled={!this.props.isLoaded}>
+          <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded}>
+          {/* // TEST */}
+          {/* <button className={styles.button} onClick={this.handleTest} disabled={!this.props.isLoaded}> */}
             {/* TEST */}
             START
           </button>
@@ -206,3 +213,14 @@ export default class MasterGrid extends React.Component {
     )
   }
 }
+
+
+const mDTP = dispatch => {
+
+  return {
+    receiveGrid: (grid) => dispatch(receiveGrid(grid))
+  }
+
+}
+
+export default connect(null, mDTP)(MasterGrid)
