@@ -48,10 +48,11 @@ class MainPage extends React.Component {
         /> */}
 
         <Switch>
-          <Route exact path="/" component={() => <KeyboardGrid cols={8}/>} />
-          <Route exact path="/rooms/:roomName/:cols" component={RoomContainer} />
+          <Route path="/rooms/:roomName/:cols" component={RoomContainer} />
+          <Route path="/" component={() => <KeyboardGrid cols={8}/>} />
           {/* <Route to="/:roomName/:cols" render={() => <RoomContainer cols={}/>} /> */}
         </Switch>
+
         <MiniGrid cols={8} selected={["A2", "A1", "A1", "A1", "A1", "A1", "A1", "A1"]}/>
         <ChatRoom> </ChatRoom>
         <h1 className={styles.blurb}>Make Music</h1>
