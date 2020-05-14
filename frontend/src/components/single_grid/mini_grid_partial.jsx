@@ -109,7 +109,6 @@ export default class MiniGrid extends React.Component {
   render(){
 
     if (!this.state.selected) return null;
-    console.log(this.state.selected)
     const cols = this.state.selected.map( (ele, colNumber) => 
     <MiniGridColumn
         selected={ele}
