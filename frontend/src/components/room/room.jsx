@@ -61,7 +61,10 @@ class Room extends React.Component {
     }
 
     render() {
+        // debugger
         if(!this.state.isLoaded) return null;
+        if (!this.props.instrument) return null;
+        if (!this.props.mainGridNotes) return null;
 
         return(
             <div>

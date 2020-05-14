@@ -4,9 +4,9 @@ import React from 'react';
 // import DrumGrid from '../single_grid/drum_grid'
 // import BassGrid from '../single_grid/bass_grid'
 
-import MainGrid from '../room/room';
 import MiniGrid from '../single_grid/mini_grid_partial';
-import Room from '../room/room';
+// import Room from '../room/room';
+import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
 
@@ -15,7 +15,10 @@ class MainPage extends React.Component {
   render() {
     return (
       <div>
-        <Room
+        <RoomContainer 
+          instrument={"piano"}
+        />
+        {/* <Room
           allNotes={[
             [ 'A2', 'A1', 'A4', 'E4' ],
             [ 'F2', 'A4' ],
@@ -29,7 +32,7 @@ class MainPage extends React.Component {
           }
           mainGridNotes={ ["","","C#2","B1","","","C#2","B1"] }
           instrument={"piano"}
-        />
+        /> */}
         {/* <PianoGrid
           cols={ 8 }
         />
