@@ -5,6 +5,7 @@ import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
 import { connect } from 'react-redux';
 import {receiveGrid} from '../../actions/grid_actions'
+import socketIOClient from "socket.io-client";
 
 class MasterGrid extends React.Component {
   constructor(props) {
@@ -32,9 +33,20 @@ class MasterGrid extends React.Component {
     // TEST
 
     this.pauseBtn = React.createRef()
+    this.socket = socketIOClient();
 
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
+  }
+
+
+  componentDidMount() {
+    // this.socket = socketIOClient();
+    this.props.socket.on('grid update', (grid) => {
+      console.log(grid)
+      this.props.receiveGrid(grid)
+    });
+
   }
   
   // componentDidMount() {
@@ -56,11 +68,15 @@ class MasterGrid extends React.Component {
       arr[column] = this.noteNames[index];
     } else arr[column] = "";
     this.setState({selected: arr})
-    this.props.receiveGrid({
+
+    let grid = {
       notes: this.state.selected,
       instrument: this.props.instrument,
       beats: 8
-    })
+    }
+    // this.props.receiveGrid({grid})
+    this.props.socket.emit('grid update', grid);
+
   }
 
   handleClick(note) {
@@ -100,7 +116,7 @@ class MasterGrid extends React.Component {
           this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
         }
         i += 1
-        if (i === this.state.selected.length) {
+        if (i === this.state.allNotes.length) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   

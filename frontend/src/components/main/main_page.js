@@ -9,16 +9,15 @@ import MiniGrid from '../single_grid/mini_grid_partial';
 import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
+import socketIOClient from "socket.io-client";
 import { Switch,Route } from 'react-router-dom';
 
 class MainPage extends React.Component {
-
+  socket = socketIOClient()
   render() {
     return (
       <div>
-        {/* <RoomContainer 
-          instrument={"piano"}
-        /> */}
+
         {/* <Room
           allNotes={[
             [ 'A2', 'A1', 'A4', 'E4' ],
@@ -46,9 +45,11 @@ class MainPage extends React.Component {
         <KeyboardGrid
           cols={ 8 }
         /> */}
+        <ChatRoom socket = {this.socket}> </ChatRoom>
+
 
         <Switch>
-          <Route path="/rooms/:roomName/:cols" component={RoomContainer} />
+          <Route path="/rooms/:roomName/:cols" component={() => < RoomContainer socket = {this.socket}/>} />
           <Route path="/" component={() => <KeyboardGrid cols={8}/>} />
           {/* <Route to="/:roomName/:cols" render={() => <RoomContainer cols={}/>} /> */}
         </Switch>
