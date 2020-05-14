@@ -47,6 +47,13 @@ export const samplerReadableNotes = (state,room) => {
     return newNoteArr
 }
 
+export const getAllMiniNotes = (state, instrument) => {
+    let res = []
+    for(let grid of state.grids){
+        if(grid.instrument !== instrument) res.push(grid.notes)
+    }
+    return res
+}
 
 // notes
 // have rooms also contain gridIds
