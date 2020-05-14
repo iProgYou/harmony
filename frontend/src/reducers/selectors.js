@@ -56,7 +56,7 @@ const state = {
                 // etc
                 // etc
             }
-        }
+        },
         jams: {
             1: {
                 id: 1,
