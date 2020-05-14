@@ -3,8 +3,10 @@ import React from 'react';
 // import PianoGrid from '../single_grid/piano_grid'
 // import DrumGrid from '../single_grid/drum_grid'
 // import BassGrid from '../single_grid/bass_grid'
+
 import MainGrid from '../room/room';
 import MiniGrid from '../single_grid/mini_grid_partial';
+import Room from '../room/room';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
 
@@ -13,7 +15,7 @@ class MainPage extends React.Component {
   render() {
     return (
       <div>
-        <MainGrid
+        <Room
           allNotes={[
             [ 'A2', 'A1', 'A4', 'E4' ],
             [ 'F2', 'A4' ],
@@ -25,17 +27,8 @@ class MainPage extends React.Component {
             [ 'B3', 'B4', 'D4' ]
           ]
           }
-          mainGridNotes={ [
-            ["A1", "F#2"],
-            ["A1"],
-            ["B1", "F#2"],
-            ["A1"],
-            ["F#2"],
-            ["A1"],
-            ["F#2", "B1"],
-            ["B1", "E2"]
-        ]}
-          instrument={"drums"}
+          mainGridNotes={ ["","","C#2","B1","","","C#2","B1"] }
+          instrument={"piano"}
         />
         {/* <PianoGrid
           cols={ 8 }

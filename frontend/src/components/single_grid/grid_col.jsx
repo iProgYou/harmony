@@ -30,7 +30,7 @@ class GridColumn extends React.Component{
           handleSelect={()=>this.handleSelect(note, idx)}
           note={note}
           isLoaded={this.props.isLoaded}
-          updateLast = {this.props.updateLast}
+          // updateLast = {this.props.updateLast}
         />
           ))}
           </div>

@@ -39,7 +39,7 @@ import dA2 from "../../notes/drums/agogoLow.mp3";
 //     A4: dA1, B4: dB1, C4: dCs2, D4: dE2, E4: dFs2, F4: dA2, 
 // }
 
-class MainGrid extends React.Component {
+class Room extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -82,4 +82,4 @@ class MainGrid extends React.Component {
     }
 };
 
-export default MainGrid;
+export default Room;
