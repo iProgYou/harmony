@@ -9,7 +9,7 @@ import {receiveGrid} from '../../actions/grid_actions'
 class MasterGrid extends React.Component {
   constructor(props) {
     super(props);
-
+    debugger
     this.state = {
       selected: props.mainGridNotes,
       // last: 7,
@@ -19,7 +19,7 @@ class MasterGrid extends React.Component {
       pauseNote: 0,
       pauseInt: null
     }
-   
+   debugger
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
@@ -157,7 +157,7 @@ class MasterGrid extends React.Component {
 
 
   render(){
-
+    debugger
     if (!this.state.selected) return null;
     const cols = this.props.instrument === "drums" ? (
       this.state.selected.map( (ele, colNumber) => 

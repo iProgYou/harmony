@@ -20,6 +20,7 @@ export default class InstrumentSelect extends React.Component{
   handleSubmit(e){
     e.preventDefault()
     console.log(`selected ${this.state.selected}`)
+    this.props.selectInstrument(this.state.selected)
     this.setState({complete:true})
   }
 
