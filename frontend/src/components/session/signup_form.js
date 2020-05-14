@@ -63,7 +63,10 @@ class SignupForm extends React.Component {
 
         <form onSubmit={this.handleSubmit} className={formStyle.form}>
           <div className={formStyle.formHeader}>Signup</div>
-   
+          
+          <br />
+          <br />
+          
           <div>
             <br />
             <div className={formStyle.formInputText}>Email</div>

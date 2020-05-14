@@ -42,4 +42,18 @@
   width: 200px;
   height: 25px;
   border-radius: 25px;
+  background: linear-gradient(to right, #4487E0 , #AA45AC);
+}
+
+.formSubmitButton:hover {
+  background: linear-gradient(to right, rgba(68, 136, 224, 0.726) , rgba(170, 69, 172, 0.733));
+  transition: 0.2s;
+  border-style: outset;
+  cursor: pointer;
+}
+
+.formSubmitButton:active {
+  background: linear-gradient(to right, rgba(68, 136, 224, 0.404) , rgba(170, 69, 172, 0.37));
+  transition: 0.2s;
+  border-style: inset;
 }
