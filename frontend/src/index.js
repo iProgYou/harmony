@@ -6,6 +6,8 @@ import configureStore from './store/store';
 // TESTING
 // import { fetchJams } from './util/jam_api_util';
 import { fetchJams, createJam } from './actions/jams_actions';
+import { receiveRoom } from './actions/room_actions';
+import { receiveGrid, receiveGrids } from './actions/grid_actions';
 // END TESTING
 
 
@@ -55,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.fetchJams = fetchJams;
     window.createJam = createJam;
     window.getState = store.getState;
+    window.receiveRoom = receiveRoom;
+    window.receiveGrid = receiveGrid;
+    window.receiveGrids = receiveGrids;
   // END TESTING
 
 

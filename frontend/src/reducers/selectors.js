@@ -23,7 +23,8 @@ const samplerNoteArr = (state, jam) => {
     return samplerNotes
 };
 
-const samplerReadableNotes = (samplerNotes) => {
+export const samplerReadableNotes = (state,room) => {
+    let samplerNotes = samplerNoteArr(state,room)
     let encodeNotes = {
         bA1: "A1", bB1: "B1", bCs2: "C1", bE2: "D1", bFs2: "E1", bA2: "F1", 
         pA1: "A2", pB1: "B2", pCs2: "C2", pE2: "D2", pFs2: "E2", pA2: "F2",

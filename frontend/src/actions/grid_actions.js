@@ -10,10 +10,10 @@ export const receiveGrid = grid => ({
   grid
 });
 
-// export const receiveGrids = grids => ({
-//   type: RECEIVE_GRIDS,
-//   grids
-// });
+export const receiveGrids = grids => ({
+  type: RECEIVE_GRIDS,
+  grids
+});
 
 // how do we send the state of our grid to other users?
 // pass grid objects through websockets
