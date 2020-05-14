@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './navbar.module.css';
+import { Link, withRouter } from 'react-router-dom';
 
 class RoomForm extends React.Component {
   constructor(props) {
@@ -38,6 +39,10 @@ class RoomForm extends React.Component {
     const {name, beats} = this.state
     let room = { name, beats };
     console.log(`room ${name} created with ${beats} beats`)
+    this.props.history.push(`/rooms/${this.state.name}/${this.state.beats}`)
+    this.props.hideModal()
+    // dispatch receiveRoom(cols)
+
     // this.props.login(user)
     // this.props.history.push('/profile');
   }
@@ -84,7 +89,9 @@ class RoomForm extends React.Component {
               </select>
               </div>
               <br />
-              <button className={styles.joinRoom} type="submit" >Harmonize </button>
+              {/* <Link to={`/rooms/${this.state.name}/${this.state.beats}`}> */}
+                <button className={styles.joinRoom} type="submit" >Harmonize </button>
+              {/* </Link> */}
               {/* {this.renderErrors()} */}
             </div>
           </form>
@@ -95,4 +102,4 @@ class RoomForm extends React.Component {
   }
 }
 
-export default RoomForm;
+export default withRouter(RoomForm);

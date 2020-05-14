@@ -59,7 +59,7 @@ class ChatRoom extends React.Component {
 
                     <label>
                         Message
-                        <input onChange = {this.handleChange} type="text" value = {this.state.message}/>
+                        <input className={styles.chatInput} onChange = {this.handleChange} type="text" value = {this.state.message}/>
                     </label>
 
                 </form>
