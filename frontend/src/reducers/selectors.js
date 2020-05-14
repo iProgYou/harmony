@@ -24,6 +24,7 @@ const samplerNoteArr = (state, room) => {
 };
 
 export const samplerReadableNotes = (state,room) => {
+    debugger
     let samplerNotes = samplerNoteArr(state,room)
     let encodeNotes = {
         bA1: "A1", bB1: "B1", bCs2: "C1", bE2: "D1", bFs2: "E1", bA2: "F1", 

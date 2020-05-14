@@ -1,6 +1,8 @@
 import React from 'react';
 import MasterGrid from './master_grid';
 import * as Tone from 'tone';
+import InstrumentSelect from './instrument_select';
+
 // import MiniGrid from './mini_grid';
 
 // bass
@@ -44,6 +46,8 @@ class Room extends React.Component {
         super(props)
         this.state = {
             isLoaded: false,
+            instrumentSelected: false,
+            instrument: null
         }
         this.sampler = new Tone.Sampler(
             {
@@ -93,21 +97,46 @@ class Room extends React.Component {
         this.props.receiveGrids(grids)
     }
 
+    selectInstrument(instrument) {
+        this.setState({
+            instrumentSelected: true,
+            instrument
+        })
+        let room = {
+            name: this.props.match.params.roomName,
+            cols: this.props.match.params.cols,
+            instrumentNames: ["keyboard","piano","drums","bass"].filter((ele) => {
+                return !this.props.availableInstruments.includes(ele)
+            })
+        }
+        this.props.receiveRoom(room)
+    }
+
     render() {
         debugger
         if (!this.state.isLoaded) return null;
         // if (!this.props.instrument) return null;
         // if (!this.props.mainGridNotes) return null;
-
-        return(
-            <div>
-                <MasterGrid
+        const masterGrid = this.state.instrumentSelected ? (
+            <MasterGrid
                     mainGridNotes={this.props.mainGridNotes}
                     allNotes={this.props.allNotes}
                     sampler={this.sampler}
-                    instrument={this.props.instrument}
+                    // instrument={this.props.instrument}
+                    instrument={this.state.instrument}
                     isLoaded={this.state.isLoaded}
                 />
+        ) : (
+            null
+        )
+        
+        return(
+            <div>
+                <InstrumentSelect 
+                    instruments={this.props.availableInstruments}
+                    selectInstrument={(instrument) => this.selectInstrument(instrument)}
+                />
+                {masterGrid}
                 {/* <MiniGrid 
                     // notes={this.props.grids[?]}
                 />

@@ -10,7 +10,6 @@ import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
 import { Switch,Route } from 'react-router-dom';
-import InstrumentSelect from '../room/instrument_select'
 
 class MainPage extends React.Component {
 
@@ -54,14 +53,12 @@ class MainPage extends React.Component {
           {/* <Route to="/:roomName/:cols" render={() => <RoomContainer cols={}/>} /> */}
         </Switch>
 
-        <MiniGrid cols={8} selected={["A2", "A1", "A1", "A1", "A1", "A1", "A1", "A1"]}/>
         <div className={styles.miniGrids}>
           <MiniGrid cols={8} selected={["A2", "E2", "A1", "E2", "A1", "C#2", "A1", "E2"]}/>
           <MiniGrid cols={8} selected={["A2", "C#2", "A1", "C#2", "E2", "A1", "B1", "A1"]}/>
           <MiniGrid cols={8} selected={["A2", "A1", "B1", "C#2", "A2", "E2", "A1", "A1"]}/>
         </div>
         <ChatRoom> </ChatRoom>
-        <InstrumentSelect instruments={['banjo', 'cowbell', 'ukelele', 'tamborine']}/>
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
           Copyright &copy; 2020 Harmony
