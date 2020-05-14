@@ -63,7 +63,7 @@ class RoomForm extends React.Component {
   render() {
     let options = [] 
     for (let i=8; i <= 64; i*=2){
-      options.push(<option value = {i}> {i} beats </option>)
+      options.push(<option key = {i} value = {i}> {i} beats </option>)
     }
 
     return (

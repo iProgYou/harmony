@@ -20,7 +20,7 @@ const mapSTP = (state, ownProps) => {
         // allNotes: samplerReadableNotes(state,state.entities.rooms[ownProps.match.params.roomId])
         allNotes: samplerReadableNotes(state,state.entities.room),
         // instrument: ownProps.instrument,
-        availableInstruments: ["keyboard","piano","drums"],
+        availableInstruments: ["keyboard","piano","drums", "bass"],
         mainGridNotes: mainGridNotes
     }
 };

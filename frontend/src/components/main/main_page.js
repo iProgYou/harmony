@@ -49,7 +49,7 @@ class MainPage extends React.Component {
 
 
         <Switch>
-          <Route path="/rooms/:roomName/:cols" component={() => < RoomContainer socket = {this.socket}/>} />
+          <Route path="/rooms/:roomName/:cols" component={(props) => < RoomContainer socket = {this.socket}  {...props}/>} />
           <Route path="/" component={() => <KeyboardGrid cols={8}/>} />
           {/* <Route to="/:roomName/:cols" render={() => <RoomContainer cols={}/>} /> */}
         </Switch>
@@ -59,7 +59,6 @@ class MainPage extends React.Component {
           <MiniGrid cols={8} selected={["A2", "C#2", "A1", "C#2", "E2", "A1", "B1", "A1"]}/>
           <MiniGrid cols={8} selected={["A2", "A1", "B1", "C#2", "A2", "E2", "A1", "A1"]}/>
         </div>
-        <ChatRoom> </ChatRoom>
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
           Copyright &copy; 2020 Harmony
