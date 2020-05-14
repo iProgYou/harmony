@@ -7,8 +7,10 @@
     width: 350px;
     height: 50vh;
     padding-top: 50px;
-    background-color: white;
+    background-color: #2350a993;
     z-index: 0;
+    border-radius: 15px;
+    border: solid 4px rgb(4, 4, 123)
 }
 
 .messageForm {
@@ -36,3 +38,7 @@
     margin-right: 20px;
 }
 
+.chatInput{
+    background-color: rgba(142, 142, 252, 0.57);
+    margin-bottom: 5px;
+}
