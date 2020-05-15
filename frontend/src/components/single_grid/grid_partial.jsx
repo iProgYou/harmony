@@ -2,6 +2,8 @@ import React from 'react';
 import GridColumn from './grid_col';
 import styles from './grid.module.css';
 import * as Tone from 'tone';
+import { FaPlay, FaPause } from 'react-icons/fa';
+import { BsFillStopFill } from 'react-icons/bs';
 
 export default class Grid extends React.Component {
   constructor(props){
@@ -13,7 +15,7 @@ export default class Grid extends React.Component {
       scheduleInterval: null,
       pauseSlide: false,
       pauseNote: 0,
-      pauseInt: null
+      pauseInt: null,
     }
    
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -53,6 +55,7 @@ export default class Grid extends React.Component {
   }
 
   handleStart() {
+    this.setState({ startBtn: false })
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
       let i = 0;
@@ -90,14 +93,12 @@ export default class Grid extends React.Component {
       Tone.Transport.pause();
       clearTimeout(this.state.pauseInt)
       document.getElementById(`${this.state.pauseNote}`).style.opacity = ".7"
-      this.pauseBtn.current.innerHTML = 'PLAY'
     } else {
       Tone.Transport.start();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-      this.pauseBtn.current.innerHTML = 'PAUSE'
-
     }
     this.setState({playing: !this.state.playing });
+
   }
 
   handleRestart() {
@@ -128,15 +129,25 @@ export default class Grid extends React.Component {
     if (!this.state.selected) return null;
     console.log(this.state.selected)
     const cols = this.state.selected.map( (ele, colNumber) => 
-    <GridColumn
-        selected={ele}
-        idx = {colNumber}
-        key={colNumber}
-        handleUpdate = {index => this.handleUpdate(colNumber, index)}
-        noteNames={this.noteNames}
-        handleClick={this.handleClick}
-        isLoaded={this.props.isLoaded}
-    />
+      <GridColumn
+          selected={ele}
+          idx = {colNumber}
+          key={colNumber}
+          handleUpdate = {index => this.handleUpdate(colNumber, index)}
+          noteNames={this.noteNames}
+          handleClick={this.handleClick}
+          isLoaded={this.props.isLoaded}
+      />
+    )
+
+    const pauseBtn = !this.state.playing ? (
+      <FaPlay 
+        size={20}
+      />
+    ) : (
+      <FaPause 
+        size={20}
+      />
     )
     return(
 
@@ -144,20 +155,26 @@ export default class Grid extends React.Component {
         <div className={styles.grid}>
           {cols}
         </div>
+        <div className={styles.buttons}>
         {
           this.state.scheduleInterval === null ? (
-          <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded}>
-            START
-          </button>
-            ) : (
-              <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
-            PAUSE
-          </button>
-            )
+            <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded}>
+              <FaPlay 
+                size={20}
+              />
+            </button>
+          ) : (
+            <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+              {pauseBtn}
+            </button>
+          )
         }
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
-            RESTART
-          </button>
+          <BsFillStopFill
+            size={30}
+          />
+        </button>
+        </div>
       </div>
     )
   }
