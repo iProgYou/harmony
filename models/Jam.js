@@ -3,8 +3,11 @@ const Schema = mongoose.Schema;
 
 const NoteSchema = new Schema({
   note: {
-    type: String
+    type: Schema.Types.Mixed,
+    // because notes can be an array or a string
+    // increased flexibility comes at a cost, harder to maintain
   }
+
 })
 
 const GridSchema = new Schema({
