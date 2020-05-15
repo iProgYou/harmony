@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
 }
+.gridCol.eighth{
+ margin-left: 10px;
+}
 .gridOuter{
   display: flex;
   flex-direction: column;
@@ -9,7 +12,7 @@
   margin-top: 30px;
 }
 .gridOuter > button{
-  margin: 3px;
+  margin: 5px;
   max-width: 85vw;
   width: 607px;
   height: 30px;
@@ -62,8 +65,6 @@
 }
 
 html  {
-  width: 100vw;
-  height: 100vh;
   background: radial-gradient(circle 50vw at bottom right, #AA45AC, #712F79, transparent),
             radial-gradient(circle 50vw at bottom left, #4487E0, #004BA8, black);
 }
