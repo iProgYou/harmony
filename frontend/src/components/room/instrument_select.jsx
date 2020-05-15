@@ -15,14 +15,11 @@ class InstrumentSelect extends React.Component{
     this.state = {selected: null, complete:false}
   }
 
-
-
-  componentDidMount() {
-    console.log(this.props.instruments)
-    this.props.socket.on('instrument update', (data) => {
-      this.props.receiveInstrument(data['instrument'])
-    })
-  }
+  // componentDidMount() {
+  //   this.props.socket.on('instrument update', (data) => {
+  //     this.props.receiveInstrument(data['instrument'])
+  //   })
+  // }
 
   handleChange(e){
     if(this.state.selected !== e.target.value){
@@ -37,7 +34,7 @@ class InstrumentSelect extends React.Component{
     console.log(`selected ${this.state.selected}`)
     this.props.selectInstrument(this.state.selected)
     this.setState({complete:true})
-    this.props.socket.emit('instrument update', { instrument: this.state.selected} );
+    // this.props.socket.emit('instrument update', { instrument: this.state.selected} );
     // this.props.receiveInstrument(this.state.selected)
   }
 

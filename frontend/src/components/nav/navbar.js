@@ -63,8 +63,8 @@ class NavBar extends React.Component {
     return (
       <div className={styles.navbar}>
         <div className={styles.joinDiv}>
-          <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A JAM</h2> 
-          <h2 onClick={() => this.showModal()} className={styles.joinRoom}> CREATE A JAM</h2> 
+          <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A ROOM</h2> 
+          <h2 onClick={() => this.showModal()} className={styles.joinRoom}> CREATE A ROOM</h2> 
           <SearchBar/>
         </div>
         {(this.state.formDisplay) ? <RoomForm hideModal ={()=>this.hideModal()}/> : null}

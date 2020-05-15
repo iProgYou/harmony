@@ -3,6 +3,9 @@ import MasterGrid from './master_grid';
 import * as Tone from 'tone';
 import InstrumentSelect from './instrument_select';
 import styles from './room.module.css'
+import ChatRoom from '../chat/chat_room'
+import socketIOClient from "socket.io-client";
+
 // import MiniGrid from './mini_grid';
 
 // bass
@@ -57,12 +60,15 @@ class Room extends React.Component {
                 A3: kA1, B3: kB1, C3: kCs2, D3: kE2, E3: kFs2, F3: kA2, 
                 A4: dA1, B4: dB1, C4: dCs2, D4: dE2, E4: dFs2, F4: dA2, 
             },
+            
             {
               onload: () => {
                 this.setState({ isLoaded: true });
               }
             }
           ).toMaster();
+        this.socket = socketIOClient()
+
     }
 
     componentDidMount() {
@@ -122,7 +128,7 @@ class Room extends React.Component {
         // if (!this.props.mainGridNotes) return null;
         const masterGrid = this.state.instrumentSelected ? (
             <MasterGrid
-                    socket = {this.props.socket}
+                    socket = {this.socket}
                     mainGridNotes={this.props.mainGridNotes}
                     allNotes={this.props.allNotes}
                     sampler={this.sampler}
@@ -139,7 +145,7 @@ class Room extends React.Component {
                 <InstrumentSelect 
 
                     selectInstrument={(instrument) => this.selectInstrument(instrument)}
-                    socket={this.props.socket}
+                    socket={this.socket}
 
                 />
                 {masterGrid}
@@ -158,6 +164,8 @@ class Room extends React.Component {
                 />
                 <MiniGrid />
                 <MiniGrid /> */}
+                <ChatRoom socket={this.socket}/> 
+
             </div>
         )
     }

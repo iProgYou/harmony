@@ -147,13 +147,11 @@ class MasterGrid extends React.Component {
   }
 
   animateNote(i) {
-    let col = document.getElementById(`${i}`)
-    col.style.opacity = ".7"
+    document.getElementById(`${i}`).style.opacity = ".7"
     if (i < this.props.allNotes.length-2) {
       document.getElementById(`${i+2}`).scrollIntoView({behavior: 'smooth', block: 'center'})
-    }else {
-      col.scrollIntoView({ behavior: 'smooth' })
     }
+
     let k = i
     const pauseInt = setTimeout(() => {
       document.getElementById(`${k}`).style.opacity = "1"

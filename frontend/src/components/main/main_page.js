@@ -17,15 +17,13 @@ import { connect } from 'react-redux'
 class MainPage extends React.Component {
   constructor(props) {
     super(props)
-    this.socket = socketIOClient()
   }
 
-  componentDidMount() {
-
-    this.socket.on('instrument update', (data) => {
-      this.props.receiveInstrument(data['instrument'])
-    })
-  }
+  // componentDidMount() {
+  //   this.socket.on('instrument update', (data) => {
+  //     this.props.receiveInstrument(data['instrument'])
+  //   })
+  // }
   render() {
     return (
       <div>
@@ -57,7 +55,6 @@ class MainPage extends React.Component {
         <KeyboardGrid
           cols={ 8 }
         /> */}
-        <ChatRoom socket = {this.socket}> </ChatRoom>
 
         <Switch>
           <Route path="/rooms/:roomName/:cols" component={(props) => < RoomContainer socket = {this.socket}  {...props}/>} />
