@@ -1,30 +1,33 @@
 .chatContainer {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     right: 0;
-    top: 200px;
+    bottom: 0px;
     width: 350px;
     height: 50vh;
-    padding-top: 50px;
-    background-color: #2350a993;
-    z-index: 0;
+    padding-top: 30px;
+    background-color: #2350a9e7;
+    z-index: 1;
     border-radius: 15px;
-    border: solid 4px rgb(4, 4, 123)
+    transition: .2s;
+    border: solid 4px rgb(4, 4, 123);
+    padding-bottom: 20px;
 }
 
 .messageForm {
-    position: absolute;
+    position: fixed;
     right: 0px;
-    bottom: 0;
-    width: 300px;
+    bottom: 2px;
+    width: 347px;
+
 }
 
-.messageForm > label {
-    display: flex;
-    flex-direction: column;
-}
 
+
+.message{
+    color: #dadce0;
+}
 
 .chatContainer > li { 
     list-style: none;
@@ -32,7 +35,7 @@
 
 
 .username{ 
-    color: #923C96;
+    color: rgb(175, 170, 175);
     font-weight: 700;
     margin-left: 10px;
     margin-right: 20px;
@@ -41,4 +44,55 @@
 .chatInput{
     background-color: rgba(142, 142, 252, 0.57);
     margin-bottom: 5px;
+    width: 96%;
+    right:0px;
+    border-radius: 3px;
+    border: rgb(19, 19, 111);
+    
 }
+.chatInput::placeholder{
+    color:rgb(92, 0, 92);
+}
+
+.minus{
+    position: absolute;
+    top:5px;
+    right: 5px;
+    padding: 3px 6px;
+    background-color: rgb(69, 20, 148);
+    border-radius: 50%;
+    border: 0px;
+    font-size: 20px;
+    color: #dadce0
+}
+.minus:hover{
+    background-color: rgb(90, 32, 184); transition: .3s;
+    cursor: pointer;
+}
+
+.chatContainer.hidden{
+    position: fixed;
+    height: 10px;
+    bottom: 0px;
+    right: 0px;
+    top: inherit;
+    overflow: hidden;
+    padding-bottom: 0;
+}
+.hidden .messageForm{
+    display:none;
+}
+
+.chatTitle{
+    position: absolute;
+    left: 37%;
+    font-size: 30px;
+    top:6px;
+    color: rgb(205, 205, 205);
+}
+.messages{
+    margin-top:20px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
