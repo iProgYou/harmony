@@ -119,7 +119,6 @@ class MasterGrid extends React.Component {
   }
     
   handleStartGrid() {
-    debugger
     Tone.Transport.toggle();
     this.setState({ playing: !this.state.playing });
     let i = 0;
