@@ -12,7 +12,8 @@ class ChatRoom extends React.Component {
         super(props)
         this.state = {
             message: '',
-            messageList: []
+            messageList: [],
+            shown: false,
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -30,6 +31,9 @@ class ChatRoom extends React.Component {
     }
 
 
+    toggleShow(){
+        this.setState({shown: !this.state.shown})
+    }
 
     handleChange(e) {
         this.setState({message: e.currentTarget.value})
@@ -45,22 +49,25 @@ class ChatRoom extends React.Component {
         const messageList = this.state.messageList.map((data, idx) => {
         return <li key = {idx}>
                     <span className = {styles.username}>{data['username'] + ":"}</span>
-                    <span>{data['message']}</span>
+                    <span className={styles.message}>{data['message']}</span>
                 </li>
         })
 
-
+        const chatStyles = (this.state.shown) ? styles.chatContainer : [styles.chatContainer, styles.hidden].join(" ")
         return (
-            <div className = {styles.chatContainer}>
-
+            <div className = {chatStyles}>
+                <div className={styles.chatTitle}>Chat</div>
+                <button 
+                className={styles.minus}
+                onClick={()=>this.toggleShow()}>{this.state.shown ? "-" : "+"}</button>
+                <ul className={styles.messages}>
                 {messageList}
+                </ul>
 
                 <form className={styles.messageForm} onSubmit = {this.handleSubmit} action="">
 
-                    <label>
-                        Message
-                        <input className={styles.chatInput} onChange = {this.handleChange} type="text" value = {this.state.message}/>
-                    </label>
+                    
+                        <input placeholder="Send a message to the room" className={styles.chatInput} onChange = {this.handleChange} type="text" value = {this.state.message}/>
 
                 </form>
             </div>
