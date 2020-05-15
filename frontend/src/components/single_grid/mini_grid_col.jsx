@@ -6,6 +6,7 @@ export default class MiniGridColumn extends React.Component{
   constructor(props){
     super(props);
     // this.state = { selected: props.noteNames.indexOf(props.selected) } 
+
   }
 
 

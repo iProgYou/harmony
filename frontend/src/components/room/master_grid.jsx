@@ -28,7 +28,7 @@ class MasterGrid extends React.Component {
     this.handleStartGrid = this.handleStartGrid.bind(this)
     this.encodeDrumNotes = this.encodeDrumNotes.bind(this)
    
-
+    this.gridRef = React.createRef()
     this.pauseBtn = React.createRef()
     this.socket = socketIOClient();
 
@@ -147,7 +147,13 @@ class MasterGrid extends React.Component {
   }
 
   animateNote(i) {
-    document.getElementById(`${i}`).style.opacity = ".7"
+    let col = document.getElementById(`${i}`)
+    col.style.opacity = ".7"
+    if (i < this.props.allNotes.length-2) {
+      document.getElementById(`${i+2}`).scrollIntoView({behavior: 'smooth', block: 'center'})
+    }else {
+      col.scrollIntoView({ behavior: 'smooth' })
+    }
     let k = i
     const pauseInt = setTimeout(() => {
       document.getElementById(`${k}`).style.opacity = "1"
@@ -225,7 +231,7 @@ class MasterGrid extends React.Component {
     return(
 
       <div className={styles.gridOuter}>
-        <div className={styles.grid}>
+        <div ref = {this.gridRef} className={styles.grid}>
           {cols}
         </div>
         {

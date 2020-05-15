@@ -53,11 +53,12 @@
 .grid{
   display: flex;
   position: relative;
-  max-width: 85vw;
+  max-width: 1226px;
   overflow-x: auto;
   z-index: 0;
   margin: auto;
   justify-content: flex-start;
+  scroll-behavior: smooth;
 }
 .gridItem.selected{
   border-style: inset;
