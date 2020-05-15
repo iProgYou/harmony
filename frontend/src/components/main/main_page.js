@@ -55,7 +55,7 @@ class MainPage extends React.Component {
         </Switch>
 
 
-        <ChatRoom> </ChatRoom>
+
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
           Copyright &copy; 2020 Harmony

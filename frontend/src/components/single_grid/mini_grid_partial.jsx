@@ -8,7 +8,6 @@ export default class MiniGrid extends React.Component {
     super(props);
 
     this.state = {
-      selected: null,
       last: 0,
       playing: false,
       scheduleInterval: null,
@@ -17,12 +16,6 @@ export default class MiniGrid extends React.Component {
       pauseInt: null
     }
    
-    // this.handleStart = this.handleStart.bind(this);
-    // this.handlePause = this.handlePause.bind(this);
-    // this.updateLast = this.updateLast.bind(this)
-    // this.handleRestart = this.handleRestart.bind(this)
-    // this.animateNote = this.animateNote.bind(this)
-
     this.pauseBtn = React.createRef()
 
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
@@ -42,74 +35,11 @@ export default class MiniGrid extends React.Component {
   }
 
 
-  //handle update updates the state of the grid, taking in the number of the column,
-  //and the selected index
-
-
-  // handleStart() {
-  //   if (this.state.last !== 0) {
-  //     Tone.Transport.toggle();
-  //     this.setState({ playing: !this.state.playing});
-  //     let i = 0;
-  //     const interval = Tone.Transport.scheduleRepeat(() => {
-  //       this.animateNote(i)
-
-  //       if (i === 0 ) {
-  //         this.setState({ scheduleInterval: interval  });
-  //       }
-  //       if (this.state.selected[i]) {
-  //         this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
-  //       }
-  //       i += 1
-  //       if (i === this.state.last + 1) {
-  //         Tone.Transport.clear(interval);
-  //         Tone.Transport.toggle();
-  //         this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
-  //       }
-  //     }, "8n");
-  //   }
-  // }
-
-  // animateNote(i) {
-  //   document.getElementById(`${i}`).style.opacity = ".7"
-  //   let k = i
-  //   const pauseInt = setTimeout(() => {
-  //     document.getElementById(`${k}`).style.opacity = "1"
-  //   }, 250)
-  //   this.setState({ startSlide: true, pauseNote: i, pauseInt: pauseInt })
-  // }
-
-  // handlePause() {
-  
-  //   if (this.state.playing) {
-  //     Tone.Transport.pause();
-  //     clearTimeout(this.state.pauseInt)
-  //     document.getElementById(`${this.state.pauseNote}`).style.opacity = ".7"
-  //     this.pauseBtn.current.innerHTML = 'PLAY'
-  //   } else {
-  //     Tone.Transport.start();
-  //     document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-  //     this.pauseBtn.current.innerHTML = 'PAUSE'
-
-  //   }
-  //   this.setState({playing: !this.state.playing });
-  // }
-
-  // handleRestart() {
-  //   if (this.state.scheduleInterval || this.state.scheduleInterval === 0) {
-  //     Tone.Transport.start();
-  //     Tone.Transport.clear(this.state.scheduleInterval);
-  //     Tone.Transport.toggle();
-  //     document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-  //     this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
-  //    } 
-  // }
-
 
   render(){
 
     if (!this.state.selected) return null;
-    const cols = this.state.selected.map( (ele, colNumber) => 
+    const cols = this.props.selected.map( (ele, colNumber) => 
     <MiniGridColumn
         selected={ele}
         idx = {colNumber}
@@ -117,10 +47,10 @@ export default class MiniGrid extends React.Component {
         // handleUpdate = {index => this.handleUpdate(colNumber, index)}
         noteNames={this.noteNames}
         // handleClick={this.handleClick}
-        isLoaded={this.props.isLoaded}
         updateLast = {this.updateLast}
     />
     )
+    debugger
     return(
 
       <div id={styles.mini} className={styles.gridOuter}>
