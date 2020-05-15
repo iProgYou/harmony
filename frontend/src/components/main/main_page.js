@@ -11,9 +11,21 @@ import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
 import socketIOClient from "socket.io-client";
 import { Switch,Route } from 'react-router-dom';
+import { receiveInstrument } from '../../actions/instrument_actions'
+import { connect } from 'react-redux'
 
 class MainPage extends React.Component {
-  socket = socketIOClient()
+  constructor(props) {
+    super(props)
+    this.socket = socketIOClient()
+  }
+
+  componentDidMount() {
+
+    this.socket.on('instrument update', (data) => {
+      this.props.receiveInstrument(data['instrument'])
+    })
+  }
   render() {
     return (
       <div>
@@ -47,12 +59,13 @@ class MainPage extends React.Component {
         /> */}
         <ChatRoom socket = {this.socket}> </ChatRoom>
 
-
         <Switch>
           <Route path="/rooms/:roomName/:cols" component={(props) => < RoomContainer socket = {this.socket}  {...props}/>} />
           <Route path="/" component={() => <KeyboardGrid cols={8}/>} />
           {/* <Route to="/:roomName/:cols" render={() => <RoomContainer cols={}/>} /> */}
         </Switch>
+
+
 
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
@@ -63,4 +76,12 @@ class MainPage extends React.Component {
   }
 }
 
-export default MainPage;
+
+const mDTP = dispatch => {
+
+  return {
+    receiveInstrument: instrument => dispatch(receiveInstrument(instrument)),
+  }
+}
+
+export default connect(null, mDTP)(MainPage);

@@ -9,7 +9,6 @@ export default class Grid extends React.Component {
 
     this.state = {
       selected: null,
-      last: 0,
       playing: false,
       scheduleInterval: null,
       pauseSlide: false,
@@ -21,7 +20,6 @@ export default class Grid extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handlePause = this.handlePause.bind(this);
-    this.updateLast = this.updateLast.bind(this)
     this.handleRestart = this.handleRestart.bind(this)
     this.animateNote = this.animateNote.bind(this)
 
@@ -55,7 +53,6 @@ export default class Grid extends React.Component {
   }
 
   handleStart() {
-    if (this.state.last !== 0) {
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
       let i = 0;
@@ -69,13 +66,13 @@ export default class Grid extends React.Component {
           this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
         }
         i += 1
-        if (i === this.state.last + 1) {
+        if (i === this.state.selected.length) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
         }
       }, "8n");
-    }
+    
   }
 
   animateNote(i) {
@@ -139,7 +136,6 @@ export default class Grid extends React.Component {
         noteNames={this.noteNames}
         handleClick={this.handleClick}
         isLoaded={this.props.isLoaded}
-        updateLast = {this.updateLast}
     />
     )
     return(

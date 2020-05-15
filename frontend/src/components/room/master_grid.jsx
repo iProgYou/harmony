@@ -23,18 +23,24 @@ class MasterGrid extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handlePause = this.handlePause.bind(this);
-    this.updateLast = this.updateLast.bind(this)
     this.handleRestart = this.handleRestart.bind(this)
     this.animateNote = this.animateNote.bind(this)
-    // TEST
-    this.handleTest = this.handleTest.bind(this)
-    // TEST
+    this.handleStartGrid = this.handleStartGrid.bind(this)
+   
 
     this.pauseBtn = React.createRef()
     this.socket = socketIOClient();
 
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
+
+    this.encodeNotes = {
+      "keyboard": { "A1": "A3", "B1": "B3", "C#2": "C3", "E2": "D3", "F#2": "E3", "A2": "F3" },
+      "piano": { "A1": "A2", "B1": "B2", "C#2": "C2", "E2": "D2", "F#2": "E2", "A2": "F2" },
+      "bass": { "A1": "A1", "B1": "B1", "C#2": "C1", "E2": "D1", "F#2": "E1", "A2": "F1" },
+      "drums": { "A1": "A4", "B1": "B4", "C#2": "C4", "E2": "D4", "F#2": "E4", "A2": "F4" }
+
+    }
   }
 
 
@@ -78,27 +84,10 @@ class MasterGrid extends React.Component {
   }
 
   handleClick(note) {
-    let encodeNotes = {
-      "keyboard": {"A1":"A3", "B1":"B3", "C#2":"C3", "E2": "D3", "F#2":"E3", "A2":"F3"},
-      "piano": {"A1":"A2", "B1":"B2", "C#2":"C2", "E2": "D2", "F#2":"E2", "A2":"F2"},
-      "bass": {"A1":"A1", "B1":"B1", "C#2":"C1", "E2": "D1", "F#2":"E1", "A2":"F1"},
-      "drums": {"A1":"A4", "B1":"B4", "C#2":"C4", "E2": "D4", "F#2":"E4", "A2":"F4"}
-
-    }
-    this.props.sampler.triggerAttack(encodeNotes[this.props.instrument][note]);
+ 
+    this.props.sampler.triggerAttack(this.encodeNotes[this.props.instrument][note]);
   }
 
-  // TEST 
-  handleTest() {
-    Tone.Transport.toggle();
-    let i = 0;
-    Tone.Transport.scheduleRepeat(time => {
-      this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
-      i++
-    }, "8n" )
-
-  }
-  // -TEST
 
   handleStart() {
     // if (this.state.last !== 0) {
@@ -121,6 +110,29 @@ class MasterGrid extends React.Component {
         }
       }, "8n");
     // }
+  }
+
+  handleStartGrid() {
+    Tone.Transport.toggle();
+    this.setState({ playing: !this.state.playing });
+    let i = 0;
+    const interval = Tone.Transport.scheduleRepeat(() => {
+      this.animateNote(i)
+
+      if (i === 0) {
+        this.setState({ scheduleInterval: interval });
+      }
+      if (this.state.selected[i]) {
+        this.props.sampler.triggerAttackRelease(this.encodeNotes[this.props.instrument][this.state.selected[i]], "8n");
+      }
+      i += 1
+      if (i === this.state.selected.length) {
+        Tone.Transport.clear(interval);
+        Tone.Transport.toggle();
+        this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+      }
+    }, "8n");
+
   }
 
   animateNote(i) {
@@ -221,7 +233,12 @@ class MasterGrid extends React.Component {
         }
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
             RESTART
-          </button>
+        </button>   
+
+        <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleStartGrid}>
+            PLAY INSTRUMENT
+        </button>
+
       </div>
     )
   }
