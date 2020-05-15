@@ -96,24 +96,3 @@
     overflow-y: scroll;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(30, 44, 62, 0); 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #4487E0 , #AA45AC)
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    transition: .2s;
-    background: linear-gradient(45deg, rgb(28, 88, 167) , rgb(120, 39, 121));
-    border: 1px solid black; 
-}
