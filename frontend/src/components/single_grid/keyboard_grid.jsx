@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from './grid_partial';
 import * as Tone from 'tone';
-
+import styles from './grid.module.css'
 import A1 from "../../notes/keyboard_a_pentatonic/A1.mp3";
 import B1 from "../../notes/keyboard_a_pentatonic/B1.mp3";
 import Cs2 from "../../notes/keyboard_a_pentatonic/Cs2.mp3";
@@ -31,12 +31,13 @@ export default class KeyboardGrid extends React.Component {
   render(){
     if (!this.state.isLoaded) return null;
     return(
-
-      <Grid 
-        isLoaded={ this.state.isLoaded }
-        cols={ this.props.cols }
-        sampler={ this.sampler }
-      />
+      <div className={styles.homePageGrid}>
+        <Grid 
+          isLoaded={ this.state.isLoaded }
+          cols={ this.props.cols }
+          sampler={ this.sampler }
+        />
+      </div>
       
     )
   }

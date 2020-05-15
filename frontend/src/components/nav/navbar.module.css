@@ -11,6 +11,7 @@
   width: 100vw;
   box-sizing: border-box;
   z-index: 1;
+  height: 80px;
 }
 
 .title{
@@ -24,6 +25,7 @@
 }
 
 .userLinks > * {
+  font-size: 18px;
   background-color: #712F79;
   border-radius: 10px;
   padding: 5px 10px;
@@ -139,7 +141,7 @@
 #searchbar{
  display: none;
  position:fixed;
- top:100px;
+ top:83px;
  transition: 1s;
  height: 30px;
  border-radius: 10px;

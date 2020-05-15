@@ -46,14 +46,14 @@ class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div className={styles.userLinks}>
-          <button onClick={this.logoutUser}>Logout</button>
+          <button onClick={this.logoutUser}>LOGOUT</button>
         </div>
       );
     } else {
       return (
         <div className={styles.userLinks}>
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
+          <Link to={'/signup'}>SIGNUP</Link>
+          <Link to={'/login'}>LOGIN</Link>
         </div>
       );
     }
@@ -63,8 +63,10 @@ class NavBar extends React.Component {
     return (
       <div className={styles.navbar}>
         <div className={styles.joinDiv}>
+
           <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A ROOM</h2> 
           <h2 onClick={() => this.showModal()} className={styles.joinRoom}> CREATE A ROOM</h2> 
+
           <SearchBar/>
         </div>
         {(this.state.formDisplay) ? <RoomForm hideModal ={()=>this.hideModal()}/> : null}
