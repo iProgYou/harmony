@@ -14,7 +14,7 @@ const GridSchema = new Schema({
   instrument: {
     type: String, 
   }, 
-  notes: [NoteSchema]
+  notes: [NoteSchema],
 })
 
 const JamSchema = new Schema({
@@ -30,7 +30,7 @@ const JamSchema = new Schema({
     type: Date,
     default: Date.now
   }, 
-  // grids: [GridSchema]
+  grids: [GridSchema]
 });
 
 module.exports = Jam = mongoose.model('Jam', JamSchema);

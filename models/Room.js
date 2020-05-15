@@ -21,7 +21,7 @@ const RoomSchema = new Schema({
   // possible future additions
   // 1. members - which should be capped at 4
   // 2. length of jam - all members should have the same jam length
-  // 3. jam
+  // 3. jams
   
 });
 
