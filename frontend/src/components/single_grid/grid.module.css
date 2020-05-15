@@ -79,6 +79,7 @@
   position: relative;
   max-width: 85vw;
   width:1227px;
+
   overflow-x: auto;
   z-index: 0;
   margin: auto;
