@@ -136,8 +136,10 @@ class Room extends React.Component {
         return(
             <div>
                 <InstrumentSelect 
-                    instruments={this.props.availableInstruments}
+
                     selectInstrument={(instrument) => this.selectInstrument(instrument)}
+                    socket={this.props.socket}
+
                 />
                 {masterGrid}
                 {/* <MiniGrid 

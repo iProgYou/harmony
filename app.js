@@ -46,11 +46,13 @@ io.on('connection', (socket) => {
   console.log("a user has connected")
   socket.on('chat message', (data) => {
     io.emit('chat message', data);
-    console.log('message: ' + data);
   });
   socket.on('grid update', (data) => {
     io.emit('grid update', data);
-    console.log('gridupate: ');
+  });
+
+  socket.on('instrument update', (data) => {
+    io.emit('instrument update', data);
   });
 
 });
