@@ -11,24 +11,44 @@
   align-items: center;
   margin-top: 30px;
 }
-.gridOuter > button{
+.homePageGrid .buttons{
+  width: 605px
+
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width:1227px;
+  width: 85vw;
+}
+.buttons > button{
   margin: 5px;
-  max-width: 85vw;
-  width: 607px;
-  height: 30px;
+  
+  width: 180px;
+  height: 45px;
   background-color: #002147;
   color: #dadce0;
   font-size: 19px;
   border-radius:5px;
   z-index: 0;
 }
-.gridOuter > button:hover{
+
+.buttons > button.bigButton{
+  width: 180px;
+}
+
+.bbDiv{
+  display: flex;
+  justify-content: space-around;
+}
+.buttons > button:hover{
   background-color: #053265;
   border-style:outset;
   transition: .2s;
   cursor: pointer;
 }
-.gridOuter > button:active{
+.buttons > button:active{
   background-color: #000f21;
   border-style:inset;
   cursor: pointer;
@@ -54,10 +74,11 @@
   display: flex;
   position: relative;
   max-width: 85vw;
+  width:1227px;
   overflow-x: auto;
   z-index: 0;
   margin: auto;
-  justify-content: flex-start;
+  justify-content: center;
   scroll-behavior: smooth;
 }
 .gridItem.selected{

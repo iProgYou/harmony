@@ -52,7 +52,7 @@ class NavBar extends React.Component {
     } else {
       return (
         <div className={styles.userLinks}>
-          <Link to={'/signup'}>SIGNOUT</Link>
+          <Link to={'/signup'}>SIGNUP</Link>
           <Link to={'/login'}>LOGIN</Link>
         </div>
       );

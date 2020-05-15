@@ -155,6 +155,7 @@ export default class Grid extends React.Component {
         <div className={styles.grid}>
           {cols}
         </div>
+        <div className={styles.buttons}>
         {
           this.state.scheduleInterval === null ? (
             <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded}>
@@ -173,6 +174,7 @@ export default class Grid extends React.Component {
             size={30}
           />
         </button>
+        </div>
       </div>
     )
   }

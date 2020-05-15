@@ -231,9 +231,14 @@ class MasterGrid extends React.Component {
     )
 
     const pauseBtn = !this.state.playing ? (
-      <FaPlay 
-        size={20}
-      />
+      <div className={styles.bbDiv}>
+        <FaPlay
+          size={20}
+        />
+        <FaUserFriends
+          size={24}
+        />
+        </div>
     ) : (
       <FaPause 
         size={20}
@@ -246,13 +251,15 @@ class MasterGrid extends React.Component {
         <div ref = {this.gridRef} className={styles.grid}>
           {cols}
         </div>
+        <div className={styles.buttons}>
+
         {
           this.state.scheduleInterval === null ? (
-          <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded}>
+          <button className={styles.bigButton} onClick={this.handleStart} disabled={!this.props.isLoaded}>
           {/* // TEST */}
           {/* <button className={styles.button} onClick={this.handleTest} disabled={!this.props.isLoaded}> */}
             {/* TEST */}
-            <div>
+            <div className={styles.bbDiv}>
               <FaPlay 
                 size={20}
               />
@@ -262,7 +269,7 @@ class MasterGrid extends React.Component {
             </div>
           </button>
             ) : (
-              <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+              <button className={((!this.state.playing) ? styles.bigButton : styles.button)} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
             {pauseBtn}
           </button>
             )
@@ -278,6 +285,7 @@ class MasterGrid extends React.Component {
             size={20}
           />
         </button>
+        </div>
 
       </div>
     )
