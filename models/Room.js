@@ -9,7 +9,7 @@ const MemberSchema = new Schema({
 })
 
 const RoomSchema = new Schema({
-  host: {
+  hostId: {
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
