@@ -66,7 +66,6 @@ class Room extends React.Component {
     }
 
     componentDidMount() {
-        // debugger
         let cols = parseInt(this.props.match.params.cols);
         let notes = new Array(cols).fill("");
         let drumNotes = [];
@@ -116,7 +115,6 @@ class Room extends React.Component {
     }
 
     render() {
-        // debugger
         if (!this.state.isLoaded) return null;
         // if (!this.props.instrument) return null;
         // if (!this.props.mainGridNotes) return null;
