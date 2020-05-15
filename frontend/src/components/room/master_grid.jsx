@@ -26,6 +26,7 @@ class MasterGrid extends React.Component {
     this.handleRestart = this.handleRestart.bind(this)
     this.animateNote = this.animateNote.bind(this)
     this.handleStartGrid = this.handleStartGrid.bind(this)
+    this.encodeDrumNotes = this.encodeDrumNotes.bind(this)
    
 
     this.pauseBtn = React.createRef()
@@ -88,7 +89,8 @@ class MasterGrid extends React.Component {
     this.props.sampler.triggerAttack(this.encodeNotes[this.props.instrument][note]);
   }
 
-
+  
+  
   handleStart() {
     // if (this.state.last !== 0) {
       Tone.Transport.toggle();
@@ -109,10 +111,15 @@ class MasterGrid extends React.Component {
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
         }
       }, "8n");
-    // }
-  }
+      // }
+    }
 
+  encodeDrumNotes(idx) {
+    return this.state.selected[idx].map(note => this.encodeNotes[this.props.instrument][note])
+  }
+    
   handleStartGrid() {
+    debugger
     Tone.Transport.toggle();
     this.setState({ playing: !this.state.playing });
     let i = 0;
@@ -123,7 +130,11 @@ class MasterGrid extends React.Component {
         this.setState({ scheduleInterval: interval });
       }
       if (this.state.selected[i]) {
-        this.props.sampler.triggerAttackRelease(this.encodeNotes[this.props.instrument][this.state.selected[i]], "8n");
+        if (this.props.instrument === "drums") {
+          this.props.sampler.triggerAttackRelease(this.encodeDrumNotes(i), "8n");
+        } else {
+          this.props.sampler.triggerAttackRelease(this.encodeNotes[this.props.instrument][this.state.selected[i]], "8n");
+        }
       }
       i += 1
       if (i === this.state.selected.length) {
