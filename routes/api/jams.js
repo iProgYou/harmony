@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-// Create a protected route for a user to post Jams
+// Create a protected route for a user to create Jams
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {

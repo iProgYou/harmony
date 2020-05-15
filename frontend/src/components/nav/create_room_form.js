@@ -43,8 +43,6 @@ class RoomForm extends React.Component {
     this.props.hideModal()
     // dispatch receiveRoom(cols)
 
-    // this.props.login(user)
-    // this.props.history.push('/profile');
   }
 
   // Render the session errors if there are any
