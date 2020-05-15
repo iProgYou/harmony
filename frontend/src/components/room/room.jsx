@@ -2,7 +2,7 @@ import React from 'react';
 import MasterGrid from './master_grid';
 import * as Tone from 'tone';
 import InstrumentSelect from './instrument_select';
-
+import styles from './room.module.css'
 // import MiniGrid from './mini_grid';
 
 // bass
@@ -33,6 +33,7 @@ import dCs2 from "../../notes/drums/hh.mp3";
 import dE2 from "../../notes/drums/hho.mp3";
 import dFs2 from "../../notes/drums/agogoHigh.mp3";
 import dA2 from "../../notes/drums/agogoLow.mp3";
+import MiniGrid from '../single_grid/mini_grid_partial';
 
 // {
 //     A1: bA1, B1: bB1, C1: bCs2, D1: bE2, E1: bFs2, F1: bA2, 
@@ -142,6 +143,16 @@ class Room extends React.Component {
 
                 />
                 {masterGrid}
+
+                {(this.state.instrumentSelected) ? (
+                    <div className={styles.miniGrids} > {this.props.getAllMiniNotes(this.state.instrument).map((notes) => (
+                        <MiniGrid
+                            selected={notes}
+                        />
+                        )
+                    )}
+                    </div>
+                ): null}
                 {/* <MiniGrid 
                     // notes={this.props.grids[?]}
                 />

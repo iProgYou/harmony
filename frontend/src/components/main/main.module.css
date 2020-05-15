@@ -11,10 +11,3 @@
   text-align: center;
 }
 
-.miniGrids{
-  display: flex;
-  justify-content: center;
-}
-.miniGrids > * {
-  margin: 10px;
-}

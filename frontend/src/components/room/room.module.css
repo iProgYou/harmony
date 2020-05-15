@@ -40,3 +40,10 @@ visibility: hidden;
 .selectTitle{
   font-size: 30px;
 }
+.miniGrids{
+  display: flex;
+  justify-content: center;
+}
+.miniGrids > * {
+  margin: 10px;
+}

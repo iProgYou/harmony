@@ -5,22 +5,24 @@ import styles from './grid.module.css';
 export default class MiniGridColumn extends React.Component{
   constructor(props){
     super(props);
-    this.state = { selected: props.noteNames.indexOf(props.selected) } 
-    
+    // this.state = { selected: props.noteNames.indexOf(props.selected) } 
+    debugger
   }
 
 
   render() {
-    const selected = this.state.selected;
+    const selected = this.props.selected;
+    const blocks = this.props.noteNames.map((note, idx) => (
+      <MiniGridItem
+        key={idx}
+        selected={(selected instanceof Array) ? selected.includes(note) : selected === note}
+        note={note}
+      />
+    ))
+
+    
     return (<div id = {this.props.idx} className={styles.gridCol}>
-      {this.props.noteNames.map((note, idx) => (
-        <MiniGridItem
-          key={idx}
-          selected = {selected === idx}
-          note={note}
-          isLoaded={this.props.isLoaded}
-        />
-          ))}
+      {blocks}
           </div>
       
     )
