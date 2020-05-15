@@ -14,15 +14,18 @@ const RoomSchema = new Schema({
     type: Date,
     default: Date.now
   }, 
-  // instruments: {
-  //   type: Array,
-  // },
+  beats: {
+    type: Number
+  },
+  // beats or columns, they are the same thing
+  savedJams: {
+    type: Schema.Types.Mixed
+  }
 
   // possible future additions
   // 1. members - which should be capped at 4
   // 2. length of jam - all members should have the same jam length
   // 3. jams
-  
 });
 
 module.exports = Room = mongoose.model('Room', RoomSchema);
