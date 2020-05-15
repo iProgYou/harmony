@@ -2,6 +2,7 @@ import React from 'react'
 import socketIOClient from "socket.io-client";
 import styles from './chat_room.module.css'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 const ENDPOINT = "http://10.0.0.69:5000";
 
 
@@ -20,8 +21,9 @@ class ChatRoom extends React.Component {
     }
     
     componentDidMount() {
+        // this.props.socket.connect()
+        this.props.socket.emit('joinRoom', this.props.match.params.roomName)
 
-        // this.socket = socketIOClient();
         this.props.socket.on('chat message', (msg) => {
             let newMessageList = [...this.state.messageList]
             newMessageList.push(msg)   
@@ -41,7 +43,11 @@ class ChatRoom extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault(); 
-        this.props.socket.emit('chat message', {username: this.props.currentUser.handle, message: this.state.message});
+        // this.props.socket.in(`${this.props.match.params.roomName}`)
+        //     .emit('chat message', { username: this.props.currentUser.handle, message: this.state.message, room: this.props.match.params.roomName });
+        //     this.setState({message: ''})    
+            
+        this.props.socket.emit('chat message', { username: this.props.currentUser.handle, message: this.state.message, room: this.props.match.params.roomName });
         this.setState({message: ''})
     }
 
@@ -66,7 +72,6 @@ class ChatRoom extends React.Component {
 
                 <form className={styles.messageForm} onSubmit = {this.handleSubmit} action="">
 
-                    
                         <input placeholder="Send a message to the room" className={styles.chatInput} onChange = {this.handleChange} type="text" value = {this.state.message}/>
 
                 </form>
@@ -93,4 +98,4 @@ const mSTP = (state) => {
 
 
 
-export default connect(mSTP, null)(ChatRoom)
+export default withRouter(connect(mSTP, null)(ChatRoom))

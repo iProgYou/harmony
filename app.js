@@ -43,9 +43,16 @@ const server = app.listen(port, () => console.log(`Server is running on port ${p
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-  console.log("a user has connected")
+  console.log(`A user has connected`)
+
+  socket.on('joinRoom', (room) => {
+    console.log(`you have join room ${room}`)
+    socket.join(room);
+  });
   socket.on('chat message', (data) => {
-    io.emit('chat message', data);
+    // io.to(data['room']).emit('chat message', data);
+    console.log(data['room'])
+    io.to(data['room']).emit('chat message', data);
   });
   socket.on('grid update', (data) => {
     io.emit('grid update', data);
