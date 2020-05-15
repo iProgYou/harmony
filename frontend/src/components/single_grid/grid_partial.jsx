@@ -2,8 +2,8 @@ import React from 'react';
 import GridColumn from './grid_col';
 import styles from './grid.module.css';
 import * as Tone from 'tone';
-import { FaPlay, FaPause, FaRedo } from 'react-icons/fa';
-// import { MdReplay } from 'react-icons/md';
+import { FaPlay, FaPause } from 'react-icons/fa';
+import { BsFillStopFill } from 'react-icons/bs';
 
 export default class Grid extends React.Component {
   constructor(props){
@@ -169,8 +169,8 @@ export default class Grid extends React.Component {
           )
         }
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
-          <FaRedo
-            size={20}
+          <BsFillStopFill
+            size={30}
           />
         </button>
       </div>

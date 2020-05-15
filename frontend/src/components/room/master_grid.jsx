@@ -5,6 +5,8 @@ import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
 import { connect } from 'react-redux';
 import {receiveGrid} from '../../actions/grid_actions'
+import { FaPlay, FaPause, FaRedo,FaUserFriends } from 'react-icons/fa';
+import { BsFillStopFill } from 'react-icons/bs';
 import socketIOClient from "socket.io-client";
 
 class MasterGrid extends React.Component {
@@ -119,7 +121,6 @@ class MasterGrid extends React.Component {
   }
     
   handleStartGrid() {
-    debugger
     Tone.Transport.toggle();
     this.setState({ playing: !this.state.playing });
     let i = 0;
@@ -167,11 +168,11 @@ class MasterGrid extends React.Component {
       Tone.Transport.pause();
       clearTimeout(this.state.pauseInt)
       document.getElementById(`${this.state.pauseNote}`).style.opacity = ".7"
-      this.pauseBtn.current.innerHTML = 'PLAY'
+      // this.pauseBtn.current.innerHTML = 'PLAY'
     } else {
       Tone.Transport.start();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-      this.pauseBtn.current.innerHTML = 'PAUSE'
+      // this.pauseBtn.current.innerHTML = 'PAUSE'
     }
     this.setState({playing: !this.state.playing });
   }
@@ -228,6 +229,17 @@ class MasterGrid extends React.Component {
         />
       )
     )
+
+    const pauseBtn = !this.state.playing ? (
+      <FaPlay 
+        size={20}
+      />
+    ) : (
+      <FaPause 
+        size={20}
+      />
+    )
+
     return(
 
       <div className={styles.gridOuter}>
@@ -240,20 +252,31 @@ class MasterGrid extends React.Component {
           {/* // TEST */}
           {/* <button className={styles.button} onClick={this.handleTest} disabled={!this.props.isLoaded}> */}
             {/* TEST */}
-            START
+            <div>
+              <FaPlay 
+                size={20}
+              />
+              <FaUserFriends
+                size={24}
+              />
+            </div>
           </button>
             ) : (
               <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
-            PAUSE
+            {pauseBtn}
           </button>
             )
         }
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
-            RESTART
+          <BsFillStopFill
+            size={30}
+          />
         </button>   
 
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleStartGrid}>
-            PLAY INSTRUMENT
+          <FaPlay 
+            size={20}
+          />
         </button>
 
       </div>
