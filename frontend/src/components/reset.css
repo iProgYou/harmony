@@ -56,7 +56,8 @@ table {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgba(30, 44, 62, 0); 
+	background: rgba(30, 44, 62, 0); 
+	border: solid black 1px;
 }
  
 /* Handle */
