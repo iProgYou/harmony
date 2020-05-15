@@ -8,7 +8,6 @@ const MemberSchema = new Schema({
   }
 })
 
-
 const RoomSchema = new Schema({
   host: {
     type: Schema.Types.ObjectId,
@@ -30,10 +29,7 @@ const RoomSchema = new Schema({
     type: Schema.Types.Mixed
   }, 
   memberIds : [MemberSchema]
-  // possible future additions
-  // 1. members - which should be capped at 4
-  // 2. length of jam - all members should have the same jam length
-  // 3. jams
+  // memberIds should be capped at 4?
 });
 
 module.exports = Room = mongoose.model('Room', RoomSchema);
