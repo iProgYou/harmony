@@ -50,7 +50,7 @@ export default class MiniGrid extends React.Component {
         updateLast = {this.updateLast}
     />
     )
-    debugger
+    
     return(
 
       <div id={styles.mini} className={styles.gridOuter}>
