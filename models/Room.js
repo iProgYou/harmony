@@ -14,6 +14,9 @@ const RoomSchema = new Schema({
     type: Date,
     default: Date.now
   }, 
+  // instruments: {
+  //   type: Array,
+  // },
 
   // possible future additions
   // 1. members - which should be capped at 4
