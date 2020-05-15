@@ -55,15 +55,6 @@ class MasterGrid extends React.Component {
     });
 
   }
-  
-  // componentDidMount() {
-  //   let arrCols = [];
-  //   for (let i = 0; i < this.props.cols; i++) {
-  //     arrCols.push("")
-  //   }
-  //   this.setState({ selected: arrCols })
-  // }
-
 
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
@@ -200,7 +191,7 @@ class MasterGrid extends React.Component {
 
   render(){
     if (!this.state.selected) return null;
-    const cols = this.props.instrument === "drums" ? (
+    const beats = this.props.instrument === "drums" ? (
       this.state.selected.map( (ele, colNumber) => 
         <MultiGridColumn
             selected={ele}
@@ -247,7 +238,7 @@ class MasterGrid extends React.Component {
 
       <div className={styles.gridOuter}>
         <div ref = {this.gridRef} className={styles.grid}>
-          {cols}
+          {beats}
         </div>
         <div className={styles.buttons}>
 

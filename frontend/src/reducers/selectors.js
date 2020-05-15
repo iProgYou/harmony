@@ -1,6 +1,6 @@
 const samplerNoteArr = (state, room) => {
     let samplerNotes = [];
-    for (let i = 0; i < room.cols; i++) {
+    for (let i = 0; i < room.beats; i++) {
         samplerNotes.push([])
         room.instrumentNames.forEach(gridId => {
             let notes = state.entities.grids[gridId].notes;
@@ -64,38 +64,71 @@ export const getAllMiniNotes = (state, instrument) => {
 //                 id: 1,
 //                 beats: 8,
 //                 hostId: 10,
-//                 gridNames: ["piano","keyboard","drums","bass"]
+//                 userIds: [1,4,7]
+
 //             }
 //         },
 //         jams: {
 //             1: {
 //                 id: 1,
-//                 gridIds: [1,2,3,4],
+//                 name: "big Jam",
+//                 grids: [
+//                     {
+//                         userId: 1
+//                         id: 1,
+//                         notes: ["A1","A2","","","A1","A2","",""],
+//                         instrument: "piano",
+//                         beats: 8
+//                     },
+//                     {
+//                         id: 2,
+//                         userId: 4
+        
+//                         notes: ["","","C#2","B1","","","C#2","B1"],
+//                         instrument: "keyboard",
+//                         beats: 8
+//                     },
+//                     {
+//                         id: 3,
+//                         userId: 7
+//                         notes: [
+//                             ["A1", "F#2"],
+//                             ["A1"],
+//                             ["B1", "F#2"],
+//                             ["A1"],
+//                             ["F#2"],
+//                             ["A1"],
+//                             ["F#2", "B1"],
+//                             ["B1", "E2"]
+//                         ],
+//                         instrument: "drums",
+//                         beats: 8
+//                     }
+//                 ],
+//                 allNotes: [ "array that contains all of the notes from allNotes in room slice of state" ]
 //                 beats: 8,
 //                 hostId: 10
 //             }
 //         },
 //         grids: {
-//             "piano": {
+//             1: {
+//                 userId: 1
 //                 id: 1,
 //                 notes: ["A1","A2","","","A1","A2","",""],
 //                 instrument: "piano",
 //                 beats: 8
 //             },
-//             "keyboard": {
+//             4: {
 //                 id: 2,
+//                 userId: 4
+
 //                 notes: ["","","C#2","B1","","","C#2","B1"],
 //                 instrument: "keyboard",
 //                 beats: 8
 //             },
-//             "bass": {
+//             7: {
 //                 id: 3,
-//                 notes: ["A1","","C#2","","A1","","C#2",""],
-//                 instrument: "bass",
-//                 beats: 8
-//             },
-//             "drums": {
-//                 id: 3,
+//                 userId: 7
 //                 notes: [
 //                     ["A1", "F#2"],
 //                     ["A1"],

@@ -32,11 +32,11 @@ export default class Grid extends React.Component {
   }
   
   componentDidMount() {
-    let arrCols = [];
-    for (let i = 0; i < this.props.cols; i++) {
-      arrCols.push("")
+    let arrBeats = [];
+    for (let i = 0; i < this.props.beats; i++) {
+      arrBeats.push("")
     }
-    this.setState({ selected: arrCols })
+    this.setState({ selected: arrBeats })
   }
 
 
@@ -128,7 +128,7 @@ export default class Grid extends React.Component {
 
     if (!this.state.selected) return null;
     console.log(this.state.selected)
-    const cols = this.state.selected.map( (ele, colNumber) => 
+    const beats = this.state.selected.map( (ele, colNumber) => 
       <GridColumn
           selected={ele}
           idx = {colNumber}
@@ -153,7 +153,7 @@ export default class Grid extends React.Component {
 
       <div className={styles.gridOuter}>
         <div className={styles.grid}>
-          {cols}
+          {beats}
         </div>
         <div className={styles.buttons}>
         {

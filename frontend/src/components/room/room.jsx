@@ -72,32 +72,32 @@ class Room extends React.Component {
     }
 
     componentDidMount() {
-        let cols = parseInt(this.props.match.params.cols);
-        let notes = new Array(cols).fill("");
+        let beats = parseInt(this.props.match.params.beats);
+        let notes = new Array(beats).fill("");
         let drumNotes = [];
-        for (let i = 0; i < cols; i++) {
+        for (let i = 0; i < beats; i++) {
             drumNotes.push([])
         }
         let grids = {
             "piano": {
                 notes,
                 instrument: "piano",
-                beats: cols
+                beats: beats
             },
             "keyboard": {
                 notes,
                 instrument: "keyboard",
-                beats: cols
+                beats: beats
             },
             "bass": {
                 notes,
                 instrument: "bass",
-                beats: cols
+                beats: beats
             },
             "drums": {
                 notes: drumNotes,
                 instrument: "drums",
-                beats: cols
+                beats: beats
             }
         }
         this.props.receiveGrids(grids)
@@ -111,7 +111,7 @@ class Room extends React.Component {
         })
         let room = {
             name: this.props.match.params.roomName,
-            cols: this.props.match.params.cols,
+            // cols: this.props.match.params.cols,
             instrumentNames: ["keyboard","piano","drums","bass"]
             // .filter((ele) => {
             //     return !this.props.availableInstruments.includes(ele)
@@ -141,10 +141,8 @@ class Room extends React.Component {
         return(
             <div>
                 <InstrumentSelect 
-
                     selectInstrument={(instrument) => this.selectInstrument(instrument)}
                     socket={this.socket}
-
                 />
                 {masterGrid}
 

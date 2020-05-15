@@ -45,11 +45,11 @@ export default class DrumGrid extends React.Component {
     }
     
     componentDidMount() {
-      let arrCols = [];
-      for (let i = 0; i < this.props.cols; i++) {
-        arrCols.push("")
+      let arrBeats = [];
+      for (let i = 0; i < this.props.Beats; i++) {
+        arrBeats.push("")
       }
-      this.setState({ selected: arrCols })
+      this.setState({ selected: arrBeats })
     }
   
   
@@ -126,7 +126,7 @@ export default class DrumGrid extends React.Component {
   
     render(){
       if (!this.state.selected) return null;
-      const cols = this.state.selected.map( (ele, colNumber) => 
+      const beats = this.state.selected.map( (ele, colNumber) => 
       <GridColumn
           key={colNumber}
           handleUpdate = {index => this.handleUpdate(colNumber, index)}
@@ -140,7 +140,7 @@ export default class DrumGrid extends React.Component {
   
         <div className={styles.gridOuter}>
           <div className={styles.grid}>
-            {cols}
+            {beats}
           </div>
           {
             this.state.scheduleInterval === null ? (
@@ -196,7 +196,7 @@ export default class DrumGrid extends React.Component {
 //     return(
 //       <Grid 
 //         isLoaded={ this.state.isLoaded }
-//         cols={ this.props.cols }
+//         beats={ this.props.beats }
 //         sampler={ this.sampler }
 //       />
 //     )
