@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RoomSchema = new Schema({
-  host: {
+  // Should this be host?
+  hostId: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'users',
+    required: true
   },
   name: {
     type: String,
@@ -14,6 +16,10 @@ const RoomSchema = new Schema({
     type: Date,
     default: Date.now
   }, 
+  beats: {
+    type: Number,
+    required: true
+  }
 
   // possible future additions
   // 1. members - which should be capped at 4

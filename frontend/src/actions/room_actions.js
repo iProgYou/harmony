@@ -19,7 +19,7 @@ export const receiveRoom = room => ({
 //     .then(rooms => dispatch(receiveRooms(rooms)))
 // }
 
-// export const createRoom = (room) => (dispatch) => (
-//   RoomsAPIUtil.createRoom(room)
-//     .then(room => dispatch(receiveRoom(room)))
-// )
+export const createRoom = (room) => (dispatch) => (
+  RoomsAPIUtil.createRoom(room)
+    .then(room => dispatch(receiveRoom(room)))
+)
