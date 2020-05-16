@@ -68,7 +68,7 @@ class Room extends React.Component {
             }
           ).toMaster();
         this.socket = socketIOClient()
-
+        
     }
 
     componentDidMount() {
@@ -105,7 +105,7 @@ class Room extends React.Component {
 
 
     selectInstrument(instrument) {
-        const {beats} = this.props.currentRoom
+        const { beats } = this.props.currentRoom
         const userId = this.props.currentUserId
         let notes;
         if (instrument !== 'drums'){
@@ -117,13 +117,12 @@ class Room extends React.Component {
             }
         }
         let grid = {instrument, notes, beats, userId }
+        this.props.updateRoom(userId,this.props.currentRoomId)
         this.props.receiveGrid(grid)
-            .then(
-                this.setState({
-                    instrumentSelected: true,
-                    instrument
-                })
-            )
+        this.setState({
+            instrumentSelected: true,
+            instrument
+        })
         // let room = {
         //     name: this.props.match.params.roomName,
         //     // cols: this.props.match.params.cols,

@@ -7,7 +7,7 @@ import {
 
 const roomsReducer = (state = {}, action) => {
   Object.freeze(state);
-
+ 
   switch (action.type) {
     // case RECEIVE_ROOMS:
     //   return Object.assign({}, action.rooms);

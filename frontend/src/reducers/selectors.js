@@ -1,5 +1,6 @@
 const samplerNoteArr = (state, room) => {
     let samplerNotes = [];
+    // debugger
     for (let i = 0; i < room.beats; i++) {
         samplerNotes.push([])
         room.memberIds.forEach(gridId => {

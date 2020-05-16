@@ -41,12 +41,15 @@ router.post('/',
 
     const newRoom = new Room({
       name: req.body.name,
-      host: req.user.id
+      hostId: req.user.id,
+      beats: req.body.beats,
+      // memberIds: [req.user.id]
       // more additions to come?
     });
 
     newRoom.save()
       .then(room => res.json(room))
+      // .then(room => console.log("success"))
       .catch(err => console.log(err));
   }
 );

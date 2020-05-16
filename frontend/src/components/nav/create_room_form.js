@@ -37,14 +37,15 @@ class RoomForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const {name, beats} = this.state
-    const { hostId } = this.props
-    let room = { name, beats, hostId };
+    let room = { name, beats };
     console.log(`room ${name} created with ${beats} beats`)
     // this.props.history.push(`/rooms/${this.state.name}/${this.state.beats}`)
-    if (name.length >= 5 && name.length < 100) {
-      this.props.createRoom(room)
-        this.props.history.push(`/rooms/${this.state.name}`)
-    }
+    // if (name.length >= 5 && name.length < 100) {
+    this.props.createRoom(room)
+    // Come back to this!!!
+      .then(this.props.history.push(`/rooms/${this.state.name}`))
+      .catch()
+    // }
     this.props.hideModal()
     // dispatch receiveRoom(beats)
 
