@@ -19,11 +19,12 @@ const mapSTP = (state, ownProps) => {
     return {
         // allNotes: samplerReadableNotes(state,state.entities.rooms[ownProps.match.params.roomId])
         currentRoom: state.entities.room,
-        // allNotes: samplerReadableNotes(state,state.entities.room),
+        currentUserId: state.session.user.id,
+        mainGridNotes: state.entities.grids[state.session.user.id].notes,
+        allNotes: samplerReadableNotes(state,state.entities.room),
         // getAllMiniNotes: (instrument) => getAllMiniNotes(state, instrument),
         // instrument: ownProps.instrument,
         // availableInstruments: ["keyboard","piano","drums", "bass"],
-        // mainGridNotes: mainGridNotes
     }
 };
 

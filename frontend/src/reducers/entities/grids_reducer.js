@@ -12,7 +12,7 @@ const gridReducer = (state = {}, action) => {
       return Object.assign({}, action.grids)
     case RECEIVE_GRID:
       return Object.assign({}, state, {
-        [action.grid.instrument]: action.grid
+        [action.grid.userId]: action.grid
       });
     default:
       return state;

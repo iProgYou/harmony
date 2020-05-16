@@ -2,7 +2,7 @@ const samplerNoteArr = (state, room) => {
     let samplerNotes = [];
     for (let i = 0; i < room.beats; i++) {
         samplerNotes.push([])
-        room.instrumentNames.forEach(gridId => {
+        room.memberIds.forEach(gridId => {
             let notes = state.entities.grids[gridId].notes;
             let inst = state.entities.grids[gridId].instrument;
             if (inst === "drums") {

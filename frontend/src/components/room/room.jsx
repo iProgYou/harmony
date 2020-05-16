@@ -105,12 +105,25 @@ class Room extends React.Component {
 
 
     selectInstrument(instrument) {
-        this.setState({
-            instrumentSelected: true,
-            instrument
-        })
-
-        let grid = {}
+        const {beats} = this.props.currentRoom
+        const userId = this.props.currentUserId
+        let notes;
+        if (instrument !== 'drums'){
+            notes = new Array(beats).fill("");
+        } else {
+            notes = [];
+            for (let i = 0; i < beats; i++) {
+                notes.push([])
+            }
+        }
+        let grid = {instrument, notes, beats, userId }
+        this.props.receiveGrid(grid)
+            .then(
+                this.setState({
+                    instrumentSelected: true,
+                    instrument
+                })
+            )
         // let room = {
         //     name: this.props.match.params.roomName,
         //     // cols: this.props.match.params.cols,
