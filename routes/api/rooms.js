@@ -41,11 +41,13 @@ router.post('/',
 
     const newRoom = new Room({
       name: req.body.name,
-      user: req.user.id
-      // more additions to come
+      host: req.user.id
+      // more additions to come?
     });
 
-    newRoom.save().then(room => res.json(room));
+    newRoom.save()
+      .then(room => res.json(room))
+      .catch(err => console.log(err));
   }
 );
 

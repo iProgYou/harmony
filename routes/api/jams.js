@@ -16,18 +16,18 @@ router.get('/', (req, res) => {
 });
 
 
-// This would retrieve a single user's Jams
-// router.get('/user/:user_id', (req, res) => {
-//   Jam.find({ authorId: req.params.author_id })
-//     .then(jams => res.json(jams))
-//     .catch(err =>
-//       res.status(404).json({ nojamsfound: 'No jams found from that user' }
-//       )
-//     );
-// });
+// Retrieve a single user's Jams
+router.get('/user/:user_id', (req, res) => {
+  Jam.find({ authorId: req.params.author_id })
+    .then(jams => res.json(jams))
+    .catch(err =>
+      res.status(404).json({ nojamsfound: 'No jams found from that user' }
+      )
+    );
+});
 
 
-// This would retrieve an individual's Jams
+// Retrieve an individual's Jams
 router.get('/:id', (req, res) => {
   Jam.findById(req.params.id)
     .then(jam => res.json(jam))
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-// This would create a protected route for a user to post Jams
+// Create a protected route for a user to create Jams
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
