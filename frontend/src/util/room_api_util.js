@@ -9,5 +9,5 @@ export const createRoom = (roomData) => {
 }
 
 export const updateRoom = (roomData) => {
-  return axios.patch('/api/rooms/', roomData)
+  return axios.patch(`/api/rooms/${roomData.id}`, roomData)
 }

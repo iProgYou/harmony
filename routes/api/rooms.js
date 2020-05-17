@@ -57,8 +57,9 @@ router.post('/',
 router.put('/room/update/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    db.rooms.update(
-      { _id: req.body.roomId }, 
+    console.log(req.body);
+    Room.update(
+      { _id: req.params.id }, 
       { $push: {
           memberId: req.body.userId,
         } 
