@@ -26,11 +26,11 @@ export default class MiniGrid extends React.Component {
     if (this.props.selected){
       this.setState({selected: this.props.selected})
     } else{
-      let arrCols = [];
-      for (let i = 0; i < this.props.cols; i++) {
-        arrCols.push("")
+      let arrBeats = [];
+      for (let i = 0; i < this.props.beats; i++) {
+        arrBeats.push("")
       }
-      this.setState({ selected: arrCols })
+      this.setState({ selected: arrBeats })
     }
   }
 
@@ -39,23 +39,23 @@ export default class MiniGrid extends React.Component {
   render(){
 
     if (!this.state.selected) return null;
-    const cols = this.props.selected.map( (ele, colNumber) => 
-    <MiniGridColumn
-        selected={ele}
-        idx = {colNumber}
-        key={colNumber}
-        // handleUpdate = {index => this.handleUpdate(colNumber, index)}
-        noteNames={this.noteNames}
-        // handleClick={this.handleClick}
-        updateLast = {this.updateLast}
-    />
+    const beats = this.props.selected.map( (ele, colNumber) => 
+      <MiniGridColumn
+          selected={ele}
+          idx = {colNumber}
+          key={colNumber}
+          // handleUpdate = {index => this.handleUpdate(colNumber, index)}
+          noteNames={this.noteNames}
+          // handleClick={this.handleClick}
+          updateLast = {this.updateLast}
+      />
     )
 
     return(
 
       <div id={styles.mini} className={styles.gridOuter}>
         <div className={styles.grid}>
-          {cols}
+          {beats}
         </div>
         {/* {
           this.state.scheduleInterval === null ? (

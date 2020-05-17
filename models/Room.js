@@ -9,9 +9,11 @@ const MemberSchema = new Schema({
 })
 
 const RoomSchema = new Schema({
+  // Should this be host?
   hostId: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'users',
+    required: true
   },
   name: {
     type: String,
@@ -22,7 +24,8 @@ const RoomSchema = new Schema({
     default: Date.now
   }, 
   beats: {
-    type: Number
+    type: Number,
+    required: true
   },
   // beats or columns, they are the same thing
   savedJams: {

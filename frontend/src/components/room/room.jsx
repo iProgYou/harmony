@@ -72,52 +72,67 @@ class Room extends React.Component {
     }
 
     componentDidMount() {
-        let cols = parseInt(this.props.match.params.cols);
-        let notes = new Array(cols).fill("");
-        let drumNotes = [];
-        for (let i = 0; i < cols; i++) {
-            drumNotes.push([])
-        }
-        let grids = {
-            "piano": {
-                notes,
-                instrument: "piano",
-                beats: cols
-            },
-            "keyboard": {
-                notes,
-                instrument: "keyboard",
-                beats: cols
-            },
-            "bass": {
-                notes,
-                instrument: "bass",
-                beats: cols
-            },
-            "drums": {
-                notes: drumNotes,
-                instrument: "drums",
-                beats: cols
-            }
-        }
-        this.props.receiveGrids(grids)
+        // let beats = parseInt(this.props.match.params.beats);
+        // let notes = new Array(beats).fill("");
+        // let drumNotes = [];
+        // for (let i = 0; i < beats; i++) {
+        //     drumNotes.push([])
+        // }
+        // let grids = {
+        //     "piano": {
+        //         notes,
+        //         instrument: "piano",
+        //         beats: beats
+        //     },
+        //     "keyboard": {
+        //         notes,
+        //         instrument: "keyboard",
+        //         beats: beats
+        //     },
+        //     "bass": {
+        //         notes,
+        //         instrument: "bass",
+        //         beats: beats
+        //     },
+        //     "drums": {
+        //         notes: drumNotes,
+        //         instrument: "drums",
+        //         beats: beats
+        //     }
+        // }
+        // this.props.receiveGrids(grids)
     }
 
 
     selectInstrument(instrument) {
-        this.setState({
-            instrumentSelected: true,
-            instrument
-        })
-        let room = {
-            name: this.props.match.params.roomName,
-            cols: this.props.match.params.cols,
-            instrumentNames: ["keyboard","piano","drums","bass"]
-            // .filter((ele) => {
-            //     return !this.props.availableInstruments.includes(ele)
-            // })
+        const {beats} = this.props.currentRoom
+        const userId = this.props.currentUserId
+        let notes;
+        if (instrument !== 'drums'){
+            notes = new Array(beats).fill("");
+        } else {
+            notes = [];
+            for (let i = 0; i < beats; i++) {
+                notes.push([])
+            }
         }
-        this.props.receiveRoom(room)
+        let grid = {instrument, notes, beats, userId }
+        this.props.receiveGrid(grid)
+            .then(
+                this.setState({
+                    instrumentSelected: true,
+                    instrument
+                })
+            )
+        // let room = {
+        //     name: this.props.match.params.roomName,
+        //     // cols: this.props.match.params.cols,
+        //     instrumentNames: ["keyboard","piano","drums","bass"]
+        //     // .filter((ele) => {
+        //     //     return !this.props.availableInstruments.includes(ele)
+        //     // })
+        // }
+        // this.props.receiveRoom(room)
     }
 
     render() {
@@ -141,10 +156,8 @@ class Room extends React.Component {
         return(
             <div>
                 <InstrumentSelect 
-
                     selectInstrument={(instrument) => this.selectInstrument(instrument)}
                     socket={this.socket}
-
                 />
                 {masterGrid}
 

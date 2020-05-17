@@ -34,7 +34,7 @@ export default class KeyboardGrid extends React.Component {
       <div className={styles.homePageGrid}>
         <Grid 
           isLoaded={ this.state.isLoaded }
-          cols={ this.props.cols }
+          beats={ this.props.beats }
           sampler={ this.sampler }
         />
       </div>

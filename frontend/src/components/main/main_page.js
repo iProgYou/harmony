@@ -44,22 +44,22 @@ class MainPage extends React.Component {
           instrument={"piano"}
         /> */}
         {/* <PianoGrid
-          cols={ 8 }
+          beats={ 8 }
         />
         <BassGrid
-          cols={ 8 }
+          beats={ 8 }
         />
         <DrumsGrid
-          cols={ 8 }
+          beats={ 8 }
         />
         <KeyboardGrid
-          cols={ 8 }
+          beats={ 8 }
         /> */}
 
         <Switch>
-          <Route path="/rooms/:roomName/:cols" component={(props) => < RoomContainer socket = {this.socket}  {...props}/>} />
-          <Route path="/" component={() => <KeyboardGrid cols={8}/>} />
-          {/* <Route to="/:roomName/:cols" render={() => <RoomContainer cols={}/>} /> */}
+          <Route path="/rooms/:roomName/" component={(props) => < RoomContainer socket = {this.socket}  {...props}/>} />
+          <Route path="/" component={() => <KeyboardGrid beats={8}/>} />
+          {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
         </Switch>
 
 

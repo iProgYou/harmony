@@ -32,7 +32,7 @@ export default class PianoGrid extends React.Component {
     return(
       <Grid 
         isLoaded={ this.state.isLoaded }
-        cols={ this.props.cols }
+        beats={ this.props.beats }
         sampler={ this.sampler }
       />
     )
