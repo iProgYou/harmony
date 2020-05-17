@@ -54,19 +54,16 @@ router.post('/',
   }
 );
 
-router.patch('/',
+router.put('/room/update/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const newRoom = new Room({
-      name: req.body.name,
-      hostId: req.user.id,
-      beats: req.body.beats,
-      memberIds: [req.user.id]
-    });
-
-    newRoom.save()
-      .then(room => res.json(room))
-      .catch(err => console.log(err));
+    db.rooms.update(
+      { _id: req.body.roomId }, 
+      { $push: {
+          memberId: req.body.userId,
+        } 
+      }
+    )
   }
 );
 
