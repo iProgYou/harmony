@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { receiveGrid, receiveGrids } from '../../actions/grid_actions';
-import { receiveRoom } from '../../actions/room_actions';
+import { updateRoom } from '../../actions/room_actions';
 import { samplerReadableNotes, getAllMiniNotes } from '../../reducers/selectors';
 import Room from './room';
 
@@ -41,7 +41,7 @@ const mapDTP = dispatch => {
     return{
         // receiveRoom: room => dispatch(receiveRoom(room)),
         receiveGrid: grid => dispatch(receiveGrid(grid)),
-        updateRoom: (userId, roomId) => dispatch(updateRoom(userId,roomId)),
+        updateRoom: (roomData) => dispatch(updateRoom(roomData)),
         receiveGrids: grids => dispatch(receiveGrids(grids))
     }
 }

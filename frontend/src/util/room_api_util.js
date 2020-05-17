@@ -7,3 +7,7 @@ export const fetchRooms = () => {
 export const createRoom = (roomData) => {
   return axios.post('/api/rooms/', roomData)
 }
+
+export const updateRoom = (roomData) => {
+  return axios.patch('/api/rooms/', roomData)
+}

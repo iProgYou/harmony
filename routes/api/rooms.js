@@ -54,4 +54,20 @@ router.post('/',
   }
 );
 
+router.patch('/',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const newRoom = new Room({
+      name: req.body.name,
+      hostId: req.user.id,
+      beats: req.body.beats,
+      memberIds: [req.user.id]
+    });
+
+    newRoom.save()
+      .then(room => res.json(room))
+      .catch(err => console.log(err));
+  }
+);
+
 module.exports = router;

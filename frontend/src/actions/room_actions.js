@@ -34,8 +34,8 @@ export const createRoom = (room) => (dispatch) => {
     })
 }
 
-export const updateRoom = (userId,roomId) => (dispatch) => {
-  return RoomsAPIUtil.updateRoom(userId,roomId)
+export const updateRoom = (roomData) => (dispatch) => {
+  return RoomsAPIUtil.updateRoom(roomData)
     .then(room => dispatch(receiveRoom(room)))
     .catch(err => dispatch(receiveErrors(err.response.data)))
 }
