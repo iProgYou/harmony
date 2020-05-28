@@ -57,9 +57,10 @@ router.post('/',
 router.patch('/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log(req.body);
-    debugger
-    Room.findById(req.params._id, (err, room) => {
+    console.log(req.body.roomId);
+    // could not do the Room.update method outlined in MongoDB docs
+    // possibly due to websockets
+    Room.findById(req.body.roomId, (err, room) => {
       if (room) {
         room.memberIds.push(req.body.userId);
         const updatedRoom = room.save();
@@ -69,13 +70,6 @@ router.patch('/:id',
         console.log(err);
       }
     })
-    // Room.update(
-    //   { _id: req.params.id }, 
-    //   { $push: {
-    //       memberIds: req.body.userId,
-    //     } 
-    //   }
-    // )
   }
 );
 // "Proxy error: Could not proxy request /api/rooms/5ecff8e17064d743f78a334f from localhost:3000 to http://localhost:5000 (ECONNRESET)."
