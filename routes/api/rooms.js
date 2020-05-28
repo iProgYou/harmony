@@ -54,7 +54,7 @@ router.post('/',
   }
 );
 
-router.put('/room/update/:id',
+router.patch('/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     console.log(req.body);
@@ -78,6 +78,10 @@ router.put('/room/update/:id',
     // )
   }
 );
+// "Proxy error: Could not proxy request /api/rooms/5ecff8e17064d743f78a334f from localhost:3000 to http://localhost:5000 (ECONNRESET)."
+// $.ajax({
+//   url: `/api/posts/${}`
+// })
 
 // 
 

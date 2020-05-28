@@ -117,7 +117,9 @@ class Room extends React.Component {
             }
         }
         let grid = {instrument, notes, beats, userId }
-        this.props.updateRoom(userId,this.props.currentRoomId)
+        console.log(this.props.currentRoom._id)
+        let roomData = { userId: userId, roomId: this.props.currentRoom._id }
+        this.props.updateRoom(roomData)
         this.props.receiveGrid(grid)
         this.setState({
             instrumentSelected: true,

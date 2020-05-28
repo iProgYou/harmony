@@ -26,7 +26,7 @@ const mapSTP = (state, ownProps) => {
     return {
         // allNotes: samplerReadableNotes(state,state.entities.rooms[ownProps.match.params.roomId])
         currentRoom: state.entities.room,
-        currentRoomId: state.entities.room.id, 
+        // currentRoomId: state.entities.room.id, 
         currentUserId: state.session.user.id,
         mainGridNotes,
         allNotes: samplerReadableNotes(state,state.entities.room),
