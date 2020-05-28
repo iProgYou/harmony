@@ -58,7 +58,8 @@ router.put('/room/update/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     console.log(req.body);
-    Room.findById(req.params.id, (err, room) => {
+    debugger
+    Room.findById(req.params._id, (err, room) => {
       if (room) {
         room.memberIds.push(req.body.userId);
         const updatedRoom = room.save();
