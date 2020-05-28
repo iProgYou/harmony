@@ -58,14 +58,26 @@ router.put('/room/update/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     console.log(req.body);
-    Room.update(
-      { _id: req.params.id }, 
-      { $push: {
-          memberId: req.body.userId,
-        } 
+    Room.findById(req.params.id, (err, room) => {
+      if (room) {
+        room.memberIds.push(req.body.userId);
+        const updatedRoom = room.save();
+        console.log(updatedRoom);
+      } else {
+        console.log('Room was not able to get updated');
+        console.log(err);
       }
-    )
+    })
+    // Room.update(
+    //   { _id: req.params.id }, 
+    //   { $push: {
+    //       memberIds: req.body.userId,
+    //     } 
+    //   }
+    // )
   }
 );
+
+// 
 
 module.exports = router;
