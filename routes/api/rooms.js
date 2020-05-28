@@ -63,11 +63,13 @@ router.patch('/:id',
     Room.findById(req.body.roomId, (err, room) => {
       if (room) {
         room.memberIds.push(req.body.userId);
-        const updatedRoom = room.save();
-        console.log(updatedRoom);
+        const updatedRoom = room.save().then((room) => {
+          console.log(res.json(room))
+          return res.json(room)
+        }).catch(() => console.log('room was not updated'));
       } else {
-        console.log('Room was not able to get updated');
-        console.log(err);
+        console.log('Room was not found');
+        res.send('Room not found');
       }
     })
   }
