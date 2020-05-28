@@ -58,19 +58,30 @@ router.patch('/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     console.log(req.body);
-    console.log(req.params);
-    Room.update(
-      { _id: req.body.roomId }, 
-      { $push: {
-          memberIds: req.body.userId,
-        } 
+    Room.findById(req.params.id, (err, room) => {
+      if (room) {
+        room.memberIds.push(req.body.userId);
+        const updatedRoom = room.save();
+        console.log(updatedRoom);
+      } else {
+        console.log('Room was not able to get updated');
+        console.log(err);
       }
-    )
+    })
+    // Room.update(
+    //   { _id: req.params.id }, 
+    //   { $push: {
+    //       memberIds: req.body.userId,
+    //     } 
+    //   }
+    // )
   }
 );
 // "Proxy error: Could not proxy request /api/rooms/5ecff8e17064d743f78a334f from localhost:3000 to http://localhost:5000 (ECONNRESET)."
 // $.ajax({
 //   url: `/api/posts/${}`
 // })
+
+// 
 
 module.exports = router;
