@@ -1,4 +1,5 @@
 import React from 'react';
+import AboutPage from './about_page'
 import KeyboardGrid from '../single_grid/keyboard_grid'
 // import PianoGrid from '../single_grid/piano_grid'
 // import DrumGrid from '../single_grid/drum_grid'
@@ -57,6 +58,7 @@ class MainPage extends React.Component {
         /> */}
 
         <Switch>
+          <Route path="/about" component = {()=><AboutPage/>}/>
           <Route path="/rooms/:roomName/" component={(props) => < RoomContainer socket = {this.socket}  {...props}/>} />
           <Route path="/" component={() => <KeyboardGrid beats={8}/>} />
           {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
