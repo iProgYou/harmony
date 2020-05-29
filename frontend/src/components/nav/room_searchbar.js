@@ -10,6 +10,7 @@ export default class SearchBar extends React.Component{
   handleSearch(e){
     e.preventDefault()
     console.log(`you just did a search for ${this.state.search}`)
+    // this.state.search should be roomId
     // If there is a room, load that room into state and add current memberid
     // If not, do nothing
   }

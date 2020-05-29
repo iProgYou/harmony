@@ -22,6 +22,7 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
+// Find room by name
 router.get('/:roomName', (req, res) => {
   Room.find({name: req.params.roomName})
     .then(room => res.json(room))
@@ -29,6 +30,16 @@ router.get('/:roomName', (req, res) => {
       res.status(404).json({ noroomfound: 'No room found with that name' })
     );
 });
+
+// Find room by Id
+// router.get('/:id', (req, res) => {
+//   Room.findById(req.params.id)
+//     .then(room => res.json(room))
+//     .catch(err =>
+//       res.status(404).json({ noroomfound: 'No room found with that ID' })
+//     );
+// });
+
 
 router.post('/',
   passport.authenticate('jwt', { session: false }),

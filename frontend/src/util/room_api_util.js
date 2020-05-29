@@ -8,6 +8,10 @@ export const fetchRoom = roomName =>{
   return axios.get(`/api/rooms/${roomName}`)
 }
 
+// export const fetchRoom = roomId =>{
+//   return axios.get(`/api/rooms/${roomId}`)
+// }
+
 export const createRoom = (roomData) => {
   return axios.post('/api/rooms/', roomData)
 }
