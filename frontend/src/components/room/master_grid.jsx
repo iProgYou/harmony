@@ -50,7 +50,6 @@ class MasterGrid extends React.Component {
   componentDidMount() {
     // this.socket = socketIOClient();
     this.props.socket.on('grid update', (grid) => {
-      console.log(grid)
       this.props.receiveGrid(grid)
     });
 
@@ -70,7 +69,8 @@ class MasterGrid extends React.Component {
     let grid = {
       notes: this.state.selected,
       instrument: this.props.instrument,
-      beats: 8
+      userId: this.props.currentUserId,
+      beats: this.props.beats
     }
     // this.props.receiveGrid({grid})
     this.props.socket.emit('grid update', grid);
