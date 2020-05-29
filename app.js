@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
   console.log(`A user has connected`)
 
   socket.on('joinRoom', (room) => {
-    console.log(`you have join room ${room}`)
+    console.log(`you have joined room ${room}`)
     socket.join(room);
   });
   socket.on('chat message', (data) => {
