@@ -22,11 +22,11 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
-router.get('/:roomName', (req, res) => {
-  Room.find({name: req.params.roomName})
+router.get('/:id', (req, res) => {
+  Room.findById(req.params.id)
     .then(room => res.json(room))
     .catch(err =>
-      res.status(404).json({ noroomfound: 'No room found with that name' })
+      res.status(404).json({ noroomfound: 'No room found with that ID' })
     );
 });
 
@@ -53,32 +53,5 @@ router.post('/',
       .catch(err => console.log(err));
   }
 );
-
-router.patch('/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    console.log(req.body.roomId);
-    // could not do the Room.update method outlined in MongoDB docs
-    // possibly due to websockets
-    Room.findById(req.body.roomId, (err, room) => {
-      if (room) {
-        room.memberIds.push(req.body.userId);
-        const updatedRoom = room.save().then((room) => {
-          console.log(res.json(room))
-          return res.json(room)
-        }).catch(() => console.log('room was not updated'));
-      } else {
-        console.log('Room was not found');
-        res.send('Room not found');
-      }
-    })
-  }
-);
-// "Proxy error: Could not proxy request /api/rooms/5ecff8e17064d743f78a334f from localhost:3000 to http://localhost:5000 (ECONNRESET)."
-// $.ajax({
-//   url: `/api/posts/${}`
-// })
-
-// 
 
 module.exports = router;
