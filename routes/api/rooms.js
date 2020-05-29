@@ -31,18 +31,7 @@ router.get('/:roomName', (req, res) => {
     );
 });
 
-// Find room by Id
-// router.get('/:id', (req, res) => {
-//   Room.findById(req.params.id)
-//     .then(room => res.json(room))
-//     .catch(err =>
-//       res.status(404).json({ noroomfound: 'No room found with that ID' })
-//     );
-// });
-
-
-router.post('/',
-  passport.authenticate('jwt', { session: false }),
+router.post('/', passport.authenticate('jwt', { session: false }), 
   (req, res) => {
     const { errors, isValid } = validateRoomInput(req.body);
 
@@ -50,18 +39,25 @@ router.post('/',
       return res.status(400).json(errors);
     }
 
-    const newRoom = new Room({
-      name: req.body.name,
-      hostId: req.user.id,
-      beats: req.body.beats,
-      // memberIds: [req.user.id]
-      // more additions to come?
-    });
-
-    newRoom.save()
-      .then(room => res.json(room))
-      // .then(room => console.log("success"))
-      .catch(err => console.log(err));
+    Room.findOne({ name: req.body.name })
+      .then(room => {
+        if (room) {
+          return res.status(400).json({ name: "A room with that name already exists" })
+        } else {
+          const newRoom = new Room({
+            name: req.body.name,
+            hostId: req.user.id,
+            beats: req.body.beats,
+            // memberIds: [req.user.id]
+            // more additions to come?
+          });
+      
+          newRoom.save()
+            .then(room => res.json(room))
+            // .then(room => console.log("success"))
+            .catch(err => console.log(err));
+        }
+      })
   }
 );
 
