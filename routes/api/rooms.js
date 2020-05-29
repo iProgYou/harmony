@@ -30,8 +30,7 @@ router.get('/:id', (req, res) => {
     );
 });
 
-router.post('/',
-  passport.authenticate('jwt', { session: false }),
+router.post('/', passport.authenticate('jwt', { session: false }), 
   (req, res) => {
     const { errors, isValid } = validateRoomInput(req.body);
 
@@ -39,18 +38,25 @@ router.post('/',
       return res.status(400).json(errors);
     }
 
-    const newRoom = new Room({
-      name: req.body.name,
-      hostId: req.user.id,
-      beats: req.body.beats,
-      // memberIds: [req.user.id]
-      // more additions to come?
-    });
-
-    newRoom.save()
-      .then(room => res.json(room))
-      // .then(room => console.log("success"))
-      .catch(err => console.log(err));
+    Room.findOne({ name: req.body.name })
+      .then(room => {
+        if (room) {
+          return res.status(400).json({ name: "A room with that name already exists" })
+        } else {
+          const newRoom = new Room({
+            name: req.body.name,
+            hostId: req.user.id,
+            beats: req.body.beats,
+            // memberIds: [req.user.id]
+            // more additions to come?
+          });
+      
+          newRoom.save()
+            .then(room => res.json(room))
+            // .then(room => console.log("success"))
+            .catch(err => console.log(err));
+        }
+      })
   }
 );
 
