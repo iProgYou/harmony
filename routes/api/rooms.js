@@ -42,7 +42,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
     Room.findOne({ name: req.body.name })
       .then(room => {
         if (room) {
-          return res.status(400).json({ name: "A room with that name already exists" })
+          return res.status(422).json({name: "A room with that name already exists" })
         } else {
           const newRoom = new Room({
             name: req.body.name,

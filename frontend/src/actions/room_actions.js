@@ -41,9 +41,6 @@ export const fetchRoom = (roomName) => (dispatch) => {
 export const createRoom = (room) => (dispatch) => {
   return RoomsAPIUtil.createRoom(room)
     .then(room => dispatch(receiveRoom(room.data)))
-    .catch(err => {
-      dispatch(receiveErrors(err.response.data));
-    })
 }
 
 export const updateRoom = (roomData) => (dispatch) => {

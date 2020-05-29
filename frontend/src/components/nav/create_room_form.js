@@ -36,43 +36,43 @@ class RoomForm extends React.Component {
   // Handle form submission
   handleSubmit(e) {
     e.preventDefault();
-    const {name, beats} = this.state
+    const {name, beats} = this.state;
     let room = { name, beats };
-    console.log(`room ${name} created with ${beats} beats`)
+    // console.log(`room ${name} created with ${beats} beats`)
     // this.props.history.push(`/rooms/${this.state.name}/${this.state.beats}`)
     // if (name.length >= 5 && name.length < 100) {
     this.props.createRoom(room)
-    // Come back to this!!!
-      .then(this.props.history.push(`/rooms/${this.state.name}`))
-      .catch()
-    // }
-    this.props.hideModal()
-    // dispatch receiveRoom(beats)
-
+      .then(() => {
+        this.props.history.push(`/rooms/${this.state.name}`)
+        this.props.hideModal();
+      })
+      .catch (err => this.props.receiveErrors(err.response.data));
   }
 
-  // Render the session errors if there are any
-  // renderErrors() {
-  //   return (
-  //     <ul>
-  //       {Object.keys(this.state.errors).map((error, i) => (
-  //         <li key={`error-${i}`}>
-  //           {this.state.errors[error]}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+  // Render errors if there are any
+  renderErrors() {
+    debugger
+    return (
+      <ul>
+        {Object.keys(this.props.errors).map((error, i) => (
+          <li key={`error-${i}`}>
+            {this.props.errors[error]}
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   render() {
     let options = [] 
     for (let i=8; i <= 64; i*=2){
       options.push(<option key = {i} value = {i}> {i} beats </option>)
     }
-
+    
     return (
       
       <div className={styles.outerModal} id="modal-form" onClick={e=> (e.target===e.currentTarget) ? this.props.hideModal() : undefined}>
+        {this.renderErrors()}
         <div className={styles.innerModal}> 
               <div onClick={()=>this.props.hideModal()} className={styles.xIcon}> X </div>
               <h1 className={styles.formBlurb}> Create a Room </h1>
