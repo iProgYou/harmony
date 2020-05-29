@@ -103,7 +103,6 @@ class Room extends React.Component {
         // this.props.receiveGrids(grids)
     }
 
-
     selectInstrument(instrument) {
         // need to fetch room here if there isnt one, then do all this
         const { beats } = this.props.currentRoom

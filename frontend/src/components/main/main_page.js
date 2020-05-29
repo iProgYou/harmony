@@ -57,7 +57,7 @@ class MainPage extends React.Component {
         /> */}
 
         <Switch>
-          <Route path="/rooms/:roomName/" component={(props) => < RoomContainer socket = {this.socket}  {...props}/>} />
+          <Route path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
           <Route path="/" component={() => <KeyboardGrid beats={8}/>} />
           {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
         </Switch>

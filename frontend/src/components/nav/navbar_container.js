@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
-import { createRoom } from '../../actions/room_actions';
+import { createRoom,fetchRoom } from '../../actions/room_actions';
 
 import NavBar from './navbar';
 
@@ -12,7 +12,8 @@ const mapDispatchToProps = dispatch => {
 
   return{
     logout: () => dispatch(logout()),
-    createRoom: room => dispatch(createRoom(room))
+    createRoom: room => dispatch(createRoom(room)),
+    fetchRoom: roomName => dispatch(fetchRoom(roomName))
   }
 }
 

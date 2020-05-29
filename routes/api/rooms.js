@@ -22,11 +22,11 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
-router.get('/:id', (req, res) => {
-  Room.findById(req.params.id)
+router.get('/:roomName', (req, res) => {
+  Room.find({name: req.params.roomName})
     .then(room => res.json(room))
     .catch(err =>
-      res.status(404).json({ noroomfound: 'No room found with that ID' })
+      res.status(404).json({ noroomfound: 'No room found with that name' })
     );
 });
 

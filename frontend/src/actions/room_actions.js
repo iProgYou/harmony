@@ -26,6 +26,12 @@ export const fetchRooms = () => (dispatch) => {
     err => (dispatch(receiveErrors(err.response.data))))
 };
 
+export const fetchRoom = (roomName) => (dispatch) => {
+  return RoomsAPIUtil.fetchRoom()
+    .then(room => dispatch(receiveRoom(room.data)),
+    err => (dispatch(receiveErrors(err.response.data))))
+};
+
 export const createRoom = (room) => (dispatch) => {
   return RoomsAPIUtil.createRoom(room)
     .then(room => dispatch(receiveRoom(room.data)))
