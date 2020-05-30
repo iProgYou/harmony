@@ -120,6 +120,7 @@ class Room extends React.Component {
         let grid = {instrument, notes, beats, userId }
         console.log(this.props.currentRoom._id)
         let roomData = { userId: userId, roomId: this.props.currentRoom._id }
+        debugger
         this.props.updateRoom(roomData)
             .then((stuff) => {
                 console.log(stuff)

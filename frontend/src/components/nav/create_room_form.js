@@ -43,15 +43,14 @@ class RoomForm extends React.Component {
     // if (name.length >= 5 && name.length < 100) {
     this.props.createRoom(room)
       .then(() => {
-        this.props.history.push(`/rooms/${this.state.name}`)
         this.props.hideModal();
+        this.props.history.push(`/rooms/${this.state.name}`)
       })
       .catch (err => this.props.receiveErrors(err.response.data));
   }
 
   // Render errors if there are any
   renderErrors() {
-    debugger
     return (
       <ul>
         {Object.keys(this.props.errors).map((error, i) => (

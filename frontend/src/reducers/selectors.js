@@ -1,9 +1,10 @@
 const samplerNoteArr = (state, room) => {
+    // if (room.memberIds.length === 0) return;
     let samplerNotes = [];
-    // debugger
     for (let i = 0; i < room.beats; i++) {
         samplerNotes.push([])
         room.memberIds.forEach(gridId => {
+            if (!state.entities.grids[gridId]) return;
             let notes = state.entities.grids[gridId].notes;
             let inst = state.entities.grids[gridId].instrument;
             if (inst === "drums") {
