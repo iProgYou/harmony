@@ -159,6 +159,9 @@ class Room extends React.Component {
                     isLoaded={this.state.isLoaded}
                     currentUserId = {this.props.currentUserId}
                     beats = {this.props.currentRoom.beats}
+                    currentRoom = {this.props.currentRoom}
+                    receiveRoom = {this.props.receiveRoom}
+                    
                 />
         ) : (
             null

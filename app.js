@@ -55,6 +55,7 @@ io.on('connection', (socket) => {
     console.log(`you have joined room ${room}`)
     socket.join(room);
   });
+
   socket.on('chat message', (data) => {
     // io.to(data['room']).emit('chat message', data);
     console.log(data['room'])
@@ -63,6 +64,10 @@ io.on('connection', (socket) => {
   socket.on('grid update', (data) => {
     io.emit('grid update', data);
   });
+
+  socket.on('update room', data => {
+    io.emit('update room', data)
+  })
 
   socket.on('instrument update', (data) => {
     io.emit('instrument update', data);

@@ -29,7 +29,8 @@ const mapDTP = dispatch => {
         // receiveRoom: room => dispatch(receiveRoom(room)),
         receiveGrid: grid => dispatch(receiveGrid(grid)),
         updateRoom: (roomData) => dispatch(updateRoom(roomData)),
-        receiveGrids: grids => dispatch(receiveGrids(grids))
+        receiveGrids: grids => dispatch(receiveGrids(grids)),
+        receiveRoom: room => dispatch(receiveRoom(room))
     }
 }
 

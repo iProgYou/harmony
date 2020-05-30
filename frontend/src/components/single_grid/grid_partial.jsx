@@ -54,7 +54,7 @@ export default class Grid extends React.Component {
     this.props.sampler.triggerAttack(note);
   }
 
-  handleStart() {
+  handleStart(loop) {
     this.setState({ startBtn: false })
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
@@ -68,11 +68,15 @@ export default class Grid extends React.Component {
         if (this.state.selected[i]) {
           this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
         }
+        console.log(i, loop)
         i += 1
-        if (i === this.state.selected.length) {
+        if (i === this.state.selected.length && !loop) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
+        } else if (i === this.state.selected.length && loop) {
+          i = 0
+
         }
       }, "8n");
     
@@ -158,7 +162,7 @@ export default class Grid extends React.Component {
         <div className={styles.buttons}>
         {
           this.state.scheduleInterval === null ? (
-            <button className={styles.button} onClick={this.handleStart} disabled={!this.props.isLoaded}>
+            <button className={styles.button} onClick={() => this.handleStart(false)} disabled={!this.props.isLoaded}>
               <FaPlay 
                 size={20}
               />
@@ -167,6 +171,17 @@ export default class Grid extends React.Component {
             <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
               {pauseBtn}
             </button>
+          )
+        }
+      {
+        this.state.scheduleInterval === null ? (
+            <button className={styles.button} onClick={() => this.handleStart(true)} disabled={!this.props.isLoaded}>
+            Repeat
+          </button>
+          ) : (
+            <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+            {pauseBtn}
+          </button>
           )
         }
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
