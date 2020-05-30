@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { receiveGrid, receiveGrids } from '../../actions/grid_actions';
-import { updateRoom } from '../../actions/room_actions';
+import { updateRoom, receiveRoom } from '../../actions/room_actions';
 import { samplerReadableNotes, getAllMiniNotes } from '../../reducers/selectors';
 import Room from './room';
 
