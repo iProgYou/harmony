@@ -71,9 +71,9 @@ class NavBar extends React.Component {
         <div className={styles.joinDiv}>
           <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A ROOM</h2>
           {createRoom} 
-          <SearchBar/>
+          <SearchBar fetchRoom={this.props.fetchRoom}/>
         </div>
-        {(this.state.formDisplay) ? <RoomForm createRoom={this.props.createRoom} hostId={this.props.hostId} hideModal ={()=>this.hideModal()}/> : null}
+        {(this.state.formDisplay) ? <RoomForm createRoom={this.props.createRoom} receiveErrors={this.props.receiveErrors} errors={this.props.errors}  hostId={this.props.hostId} hideModal ={()=>this.hideModal()}/> : null}
         <Link to={'/'}><h1 className={styles.title}>harmony</h1></Link>
         {this.getLinks()}
       </div>

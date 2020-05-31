@@ -9,7 +9,6 @@ const MemberSchema = new Schema({
 })
 
 const RoomSchema = new Schema({
-  // Should this be host?
   hostId: {
     type: Schema.Types.ObjectId,
     ref: 'users',
@@ -32,7 +31,9 @@ const RoomSchema = new Schema({
   savedJams: {
     type: Schema.Types.Mixed
   }, 
-  memberIds : [MemberSchema]
+  memberIds : {
+    type: Array
+  }
   // memberIds should be capped at 4?
 });
 
