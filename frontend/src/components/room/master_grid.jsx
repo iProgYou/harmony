@@ -5,7 +5,7 @@ import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
 import { connect } from 'react-redux';
 import {receiveGrid} from '../../actions/grid_actions'
-import { FaPlay, FaPause, FaRedo,FaUserFriends } from 'react-icons/fa';
+import { FaPlay, FaPause, FaRedo ,FaUserFriends } from 'react-icons/fa';
 import { BsFillStopFill } from 'react-icons/bs';
 import socketIOClient from "socket.io-client";
 
@@ -251,16 +251,25 @@ class MasterGrid extends React.Component {
           </button>
             )
         }
-        <button className={styles.bigButton} onClick={() => this.handleStart(true)} disabled={!this.props.isLoaded}>
-          <div className={styles.bbDiv}>
-            <FaPlay
-              size={20}
-            />
-            <FaUserFriends
-              size={24}
-            />
-          </div>
-        </button>
+
+        {
+         this.state.scheduleInterval === null ? (
+          <button className={styles.bigButton} onClick={() => this.handleStart(true)} disabled={!this.props.isLoaded}>
+            <div className={styles.bbDiv}>
+              <FaRedo
+                size={20}
+              />
+              <FaUserFriends
+                size={24}
+              />
+            </div>
+          </button>
+            ) : (
+              <button className={((!this.state.playing) ? styles.bigButton : styles.button)} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+            {pauseBtn}
+          </button>
+            )
+          }
 
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
           <BsFillStopFill
