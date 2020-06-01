@@ -26,16 +26,29 @@ export const fetchRooms = () => (dispatch) => {
     err => (dispatch(receiveErrors(err.response.data))))
 };
 
+// export const fetchRoom = (roomId) => (dispatch) => {
+//   return RoomsAPIUtil.fetchRoom(roomId)
+//     .then(room => dispatch(receiveRoom(room.data)),
+//     err => (dispatch(receiveErrors(err.response.data))))
+// };
+
+export const fetchRoom = (roomName) => (dispatch) => {
+  return RoomsAPIUtil.fetchRoom(roomName)
+    .then(room => {
+      dispatch(receiveRoom(room.data[0]))
+    },
+    err => (dispatch(receiveErrors(err.response.data))))
+};
+
 export const createRoom = (room) => (dispatch) => {
   return RoomsAPIUtil.createRoom(room)
     .then(room => dispatch(receiveRoom(room.data)))
-    .catch(err => {
-      dispatch(receiveErrors(err.response.data));
-    })
 }
 
-export const updateRoom = (userId,roomId) => (dispatch) => {
-  return RoomsAPIUtil.updateRoom(userId,roomId)
-    .then(room => dispatch(receiveRoom(room)))
+export const updateRoom = (roomData) => (dispatch) => {
+  return RoomsAPIUtil.updateRoom(roomData)
+    .then(room => {
+      dispatch(receiveRoom(room.data))
+    })
     .catch(err => dispatch(receiveErrors(err.response.data)))
 }

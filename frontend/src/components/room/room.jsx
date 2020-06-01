@@ -103,11 +103,12 @@ class Room extends React.Component {
         // this.props.receiveGrids(grids)
     }
 
-
     selectInstrument(instrument) {
+        // need to fetch room here if there isnt one, then do all this
         const { beats } = this.props.currentRoom
         const userId = this.props.currentUserId
         let notes;
+        // Need to fetch room here to get number of beats?
         if (instrument !== 'drums'){
             notes = new Array(beats).fill("");
         } else {
@@ -117,12 +118,21 @@ class Room extends React.Component {
             }
         }
         let grid = {instrument, notes, beats, userId }
-        this.props.updateRoom(userId,this.props.currentRoomId)
-        this.props.receiveGrid(grid)
-        this.setState({
-            instrumentSelected: true,
-            instrument
-        })
+        console.log(this.props.currentRoom._id)
+        let roomData = { userId: userId, roomId: this.props.currentRoom._id }
+        debugger
+        this.props.updateRoom(roomData)
+            .then((stuff) => {
+                console.log(stuff)
+                this.props.receiveGrid(grid)
+            })
+            .then(() => {
+                this.setState({
+                    instrumentSelected: true,
+                    instrument
+                })
+            })
+        
         // let room = {
         //     name: this.props.match.params.roomName,
         //     // cols: this.props.match.params.cols,
@@ -147,6 +157,11 @@ class Room extends React.Component {
                     // instrument={this.props.instrument}
                     instrument={this.state.instrument}
                     isLoaded={this.state.isLoaded}
+                    currentUserId = {this.props.currentUserId}
+                    beats = {this.props.currentRoom.beats}
+                    currentRoom = {this.props.currentRoom}
+                    receiveRoom = {this.props.receiveRoom}
+                    
                 />
         ) : (
             null

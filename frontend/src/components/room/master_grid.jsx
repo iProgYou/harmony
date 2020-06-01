@@ -5,7 +5,7 @@ import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
 import { connect } from 'react-redux';
 import {receiveGrid} from '../../actions/grid_actions'
-import { FaPlay, FaPause, FaRedo,FaUserFriends } from 'react-icons/fa';
+import { FaPlay, FaPause, FaRedo ,FaUserFriends } from 'react-icons/fa';
 import { BsFillStopFill } from 'react-icons/bs';
 import socketIOClient from "socket.io-client";
 
@@ -14,7 +14,6 @@ class MasterGrid extends React.Component {
     super(props);
     this.state = {
       selected: props.mainGridNotes,
-      // last: 7,
       playing: false,
       scheduleInterval: null,
       pauseSlide: false,
@@ -50,9 +49,13 @@ class MasterGrid extends React.Component {
   componentDidMount() {
     // this.socket = socketIOClient();
     this.props.socket.on('grid update', (grid) => {
-      console.log(grid)
       this.props.receiveGrid(grid)
     });
+    this.props.socket.on('update room', (room) => {
+      this.props.receiveRoom(room)
+    })
+
+    this.props.socket.emit('update room', this.props.currentRoom);
 
   }
 
@@ -70,7 +73,8 @@ class MasterGrid extends React.Component {
     let grid = {
       notes: this.state.selected,
       instrument: this.props.instrument,
-      beats: 8
+      userId: this.props.currentUserId,
+      beats: this.props.beats
     }
     // this.props.receiveGrid({grid})
     this.props.socket.emit('grid update', grid);
@@ -84,7 +88,7 @@ class MasterGrid extends React.Component {
 
   
   
-  handleStart() {
+  handleStart(loop) {
     // if (this.state.last !== 0) {
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
@@ -98,10 +102,12 @@ class MasterGrid extends React.Component {
           this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
         }
         i += 1
-        if (i === this.props.allNotes.length) {
+        if (i === this.props.allNotes.length && !loop) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
+        } else if (i === this.props.allNotes.length && loop) {
+            i = 0;
         }
       }, "8n");
       // }
@@ -157,11 +163,9 @@ class MasterGrid extends React.Component {
       Tone.Transport.pause();
       clearTimeout(this.state.pauseInt)
       document.getElementById(`${this.state.pauseNote}`).style.opacity = ".7"
-      // this.pauseBtn.current.innerHTML = 'PLAY'
     } else {
       Tone.Transport.start();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-      // this.pauseBtn.current.innerHTML = 'PAUSE'
     }
     this.setState({playing: !this.state.playing });
   }
@@ -177,18 +181,6 @@ class MasterGrid extends React.Component {
   }
 
 
-  updateLast() {
-    let lastIdx = 0
-    for (let i = this.state.selected.length-1; i>=0; i--) {
-      if (this.state.selected[i] !== "") {
-        lastIdx = i;
-        break;
-      }
-    }
-    this.setState( { last: lastIdx })
-  }
-
-
   render(){
     if (!this.state.selected) return null;
     const beats = this.props.instrument === "drums" ? (
@@ -201,7 +193,7 @@ class MasterGrid extends React.Component {
             noteNames={this.noteNames}
             handleClick={this.handleClick}
             isLoaded={this.props.isLoaded}
-            // updateLast = {this.updateLast}
+           
         />
       )
     ) : (
@@ -214,7 +206,6 @@ class MasterGrid extends React.Component {
             noteNames={this.noteNames}
             handleClick={this.handleClick}
             isLoaded={this.props.isLoaded}
-            // updateLast = {this.updateLast}
         />
       )
     )
@@ -244,10 +235,7 @@ class MasterGrid extends React.Component {
 
         {
           this.state.scheduleInterval === null ? (
-          <button className={styles.bigButton} onClick={this.handleStart} disabled={!this.props.isLoaded}>
-          {/* // TEST */}
-          {/* <button className={styles.button} onClick={this.handleTest} disabled={!this.props.isLoaded}> */}
-            {/* TEST */}
+          <button className={styles.bigButton} onClick={() => this.handleStart(false)} disabled={!this.props.isLoaded}>
             <div className={styles.bbDiv}>
               <FaPlay 
                 size={20}
@@ -263,6 +251,26 @@ class MasterGrid extends React.Component {
           </button>
             )
         }
+
+        {
+         this.state.scheduleInterval === null ? (
+          <button className={styles.bigButton} onClick={() => this.handleStart(true)} disabled={!this.props.isLoaded}>
+            <div className={styles.bbDiv}>
+              <FaRedo
+                size={20}
+              />
+              <FaUserFriends
+                size={24}
+              />
+            </div>
+          </button>
+            ) : (
+              <button className={((!this.state.playing) ? styles.bigButton : styles.button)} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+            {pauseBtn}
+          </button>
+            )
+          }
+
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
           <BsFillStopFill
             size={30}

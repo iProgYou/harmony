@@ -22,16 +22,16 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
-router.get('/:id', (req, res) => {
-  Room.findById(req.params.id)
+// Find room by name
+router.get('/:roomName', (req, res) => {
+  Room.find({name: req.params.roomName})
     .then(room => res.json(room))
     .catch(err =>
       res.status(404).json({ noroomfound: 'No room found with that ID' })
     );
 });
 
-router.post('/',
-  passport.authenticate('jwt', { session: false }),
+router.post('/', passport.authenticate('jwt', { session: false }), 
   (req, res) => {
     const { errors, isValid } = validateRoomInput(req.body);
 
@@ -39,18 +39,45 @@ router.post('/',
       return res.status(400).json(errors);
     }
 
-    const newRoom = new Room({
-      name: req.body.name,
-      hostId: req.user.id,
-      beats: req.body.beats,
-      // memberIds: [req.user.id]
-      // more additions to come?
-    });
+    Room.findOne({ name: req.body.name })
+      .then(room => {
+        if (room) {
+          return res.status(422).json({name: "A room with that name already exists" })
+        } else {
+          const newRoom = new Room({
+            name: req.body.name,
+            hostId: req.user.id,
+            beats: req.body.beats,
+            // memberIds: [req.user.id]
+            // more additions to come?
+          });
+      
+          newRoom.save()
+            .then(room => res.json(room))
+            // .then(room => console.log("success"))
+            .catch(err => console.log(err));
+        }
+      })
+  }
+);
 
-    newRoom.save()
-      .then(room => res.json(room))
-      // .then(room => console.log("success"))
-      .catch(err => console.log(err));
+router.patch('/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    console.log(req.body.roomId);
+    // could not do the Room.update method outlined in MongoDB docs
+    // possibly due to websockets
+    Room.findById(req.body.roomId, (err, room) => {
+      if (room) {
+        room.memberIds.push(req.body.userId);
+        const updatedRoom = room.save().then((room) => {
+          return res.json(room)
+        }).catch(() => console.log('room was not updated'));
+      } else {
+        console.log('Room was not found');
+        res.send('Room not found');
+      }
+    })
   }
 );
 
