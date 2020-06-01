@@ -5,7 +5,6 @@ import React from 'react';
 import BassGrid from '../single_grid/bass_grid'
 import { ProtectedRoute } from '../../util/route_util';
 import MiniGrid from '../single_grid/mini_grid_partial';
-// import Room from '../room/room';
 import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
@@ -19,11 +18,6 @@ class MainPage extends React.Component {
     super(props)
   }
 
-  // componentDidMount() {
-  //   this.socket.on('instrument update', (data) => {
-  //     this.props.receiveInstrument(data['instrument'])
-  //   })
-  // }
   render() {
     return (
       <div>

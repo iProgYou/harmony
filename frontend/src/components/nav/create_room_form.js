@@ -11,20 +11,7 @@ class RoomForm extends React.Component {
       beats: 8,
       // errors: {}
     };
-
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.renderErrors = this.renderErrors.bind(this);
   }
-
-  // Once the user has been authenticated, redirect to the current page
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.currentUser === true) {
-  //     this.props.history.push('/profile');
-  //   }
-
-    // Set or clear errors
-    // this.setState({ errors: nextProps.errors })
-  // }
 
   // Handle field updates (called in the render method)
   update(field) {
@@ -38,9 +25,6 @@ class RoomForm extends React.Component {
     e.preventDefault();
     const {name, beats} = this.state;
     let room = { name, beats };
-    // console.log(`room ${name} created with ${beats} beats`)
-    // this.props.history.push(`/rooms/${this.state.name}/${this.state.beats}`)
-    // if (name.length >= 5 && name.length < 100) {
     this.props.createRoom(room)
       .then(() => {
         this.props.hideModal();

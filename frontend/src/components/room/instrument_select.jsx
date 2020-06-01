@@ -3,23 +3,12 @@ import styles from './room.module.css'
 import {receiveInstrument} from '../../actions/instrument_actions'
 import { connect } from 'react-redux'
 
-
-
-
-
-
 class InstrumentSelect extends React.Component{
 
   constructor(props){
     super(props)
     this.state = {selected: null, complete:false}
   }
-
-  // componentDidMount() {
-  //   this.props.socket.on('instrument update', (data) => {
-  //     this.props.receiveInstrument(data['instrument'])
-  //   })
-  // }
 
   handleChange(e){
     if(this.state.selected !== e.target.value){
@@ -34,8 +23,6 @@ class InstrumentSelect extends React.Component{
     console.log(`selected ${this.state.selected}`)
     this.props.selectInstrument(this.state.selected)
     this.setState({complete:true})
-    // this.props.socket.emit('instrument update', { instrument: this.state.selected} );
-    // this.props.receiveInstrument(this.state.selected)
   }
 
   render(){
