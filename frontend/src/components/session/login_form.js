@@ -14,6 +14,7 @@ class LoginForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   // Once the user has been authenticated, redirect to the current page
@@ -36,15 +37,39 @@ class LoginForm extends React.Component {
   // demo login ghost typewriter
   demoLogin(e) {
     e.preventDefault();
+
     const { login } = this.props;
 
-    const handleInput = document.getElementById('');
-    const passwordInput = document.getElementById('');
+    const handleInput = document.getElementById('login-handle');
+    const passwordInput = document.getElementById('login-password');
 
     const demoHandle = "HarmonyDemoUser";
-    const demoPass = "12345678";
+    const demoPassword = "12345678";
 
+    let handleIndex = 0;
+    let passwordIndex = 0;
 
+    const typePassword = () => {
+      if (passwordIndex <= demoPassword.length) {
+        passwordInput.value = demoPassword.substr(0, passwordIndex ++);
+        setTimeout(() => typePassword(), 50);
+      } else {
+        setTimeout(() => login({
+          username: 'HarmonyDemoUser',
+          password: '12345678'
+        }))
+        // maybe add a .then to redirect user to the logged in page?
+      }
+    }
+
+    const typeHandle = () => {
+      if (handleIndex <= demoHandle.length) {
+        handleInput.value = demoHandle.substr(0, handleIndex++);
+        setTimeout(() => typeHandle(), 75);
+      } else typePassword()
+    }
+
+    typeHandle();
   }
 
   // Handle form submission
@@ -89,6 +114,7 @@ class LoginForm extends React.Component {
               onChange={this.update('handle')}
               placeholder="Type your handle"
               className={formStyle.formInput}
+              id="login-handle"
             />
 
             <br />
@@ -100,6 +126,7 @@ class LoginForm extends React.Component {
               onChange={this.update('password')}
               placeholder="Type your password"
               className={formStyle.formInput}
+              id="login-password"
             />
 
             <br />
