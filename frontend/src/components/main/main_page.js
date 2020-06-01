@@ -11,7 +11,7 @@ import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
 import socketIOClient from "socket.io-client";
-import { Switch,Route } from 'react-router-dom';
+import { Switch,Route, Link } from 'react-router-dom';
 import { receiveInstrument } from '../../actions/instrument_actions'
 import { connect } from 'react-redux'
 
@@ -68,7 +68,9 @@ class MainPage extends React.Component {
 
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
-          Copyright &copy; 2020 Harmony
+          <Link to="/about">About Us</Link>
+          <br/>
+          <div>Copyright &copy; 2020 Harmony</div>
         </footer>
       </div>
     );
