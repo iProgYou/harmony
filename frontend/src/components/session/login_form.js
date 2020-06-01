@@ -7,7 +7,7 @@ class LoginForm extends React.Component {
     super(props);
 
     this.state = {
-      email: '',
+      handle: '',
       password: '',
       errors: {}
     };
@@ -38,10 +38,10 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const { login } = this.props;
 
-    const emailInput = document.getElementById('');
+    const handleInput = document.getElementById('');
     const passwordInput = document.getElementById('');
-    
-    const demoEmail = "demo@harmony.heroku";
+
+    const demoHandle = "HarmonyDemoUser";
     const demoPass = "12345678";
 
 
@@ -52,7 +52,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     let user = {
-      email: this.state.email,
+      handle: this.state.handle,
       password: this.state.password
     };
 
@@ -82,11 +82,12 @@ class LoginForm extends React.Component {
           <br />
 
           <div>
-            <div className={formStyle.formInputText}>Email</div>
-            <input type="text"
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder="Type your email"
+            <div className={formStyle.formInputText}>Handle</div>
+            <input 
+              type="text"
+              value={this.state.handle}
+              onChange={this.update('handle')}
+              placeholder="Type your handle"
               className={formStyle.formInput}
             />
 
