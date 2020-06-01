@@ -1,9 +1,9 @@
 import React from 'react';
-import KeyboardGrid from '../single_grid/keyboard_grid'
+// import KeyboardGrid from '../single_grid/keyboard_grid'
 // import PianoGrid from '../single_grid/piano_grid'
 // import DrumGrid from '../single_grid/drum_grid'
-// import BassGrid from '../single_grid/bass_grid'
-
+import BassGrid from '../single_grid/bass_grid'
+import { ProtectedRoute } from '../../util/route_util';
 import MiniGrid from '../single_grid/mini_grid_partial';
 // import Room from '../room/room';
 import RoomContainer from '../room/room_container';
@@ -28,41 +28,11 @@ class MainPage extends React.Component {
     return (
       <div>
 
-        {/* <Room
-          allNotes={[
-            [ 'A2', 'A1', 'A4', 'E4' ],
-            [ 'F2', 'A4' ],
-            [ 'C3', 'C1', 'B4', 'E4' ],
-            [ 'B3', 'A4' ],
-            [ 'A2', 'A1', 'E4' ],
-            [ 'F2', 'A4' ],
-            [ 'C3', 'C1', 'E4', 'B4' ],
-            [ 'B3', 'B4', 'D4' ]
-          ]
-          }
-          mainGridNotes={ ["","","C#2","B1","","","C#2","B1"] }
-          instrument={"piano"}
-        /> */}
-        {/* <PianoGrid
-          beats={ 8 }
-        />
-        <BassGrid
-          beats={ 8 }
-        />
-        <DrumsGrid
-          beats={ 8 }
-        />
-        <KeyboardGrid
-          beats={ 8 }
-        /> */}
-
         <Switch>
-          <Route path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
-          <Route path="/" component={() => <KeyboardGrid beats={8}/>} />
+          <ProtectedRoute path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
+          <Route path="/" component={() => <BassGrid beats={8}/>} />
           {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
         </Switch>
-
-
 
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>

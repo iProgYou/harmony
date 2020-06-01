@@ -35,6 +35,7 @@ export const fetchRooms = () => (dispatch) => {
 export const fetchRoom = (roomName) => (dispatch) => {
   return RoomsAPIUtil.fetchRoom(roomName)
     .then(room => {
+      // needs to be indexed because findOne returns an array
       dispatch(receiveRoom(room.data[0]))
     },
     err => (dispatch(receiveErrors(err.response.data))))
