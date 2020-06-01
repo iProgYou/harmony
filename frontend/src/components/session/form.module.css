@@ -38,6 +38,11 @@
   color: gray;
 }
 
+.formButtonsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .formSubmitButton {
   width: 300px;
   height: 25px;
