@@ -18,7 +18,8 @@ class MasterGrid extends React.Component {
       scheduleInterval: null,
       pauseSlide: false,
       pauseNote: 0,
-      pauseInt: null
+      pauseInt: null,
+      replay: false
     }
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -28,6 +29,7 @@ class MasterGrid extends React.Component {
     this.animateNote = this.animateNote.bind(this)
     this.handleStartGrid = this.handleStartGrid.bind(this)
     this.encodeDrumNotes = this.encodeDrumNotes.bind(this)
+    this.toggleReplay = this.toggleReplay.bind(this)
    
     this.gridRef = React.createRef()
     this.pauseBtn = React.createRef()
@@ -89,7 +91,7 @@ class MasterGrid extends React.Component {
   
   
   handleStart(loop) {
-    // if (this.state.last !== 0) {
+
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
       let i = 0;
@@ -110,37 +112,42 @@ class MasterGrid extends React.Component {
             i = 0;
         }
       }, "8n");
-      // }
+
     }
 
   encodeDrumNotes(idx) {
     return this.state.selected[idx].map(note => this.encodeNotes[this.props.instrument][note])
   }
     
-  handleStartGrid() {
-    Tone.Transport.toggle();
-    this.setState({ playing: !this.state.playing });
-    let i = 0;
-    const interval = Tone.Transport.scheduleRepeat(() => {
-      this.animateNote(i)
+  handleStartGrid(loop) {
+    if (!this.state.playing) {
+      Tone.Transport.toggle();
+      this.setState({ playing: !this.state.playing });
+      let i = 0;
+      const interval = Tone.Transport.scheduleRepeat(() => {
+        this.animateNote(i)
 
-      if (i === 0) {
-        this.setState({ scheduleInterval: interval });
-      }
-      if (this.state.selected[i]) {
-        if (this.props.instrument === "drums") {
-          this.props.sampler.triggerAttackRelease(this.encodeDrumNotes(i), "8n");
-        } else {
-          this.props.sampler.triggerAttackRelease(this.encodeNotes[this.props.instrument][this.state.selected[i]], "8n");
+        if (i === 0) {
+          this.setState({ scheduleInterval: interval });
         }
-      }
-      i += 1
-      if (i === this.state.selected.length) {
-        Tone.Transport.clear(interval);
-        Tone.Transport.toggle();
-        this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
-      }
-    }, "8n");
+        if (this.state.selected[i]) {
+          if (this.props.instrument === "drums") {
+            this.props.sampler.triggerAttackRelease(this.encodeDrumNotes(i), "8n");
+          } else {
+            this.props.sampler.triggerAttackRelease(this.encodeNotes[this.props.instrument][this.state.selected[i]], "8n");
+          }
+        }
+        i += 1
+        if (i === this.state.selected.length && !loop) {
+          Tone.Transport.clear(interval);
+          Tone.Transport.toggle();
+          this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+        } else if (i === this.state.selected.length && loop) {
+          i = 0;
+        }
+      }, "8n");
+
+  }
 
   }
 
@@ -176,8 +183,12 @@ class MasterGrid extends React.Component {
       Tone.Transport.clear(this.state.scheduleInterval);
       Tone.Transport.toggle();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-      this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
+      this.setState({ playing: false, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
      } 
+  }
+
+  toggleReplay() {
+    this.setState({replay: !this.state.replay})
   }
 
 
@@ -235,7 +246,7 @@ class MasterGrid extends React.Component {
 
         {
           this.state.scheduleInterval === null ? (
-          <button className={styles.bigButton} onClick={() => this.handleStart(false)} disabled={!this.props.isLoaded}>
+          <button className={styles.bigButton} onClick={() => this.handleStart(this.state.replay)} disabled={!this.props.isLoaded}>
             <div className={styles.bbDiv}>
               <FaPlay 
                 size={20}
@@ -246,15 +257,16 @@ class MasterGrid extends React.Component {
             </div>
           </button>
             ) : (
-              <button className={((!this.state.playing) ? styles.bigButton : styles.button)} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+          <button className={((!this.state.playing) ? styles.bigButton : styles.button)} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
             {pauseBtn}
           </button>
             )
         }
 
-        {
+
+        {/* {
          this.state.scheduleInterval === null ? (
-          <button className={styles.bigButton} onClick={() => this.handleStart(true)} disabled={!this.props.isLoaded}>
+            <button className={styles.bigButton} onClick={() => this.handleStart(this.state.replay)} disabled={!this.props.isLoaded}>
             <div className={styles.bbDiv}>
               <FaRedo
                 size={20}
@@ -269,19 +281,46 @@ class MasterGrid extends React.Component {
             {pauseBtn}
           </button>
             )
+          } */}
+
+
+
+          {
+            this.state.scheduleInterval === null ? (
+              <button className={styles.bigButton} onClick={() => this.handleStartGrid(this.state.replay)} disabled={!this.props.isLoaded}>
+                <div className={styles.bbDiv}>
+                  <FaPlay
+                    size={20}
+                  />
+                </div>
+              </button>
+            ) : (
+                <button className={((!this.state.playing) ? styles.bigButton : styles.button)} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+                  {pauseBtn}
+                </button>
+              )
           }
 
+        {/* <button className={styles.button} disabled={!this.props.isLoaded} onClick={() => this.handleStartGrid(this.state.replay)}>
+          <FaPlay 
+            size={20}
+          />
+        </button>
+         */}
         <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
           <BsFillStopFill
             size={30}
           />
         </button>   
-
-        <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleStartGrid}>
-          <FaPlay 
-            size={20}
-          />
+      
+        <button className={styles.bigButton} onClick={this.toggleReplay} disabled={!this.props.isLoaded}>
+          <div className={styles.bbDiv}>
+            <FaRedo
+              size={20}
+            />
+          </div>
         </button>
+          
         </div>
 
       </div>
