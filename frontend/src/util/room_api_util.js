@@ -16,6 +16,6 @@ export const updateRoom = (roomData) => {
   return axios.patch(`/api/rooms/${roomData.roomId}`, roomData)
 }
 
-export const deleteRoom = (roomData) => {
-  return axios.delete(`/api/rooms/${roomData.roomId}`, roomData)
+export const deleteRoom = (roomId) => {
+  return axios.delete(`/api/rooms/${roomId}`)
 }

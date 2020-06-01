@@ -47,3 +47,11 @@ export const updateRoom = (roomData) => (dispatch) => {
     })
     .catch(err => dispatch(receiveErrors(err.response.data)))
 }
+
+export const deleteRoom = (roomId) => (dispatch) => {
+  return RoomsAPIUtil.deleteRoom(roomId)
+    .then(room => {
+      dispatch(receiveRoom(roomId))
+    })
+    .catch(err => dispatch(receiveErrors(err.response.data)))
+}
