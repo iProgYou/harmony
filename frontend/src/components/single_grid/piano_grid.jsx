@@ -15,6 +15,7 @@ export default class PianoGrid extends React.Component {
 
     this.state = {
       isLoaded: false,
+      instrument: 'piano'
     }
 
     this.sampler = new Tone.Sampler(

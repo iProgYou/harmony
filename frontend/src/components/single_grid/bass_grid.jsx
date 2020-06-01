@@ -15,6 +15,8 @@ export default class BassGrid extends React.Component {
 
     this.state = {
       isLoaded: false,
+      instrument: 'bass'
+
     }
 
     this.sampler = new Tone.Sampler(

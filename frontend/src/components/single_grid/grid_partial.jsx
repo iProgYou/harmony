@@ -39,7 +39,6 @@ export default class Grid extends React.Component {
     this.setState({ selected: arrBeats })
   }
 
-
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
   handleUpdate(column, index){
@@ -68,7 +67,7 @@ export default class Grid extends React.Component {
         if (this.state.selected[i]) {
           this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
         }
-        console.log(i, loop)
+        // console.log(i, loop)
         i += 1
         if (i === this.state.selected.length && !loop) {
           Tone.Transport.clear(interval);
@@ -131,7 +130,7 @@ export default class Grid extends React.Component {
   render(){
 
     if (!this.state.selected) return null;
-    console.log(this.state.selected)
+    // console.log(this.state.selected)
     const beats = this.state.selected.map( (ele, colNumber) => 
       <GridColumn
           selected={ele}

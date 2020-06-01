@@ -1,10 +1,11 @@
 import React from 'react';
 // import KeyboardGrid from '../single_grid/keyboard_grid'
 // import PianoGrid from '../single_grid/piano_grid'
-// import DrumGrid from '../single_grid/drum_grid'
+import DrumGrid from '../single_grid/drum_grid'
 import BassGrid from '../single_grid/bass_grid'
 import { ProtectedRoute } from '../../util/route_util';
 import MiniGrid from '../single_grid/mini_grid_partial';
+import QuadGrid from './quad_grid';
 import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
 import ChatRoom from '../chat/chat_room'
@@ -24,7 +25,8 @@ class MainPage extends React.Component {
 
         <Switch>
           <ProtectedRoute path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
-          <Route path="/" component={() => <BassGrid beats={8}/>} />
+          {/* <Route path="/" component={() => <DrumGrid beats={8}/>} /> */}
+          <Route path="/" component={() => <QuadGrid beats={8}/>} />
           {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
         </Switch>
 

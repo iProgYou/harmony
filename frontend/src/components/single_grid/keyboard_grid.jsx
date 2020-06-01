@@ -15,6 +15,7 @@ export default class KeyboardGrid extends React.Component {
 
     this.state = {
       isLoaded: false,
+      instrument: 'keyboard'
     }
 
     this.sampler = new Tone.Sampler(
