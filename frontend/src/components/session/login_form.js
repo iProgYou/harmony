@@ -71,7 +71,6 @@ class LoginForm extends React.Component {
           handle: 'HarmonyDemoUser',
           password: '12345678'
         }), 1)
-        // maybe add a .then to redirect user to the logged in page?
       }
     }
 
@@ -147,9 +146,9 @@ class LoginForm extends React.Component {
             />
 
             <input
-              className={formStyle.formSubmitButton}
               onClick={this.demoLogin}
               value="Demo Login"
+              className={formStyle.formSubmitButton}
             />
 
             {this.renderErrors()}
