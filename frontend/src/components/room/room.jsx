@@ -71,38 +71,6 @@ class Room extends React.Component {
         
     }
 
-    componentDidMount() {
-        // let beats = parseInt(this.props.match.params.beats);
-        // let notes = new Array(beats).fill("");
-        // let drumNotes = [];
-        // for (let i = 0; i < beats; i++) {
-        //     drumNotes.push([])
-        // }
-        // let grids = {
-        //     "piano": {
-        //         notes,
-        //         instrument: "piano",
-        //         beats: beats
-        //     },
-        //     "keyboard": {
-        //         notes,
-        //         instrument: "keyboard",
-        //         beats: beats
-        //     },
-        //     "bass": {
-        //         notes,
-        //         instrument: "bass",
-        //         beats: beats
-        //     },
-        //     "drums": {
-        //         notes: drumNotes,
-        //         instrument: "drums",
-        //         beats: beats
-        //     }
-        // }
-        // this.props.receiveGrids(grids)
-    }
-
     selectInstrument(instrument) {
         // need to fetch room here if there isnt one, then do all this
         const { beats } = this.props.currentRoom
@@ -132,29 +100,16 @@ class Room extends React.Component {
                     instrument
                 })
             })
-        
-        // let room = {
-        //     name: this.props.match.params.roomName,
-        //     // cols: this.props.match.params.cols,
-        //     instrumentNames: ["keyboard","piano","drums","bass"]
-        //     // .filter((ele) => {
-        //     //     return !this.props.availableInstruments.includes(ele)
-        //     // })
-        // }
-        // this.props.receiveRoom(room)
     }
 
     render() {
         if (!this.state.isLoaded) return null;
-        // if (!this.props.instrument) return null;
-        // if (!this.props.mainGridNotes) return null;
         const masterGrid = this.state.instrumentSelected ? (
             <MasterGrid
                     socket = {this.socket}
                     mainGridNotes={this.props.mainGridNotes}
                     allNotes={this.props.allNotes}
                     sampler={this.sampler}
-                    // instrument={this.props.instrument}
                     instrument={this.state.instrument}
                     isLoaded={this.state.isLoaded}
                     currentUserId = {this.props.currentUserId}
