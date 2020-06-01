@@ -34,6 +34,19 @@ class LoginForm extends React.Component {
     });
   }
 
+  
+  // Handle form submission
+  handleSubmit(e) {
+    e.preventDefault();
+    
+    let user = {
+      handle: this.state.handle,
+      password: this.state.password
+    };
+
+    this.props.login(user)
+  }
+  
   // demo login ghost typewriter
   demoLogin(e) {
     e.preventDefault();
@@ -55,9 +68,9 @@ class LoginForm extends React.Component {
         setTimeout(() => typePassword(), 50);
       } else {
         setTimeout(() => login({
-          username: 'HarmonyDemoUser',
+          handle: 'HarmonyDemoUser',
           password: '12345678'
-        }))
+        }), 1)
         // maybe add a .then to redirect user to the logged in page?
       }
     }
@@ -66,22 +79,13 @@ class LoginForm extends React.Component {
       if (handleIndex <= demoHandle.length) {
         handleInput.value = demoHandle.substr(0, handleIndex++);
         setTimeout(() => typeHandle(), 75);
-      } else typePassword()
+      } else {
+        typePassword()
+      }
     }
 
     typeHandle();
-  }
-
-  // Handle form submission
-  handleSubmit(e) {
-    e.preventDefault();
-
-    let user = {
-      handle: this.state.handle,
-      password: this.state.password
-    };
-
-    this.props.login(user)
+    
   }
 
   // Render the session errors if there are any
@@ -101,7 +105,10 @@ class LoginForm extends React.Component {
     return (
       <div className={formStyle.formcontainer}>
         <div className={formStyle.placeholder}></div>
-        <form onSubmit={this.handleSubmit} className={formStyle.form}>
+        <form 
+          onSubmit={this.handleSubmit} 
+          className={formStyle.form}
+        >
           <div className={formStyle.formHeader}>Login</div>
           <br />
           <br />
@@ -139,16 +146,14 @@ class LoginForm extends React.Component {
               className={formStyle.formSubmitButton}
             />
 
-            <button
+            <input
               className={formStyle.formSubmitButton}
               onClick={this.demoLogin}
-            >
-              Demo Login
-            </button>
-          
+              value="Demo Login"
+            />
+
             {this.renderErrors()}
           </div>
-
         </form>
 
         <div className={formStyle.placeholder}></div>
