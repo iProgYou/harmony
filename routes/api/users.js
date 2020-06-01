@@ -17,17 +17,16 @@ router.post('/register', (req, res) => {
     return res.status(400).json(errors);
   }
 
-  // Check to make sure nobody has already registered with a duplicate email
-  User.findOne({ email: req.body.email })
+  // Check to make sure nobody has already registered with a duplicate handle
+  User.findOne({ handle: req.body.handle })
     .then(user => {
       if (user) {
-        // Throw a 400 error if the email address already exists
-        return res.status(400).json({ email: "A user has already registered with this address" })
+        // Throw a 400 error if the handle address already exists
+        return res.status(400).json({ handle: "A user has already registered with that handle" })
       } else {
         // Otherwise create a new user
         const newUser = new User({
           handle: req.body.handle,
-          email: req.body.email,
           password: req.body.password
         })
         
@@ -54,13 +53,13 @@ router.post('/login', (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
+  const handle = req.body.handle;
   const password = req.body.password;
 
-  User.findOne({ email })
+  User.findOne({ handle })
     .then(user => {
       if (!user) {
-        return res.status(404).json({ email: 'This user does not exist' });
+        return res.status(404).json({ handle: 'This user does not exist' });
       }
 
       bcrypt.compare(password, user.password)
@@ -90,8 +89,7 @@ router.post('/login', (req, res) => {
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
     id: req.user.id,
-    handle: req.user.handle,
-    email: req.user.email
+    handle: req.user.handle
   });
 })
 
