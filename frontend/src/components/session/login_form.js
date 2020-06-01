@@ -33,6 +33,20 @@ class LoginForm extends React.Component {
     });
   }
 
+  // demo login ghost typewriter
+  demoLogin(e) {
+    e.preventDefault();
+    const { login } = this.props;
+
+    const emailInput = document.getElementById('');
+    const passwordInput = document.getElementById('');
+    
+    const demoEmail = "demo@harmony.heroku";
+    const demoPass = "12345678";
+
+
+  }
+
   // Handle form submission
   handleSubmit(e) {
     e.preventDefault();
@@ -96,6 +110,13 @@ class LoginForm extends React.Component {
               value="Submit"
               className={formStyle.formSubmitButton}
             />
+
+            <button
+              className={formStyle.formSubmitButton}
+              onClick={this.demoLogin}
+            >
+              Demo Login
+            </button>
           
             {this.renderErrors()}
           </div>
