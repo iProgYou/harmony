@@ -64,21 +64,32 @@ router.post('/', passport.authenticate('jwt', { session: false }),
 router.patch('/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log(req.body.roomId);
-    // could not do the Room.update method outlined in MongoDB docs
-    // possibly due to websockets
+    // could not do the Room.update method outlined in MongoDB docs - possibly due to socket.IO
     Room.findById(req.body.roomId, (err, room) => {
       if (room) {
         room.memberIds.push(req.body.userId);
-        const updatedRoom = room.save().then((room) => {
-          return res.json(room)
-        }).catch(() => console.log('room was not updated'));
+        room.save()
+          .then((room) => {
+            return res.json(room)
+          })
+          .catch(() => console.log('room was not updated'));
       } else {
-        console.log('Room was not found');
         res.send('Room not found');
       }
     })
   }
 );
+
+router.delete('/:roomId', passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Room.findById(req.body.roomId), (err, room) => {
+      if (room) {
+        room.delete();
+      } else {
+        res.send('room was not found');
+      }
+    }
+  }
+)
 
 module.exports = router;
