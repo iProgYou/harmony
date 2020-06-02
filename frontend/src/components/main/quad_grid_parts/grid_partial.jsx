@@ -19,7 +19,7 @@ export default class Grid extends React.Component {
     }
    
     this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handleRestart = this.handleRestart.bind(this)
@@ -41,25 +41,34 @@ export default class Grid extends React.Component {
 
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
+  // Three actions:
+  // 1. Clicking an unclicked note
+  // 2. Clicking a note already clicked
+  // 3. Clicking another space on the column with another note selected
   handleUpdate(column, index){
-    debugger
     let arr = this.state.selected
     let note = this.noteNames[index]
+    let remove = false
     if(index !== -1){
+      // case 1 and 3
       arr[column] = note;
-      if (this.props.processNote) this.props.processNote(this.props.instrument,note,false, column)
     } else {
+      // case 2
+      // remove whatever note is in the column
+      // no notes in column
       arr[column] = ""
-      if (this.props.processNote) this.props.processNote(this.props.instrument,note,true, column)
+      remove = true
     };
+    if (this.props.processNote) this.props.processNote(this.props.instrument,arr[column],remove, column)
     this.setState({selected: arr})
   }
 
-  handleClick(note) {
-    this.props.sampler.triggerAttack(note);
-  }
+  // handleClick(note) {
+  //   this.props.sampler.triggerAttack(note);
+  // }
 
   handleStart(loop) {
+    let currentInstNotes = this.props.getInstrumentNotes(this.props.instrument)
     this.setState({ startBtn: false })
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
@@ -70,16 +79,16 @@ export default class Grid extends React.Component {
         if (i === 0 ) {
           this.setState({ scheduleInterval: interval  });
         }
-        if (this.state.selected[i]) {
-          this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
+        if (currentInstNotes[i]) {
+          this.props.sampler.triggerAttackRelease(currentInstNotes[i], "8n");
         }
         // console.log(i, loop)
         i += 1
-        if (i === this.state.selected.length && !loop) {
+        if (i === currentInstNotes.length && !loop) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
-        } else if (i === this.state.selected.length && loop) {
+        } else if (i === currentInstNotes.length && loop) {
           i = 0
 
         }
@@ -134,7 +143,6 @@ export default class Grid extends React.Component {
 
 
   render(){
-
     if (!this.state.selected) return null;
     // console.log(this.state.selected)
     const beats = this.state.selected.map( (ele, colNumber) => 
@@ -144,7 +152,7 @@ export default class Grid extends React.Component {
           key={colNumber}
           handleUpdate = {index => this.handleUpdate(colNumber, index)}
           noteNames={this.noteNames}
-          handleClick={this.handleClick}
+          // handleClick={this.handleClick}
           isLoaded={this.props.isLoaded}
       />
     )
@@ -158,10 +166,9 @@ export default class Grid extends React.Component {
         size={20}
       />
     )
-    console.log(this.props.beats)
     return(
 
-      <div className={(this.props.beats !== 8) ? styles.gridOuter : styles.gridEight}>
+      <div className={styles.gridOuter}>
         <div className={styles.grid}>
           {beats}
         </div>

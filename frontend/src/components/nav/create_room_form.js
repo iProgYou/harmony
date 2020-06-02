@@ -36,9 +36,9 @@ class RoomForm extends React.Component {
   // Render errors if there are any
   renderErrors() {
     if(this.props.errors) return (
-      <ul>
+      <ul >
         {Object.keys(this.props.errors).map((error, i) => (
-          <li key={`error-${i}`}>
+          <li className={styles.errors} key={`error-${i}`}>
             {this.props.errors[error]}
           </li>
         ))}
@@ -55,12 +55,13 @@ class RoomForm extends React.Component {
     return (
       
       <div className={styles.outerModal} id="modal-form" onClick={e=> (e.target===e.currentTarget) ? this.props.hideModal() : undefined}>
-        {this.renderErrors()}
         <div className={styles.innerModal}> 
+        
               <div onClick={()=>this.props.hideModal()} className={styles.xIcon}> X </div>
               <h1 className={styles.formBlurb}> Create a Room </h1>
           <form className={styles.actualForm} onSubmit={(e) => this.handleSubmit(e)}>
-            <div> <div> Room Name: </div>
+            <div className={styles.formInner}> 
+              <div> Room Name: </div>
               <input type="text"
                 value={this.state.name}
                 onChange={this.update('name')}
@@ -79,7 +80,7 @@ class RoomForm extends React.Component {
               {/* <Link to={`/rooms/${this.state.name}/${this.state.beats}`}> */}
                 <button className={styles.joinRoom} type="submit" >Harmonize </button>
               {/* </Link> */}
-              {/* {this.renderErrors()} */}
+              {this.renderErrors()}
             </div>
           </form>
         </div>

@@ -92,7 +92,7 @@ class LoginForm extends React.Component {
     return (
       <ul>
         {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
+          <li className={formStyle.errors} key={`error-${i}`}>
             {this.state.errors[error]}
           </li>
         ))}
@@ -138,18 +138,22 @@ class LoginForm extends React.Component {
             <br />
             <br />
             <br />
+            <div className={formStyle.formButtonsContainer}>
+              <input 
+                type="submit" 
+                value="Submit"
+                className={formStyle.formSubmitButton}
+              />
 
-            <input 
-              type="submit" 
-              value="Submit"
-              className={formStyle.formSubmitButton}
-            />
+              <br/>
 
-            <input
-              onClick={this.demoLogin}
-              value="Demo Login"
-              className={formStyle.formSubmitButton}
-            />
+              <input
+                type="submit"
+                onClick={this.demoLogin}
+                value="Demo Login"
+                className={formStyle.formSubmitButton}
+              />
+            </div>
 
             {this.renderErrors()}
           </div>

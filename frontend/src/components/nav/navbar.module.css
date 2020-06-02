@@ -97,8 +97,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 300px;
+  width: 500px;
+  height: 375px;
   border-radius: 15px;
   background-color: #dadce0;
   position: relative;
@@ -224,4 +224,17 @@ select{
   position: absolute;
   bottom: -20px;
   color: white;
+
+.formInner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
+.errors{
+  margin: 10px;
+  border: #4b0202 1px solid;
+  border-radius: 3px;
+  padding:4px;
+  background-color: #6f104962;
 }

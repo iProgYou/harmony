@@ -46,7 +46,7 @@ export default class DrumGrid extends React.Component {
     
     componentDidMount() {
       let arrBeats = [];
-      for (let i = 0; i < this.props.Beats; i++) {
+      for (let i = 0; i < this.props.beats; i++) {
         arrBeats.push("")
       }
       this.setState({ selected: arrBeats })
@@ -70,6 +70,7 @@ export default class DrumGrid extends React.Component {
     }
    
     handleStart() {
+      console.log(this.state.selected)
       if (this.state.last !== 0) {
         Tone.Transport.toggle();
         this.setState({ playing: !this.state.playing, disableStart: true});

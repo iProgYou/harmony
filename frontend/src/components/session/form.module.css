@@ -25,7 +25,7 @@
 }
 
 .formInputText {
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -35,7 +35,12 @@
   background-color: #c2cfe9;
   border: none;
   border-bottom: 1px solid white;
-  color: gray;
+  color: black;
+}
+
+.formButtonsContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .formSubmitButton {
@@ -56,4 +61,12 @@
   background: linear-gradient(to right, rgba(68, 136, 224, 0.404) , rgba(170, 69, 172, 0.37));
   transition: 0.2s;
   border-style: inset;
+}
+
+.errors{
+  margin: 10px;
+  border: #4b0202 1px solid;
+  border-radius: 3px;
+  padding:4px;
+  background-color: #6f104962;
 }

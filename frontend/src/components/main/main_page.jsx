@@ -1,12 +1,10 @@
 import React from 'react';
-// import KeyboardGrid from '../single_grid/keyboard_grid'
-// import PianoGrid from '../single_grid/piano_grid'
-// import DrumGrid from '../single_grid/drum_grid'
-import BassGrid from '../single_grid/bass_grid'
+import QuadGrid from './quad_grid';
+import AboutPage from './about_page'
 import { ProtectedRoute } from '../../util/route_util';
 import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
-import { Switch,Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 // import { receiveInstrument } from '../../actions/instrument_actions'
 import { clearRoom } from '../../actions/room_actions'
 import { connect } from 'react-redux'
@@ -24,14 +22,19 @@ class MainPage extends React.Component {
     return (
       <div>
         <Switch>
+          <Route path="/about" component={() => <AboutPage />} />
+
           <ProtectedRoute path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
-          <Route path="/" component={() => <BassGrid beats={8}/>} />
+          {/* <Route path="/" component={() => <DrumGrid beats={8}/>} /> */}
+          <Route path="/" component={() => <QuadGrid beats={8}/>} />
           {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
         </Switch>
 
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
-          Copyright &copy; 2020 Harmony
+          <Link to="/about">About Us</Link>
+          <br />
+          <div>Copyright &copy; 2020 Harmony</div>
         </footer>
       </div>
     );

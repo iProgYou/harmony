@@ -170,17 +170,3 @@ html * {
   border-radius: 3px;
 
  }
-
-
- .gridEight{
-  display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.gridEight .grid{
-  display: flex;
-  justify-content: center;
-}

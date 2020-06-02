@@ -12,9 +12,10 @@ import A2 from "../../notes/keyboard_a_pentatonic/A2.mp3";
 export default class KeyboardGrid extends React.Component {
   constructor(props){
     super(props);
-
+    this.instrument = 'keyboard'
     this.state = {
       isLoaded: false,
+      
     }
 
     this.sampler = new Tone.Sampler(
@@ -36,7 +37,9 @@ export default class KeyboardGrid extends React.Component {
           isLoaded={ this.state.isLoaded }
           beats={ this.props.beats }
           sampler={ this.sampler }
-        />
+          instrument={this.instrument}
+          processNote={this.props.processNote}
+          />
       </div>
       
     )
