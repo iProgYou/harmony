@@ -139,10 +139,10 @@
 
 
 #searchbar{
- display: none;
+ display: flex;
  position:fixed;
  top:83px;
- transition: 1s;
+ transition: .2s;
  height: 30px;
  border-radius: 10px;
 }
@@ -166,6 +166,13 @@
 }
 #searchbar img{
   height: 25px;
+}
+#searchbar .modal{
+  position: fixed;
+  z-index: -99;
+  width: 100vw;
+  height: 100vh;
+
 }
 
 .formBlurb{

@@ -10,7 +10,7 @@ class NavBar extends React.Component {
     super(props);
     this.logoutUser = this.logoutUser.bind(this);
     this.getLinks = this.getLinks.bind(this);
-    this.state = {formDisplay: false, searchbarDisplay: false};
+    this.state = {formDisplay: false, searchDisplay: false};
   }
 
   logoutUser(e) {
@@ -27,17 +27,18 @@ class NavBar extends React.Component {
     modal.classList.add(styles.hidden)
     window.setTimeout(() => this.setState({ formDisplay: false }), 150)
   }
+  showSearch(){
+    this.setState({searchDisplay:true})
+  }
+  hideSearch(){
+    const searchbar = document.getElementById(styles.searchbar)
+    searchbar.classList.add(styles.hidden)
+    window.setTimeout(() => this.setState({ searchDisplay: false }), 150)
+  }
 
   toggleSearch(){
-    let searchBar=document.getElementById(styles.searchbar)
-    if (!this.state.searchbarDisplay){
-      searchBar.classList.add(styles.shown)
-    }else{ 
-      searchBar.classList.remove(styles.shown)
-      searchBar.classList.add(styles.hidden)
-      window.setTimeout(() => searchBar.classList.remove(styles.hidden), 200)
-    }
-    this.setState({searchbarDisplay:!this.state.searchbarDisplay})
+ 
+    this.setState({searchDisplay:!this.state.searchDisplay})
   }
 
 
@@ -71,8 +72,16 @@ class NavBar extends React.Component {
         <div className={styles.joinDiv}>
           <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A ROOM</h2>
           {createRoom} 
-          <SearchBar fetchRoom={this.props.fetchRoom}/>
+          {(this.state.searchDisplay) ?
+            <SearchBar fetchRoom={this.props.fetchRoom} hideSearch = {() => this.hideSearch()}/> : null}
         </div>
+        {(this.state.formDisplay) ? 
+        <RoomForm
+         createRoom={this.props.createRoom}
+         hostId={this.props.hostId}
+         hideModal ={() => this.hideModal()}
+        /> : null}
+          
         {(this.state.formDisplay) ? <RoomForm createRoom={this.props.createRoom} receiveErrors={this.props.receiveErrors} errors={this.props.errors}  hostId={this.props.hostId} hideModal ={()=>this.hideModal()}/> : null}
         <Link to={'/'}><h1 className={styles.title}>harmony</h1></Link>
         {this.getLinks()}

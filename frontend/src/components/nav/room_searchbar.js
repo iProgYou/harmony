@@ -20,10 +20,13 @@ class SearchBar extends React.Component{
   handleChange(e){
     this.setState({search: e.currentTarget.value})
   }
-
+  handleHide(e){
+   if(e.target === e.currentTarget) this.props.hideSearch()
+  }
   render(){
-    return(
+    return( 
       <form onSubmit={(e) => this.handleSearch(e)} id={styles.searchbar}>
+        <div className = {styles.modal} onClick = {e => this.handleHide(e)} > </div>
         <button type="submit">
           <img
             id="search-icon"

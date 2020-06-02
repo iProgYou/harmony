@@ -71,6 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // END TESTING
 
 
+  // about page images
+
+
+
+  // end images
 
 
   ReactDOM.render(<Root store={store} />, root);
