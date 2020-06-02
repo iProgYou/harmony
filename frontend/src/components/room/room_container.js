@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { receiveGrid, receiveGrids } from '../../actions/grid_actions';
-import { updateRoom, receiveRoom } from '../../actions/room_actions';
+import { updateRoom, receiveRoom, clearRoom } from '../../actions/room_actions';
 import { samplerReadableNotes, getAllMiniNotes } from '../../reducers/selectors';
 import Room from './room';
 
@@ -30,7 +30,8 @@ const mapDTP = dispatch => {
         receiveGrid: grid => dispatch(receiveGrid(grid)),
         updateRoom: (roomData) => dispatch(updateRoom(roomData)),
         receiveGrids: grids => dispatch(receiveGrids(grids)),
-        receiveRoom: room => dispatch(receiveRoom(room))
+        receiveRoom: room => dispatch(receiveRoom(room)),
+        clearRoom: () => dispatch(clearRoom())
     }
 }
 

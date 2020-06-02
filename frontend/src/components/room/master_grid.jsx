@@ -5,6 +5,7 @@ import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
 import { connect } from 'react-redux';
 import {receiveGrid} from '../../actions/grid_actions'
+import {receiveRoom} from '../../actions/room_actions'
 import { FaPlay, FaPause, FaRedo ,FaUserFriends } from 'react-icons/fa';
 import { BsFillStopFill } from 'react-icons/bs';
 import socketIOClient from "socket.io-client";
@@ -58,8 +59,31 @@ class MasterGrid extends React.Component {
     })
 
     this.props.socket.emit('update room', this.props.currentRoom);
-
+    window.addEventListener("beforeunload", () => this.componentCleanup() );
   }
+
+  componentCleanup() {
+
+    const {currentRoom, currentUserId} = this.props
+    
+    if (currentRoom.memberIds.length > 1) {
+      let roomDataRemove = { userId: currentUserId, roomId: this.props.currentRoom._id, removeId: true }
+      this.props.updateRoom(roomDataRemove)
+
+      let updatedRoom = { ...currentRoom }
+      updatedRoom.memberIds = currentRoom.memberIds.splice(currentRoom.memberIds.indexOf(currentUserId), 1)
+      this.props.socket.emit('update room', updatedRoom)
+    }else if (currentRoom.memberIds.length === 1) {
+
+    }
+
+    this.socket.disconnect(true)
+  }
+  componentWillUnmount() {
+    this.componentCleanup()
+    window.removeEventListener('beforeunload', this.componentCleanup);
+  }
+  
 
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
@@ -235,7 +259,7 @@ class MasterGrid extends React.Component {
         size={20}
       />
     )
-
+  
     return(
 
       <div className={styles.gridOuter}>
@@ -262,26 +286,6 @@ class MasterGrid extends React.Component {
           </button>
             )
         }
-
-
-        {/* {
-         this.state.scheduleInterval === null ? (
-            <button className={styles.bigButton} onClick={() => this.handleStart(this.state.replay)} disabled={!this.props.isLoaded}>
-            <div className={styles.bbDiv}>
-              <FaRedo
-                size={20}
-              />
-              <FaUserFriends
-                size={24}
-              />
-            </div>
-          </button>
-            ) : (
-              <button className={((!this.state.playing) ? styles.bigButton : styles.button)} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
-            {pauseBtn}
-          </button>
-            )
-          } */}
 
 
 
@@ -329,10 +333,12 @@ class MasterGrid extends React.Component {
 }
 
 
+
 const mDTP = dispatch => {
 
   return {
-    receiveGrid: (grid) => dispatch(receiveGrid(grid))
+    receiveGrid: (grid) => dispatch(receiveGrid(grid)),
+    receiveRoom: (room) => dispatch(receiveRoom(room))
   }
 
 }
