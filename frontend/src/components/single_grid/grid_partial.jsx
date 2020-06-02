@@ -153,9 +153,10 @@ export default class Grid extends React.Component {
         size={20}
       />
     )
+    console.log(this.props.beats)
     return(
 
-      <div className={styles.gridOuter}>
+      <div className={(this.props.beats !== 8) ? styles.gridOuter : styles.gridEight}>
         <div className={styles.grid}>
           {beats}
         </div>
