@@ -1,9 +1,6 @@
 import React from 'react';
-// import KeyboardGrid from '../single_grid/keyboard_grid'
-// import PianoGrid from '../single_grid/piano_grid'
-// import DrumGrid from '../single_grid/drum_grid'
+import QuadGrid from './quad_grid';
 import AboutPage from './about_page'
-import BassGrid from '../single_grid/bass_grid'
 import { ProtectedRoute } from '../../util/route_util';
 import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
