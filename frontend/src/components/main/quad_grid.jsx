@@ -1,11 +1,6 @@
 import React from 'react';
-// import KeyboardGrid from '../single_grid/keyboard_grid';
-// import PianoGrid from '../single_grid/piano_grid';
-// import DrumGrid from '../single_grid/drum_grid';
-// import BassGrid from '../single_grid/bass_grid';
 import Grid from './quad_grid_parts/grid_partial'
 import * as Tone from 'tone';
-import MiniGrid from '../single_grid/mini_grid_partial';
 
 // bass
 import bA1 from "../../notes/bass_a_pentatonic/A1.mp3";
@@ -53,7 +48,6 @@ class QuadGrid extends React.Component {
                 A3: kA1, B3: kB1, C3: kCs2, D3: kE2, E3: kFs2, F3: kA2, 
                 A4: dA1, B4: dB1, C4: dCs2, D4: dE2, E4: dFs2, F4: dA2, 
             },
-            
             {
               onload: () => {
                 this.setState({ isLoaded: true });
@@ -61,27 +55,66 @@ class QuadGrid extends React.Component {
             }
         ).toMaster();
         this.encodeNotes = {
-            "keyboard": { "A1": "A3", "B1": "B3", "C#2": "C3", "E2": "D3", "F#2": "E3", "A2": "F3" },
-            "piano": { "A1": "A2", "B1": "B2", "C#2": "C2", "E2": "D2", "F#2": "E2", "A2": "F2" },
+            // piano
             "bass": { "A1": "A1", "B1": "B1", "C#2": "C1", "E2": "D1", "F#2": "E1", "A2": "F1" },
+            "piano": { "A1": "A2", "B1": "B2", "C#2": "C2", "E2": "D2", "F#2": "E2", "A2": "F2" },
+            "keyboard": { "A1": "A3", "B1": "B3", "C#2": "C3", "E2": "D3", "F#2": "E3", "A2": "F3" },
             "drums": { "A1": "A4", "B1": "B4", "C#2": "C4", "E2": "D4", "F#2": "E4", "A2": "F4" }
         }
+        this.decode = {'bass':'1','piano':'2','keyboard':'3','drums':'4'}
+
         this.processNote = this.processNote.bind(this);
+        this.getInstrumentNotes = this.getInstrumentNotes.bind(this);
     }
 
     processNote(instrumentName,note,remove,column) {
-        // let newAllNotes = this.allNotes;
-        debugger
+
         let currentNote = this.encodeNotes[instrumentName][note];
-        if (remove) {
-            this.allNotes[column].filter(ele => ele != currentNote)
-        } else {
-            // play the note here
-            this.sampler.triggerAttack(currentNote)
+        if (!remove && currentNote) this.sampler.triggerAttack(currentNote);
+
+        if (currentNote) {
+            if (this.allNotes[column].some(ele => ele[1] === this.decode[instrumentName])) {
+                this.allNotes[column] = this.allNotes[column]
+                .filter(eachNote => eachNote[1] !== this.decode[instrumentName])
+            }
             this.allNotes[column].push(currentNote)
+        } else {
+            console.log(this.allNotes)
+            console.log(this.decode[instrumentName])
+            this.allNotes[column] = this.allNotes[column]
+                .filter(eachNote => eachNote[1] !== this.decode[instrumentName])
         }
-        // this.allNotes = newAllNotes
+
+        // let newAllNotes = this.allNotes;
+        // // if (remove) {
+        //     // debugger
+        // //     this.allNotes[column].filter(ele => ele != currentNote)
+        // // } else {
+        //     // play the note here
+        //     if (!currentNote) {
+        //         debugger
+        //         this.allNotes[column].filter(eachNote => eachNote[1] === this.decode[instrumentName])
+        //     } else if (this.allNotes[column].includes(currentNote)) {
+        //         return
+        //     } else {
+        //     }
+        // // }
+        // // this.allNotes = newAllNotes
         console.log(this.allNotes)
+    }
+
+    getInstrumentNotes(instrument) {
+        let currentInstNoteArr = [];
+
+        for (let i = 0; i < this.props.beats; i++) {
+            currentInstNoteArr.push([])
+            for (let j = 0; j < this.allNotes[i].length; j++) {
+                if (this.allNotes[i][j][1] === this.decode[instrument]) {
+                    currentInstNoteArr[i].push(this.allNotes[i][j])
+                }
+            }
+        }
+        return currentInstNoteArr
     }
 
     render() {
@@ -94,11 +127,21 @@ class QuadGrid extends React.Component {
                         isLoaded={ this.state.isLoaded }
                         instrument={instrument} 
                         beats={this.props.beats}
-                        quadGrid={true}
+                        // quadGrid={true}
                         processNote={this.processNote}
+                        sampler={this.sampler}
+                        getInstrumentNotes={this.getInstrumentNotes}
                     />
                 ))}
-                {/* Drum grid needs to be here too */}
+                {/* <DrumGrid
+                    isLoaded={ this.state.isLoaded }
+                    instrument={'drums'} 
+                    beats={this.props.beats}
+                    // quadGrid={true}
+                    processNote={this.processNote}
+                    sampler={this.sampler}
+                    getInstrumentNotes={this.getInstrumentNotes}
+                /> */}
                 {/* <Grid beats={this.props.beats} quadGrid={true} processNote={this.processNote}/> */}
             </div>
         )
