@@ -221,5 +221,7 @@ select{
 }
 
 .errorMessage {
+  position: absolute;
+  bottom: -20px;
   color: white;
 }
