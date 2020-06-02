@@ -28,7 +28,7 @@ class NavBar extends React.Component {
     window.setTimeout(() => this.setState({ formDisplay: false }), 150)
   }
   showSearch(){
-    this.setState({searchDisplay:true})
+    this.setState({searchDisplay: true})
   }
   hideSearch(){
     const searchbar = document.getElementById(styles.searchbar)

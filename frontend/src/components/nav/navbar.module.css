@@ -219,3 +219,7 @@ select{
 .innerModal input{
   margin-bottom: 12px;
 }
+
+.errorMessage {
+  color: white;
+}

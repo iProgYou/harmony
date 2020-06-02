@@ -5,15 +5,18 @@ import { withRouter } from 'react-router-dom'
 class SearchBar extends React.Component{
   constructor(props){
     super(props)
-    this.state = {search:''}
+    this.state = {
+      search:'',
+      errors: null
+  }
   }
 
   handleSearch(e){
     e.preventDefault()
     this.props.fetchRoom(this.state.search)
       .then(() => this.props.history.push(`/rooms/${this.state.search}`))
-      .catch(err => this.props.receiveErrors(err.response.data))
-      .then(this.setState({search: ''}))
+      .catch(err => this.setState({errors: err.response.data}))
+      // .then(this.setState({search: ''}))
       
     // this.state.search should be roomId
     // If there is a room, load that room into state and add current memberid
@@ -23,7 +26,10 @@ class SearchBar extends React.Component{
     this.setState({search: e.currentTarget.value})
   }
   handleHide(e){
-   if(e.target === e.currentTarget) this.props.hideSearch()
+   if(e.target === e.currentTarget) { 
+     this.props.hideSearch()
+     this.setState({errors: null})
+    }
   }
   render(){
     return( 
@@ -42,7 +48,14 @@ class SearchBar extends React.Component{
           value={this.state.search}
           onChange={(e) => this.handleChange(e)}
           placeholder="Search"
-        />
+          />
+          {
+            this.state.errors ? (
+            <div className = {styles.errorMessage}>
+              {this.state.errors.name}
+            </div>
+            ) : null
+          }
       </form>
     )
   }

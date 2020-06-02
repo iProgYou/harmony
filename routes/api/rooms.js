@@ -25,8 +25,7 @@ router.get('/user/:user_id', (req, res) => {
 // Find room by name
 router.get('/:roomName', (req, res) => {
   Room.find({ name: req.params.roomName }, (err, room) => {
-    console.log(room instanceof Array)
-    if (!(room instanceof Array)) {
+    if (room.length !== 0) {
       res.json(room)
     } else {
       return res.status(404).json({ name: "That room does not exist" })
