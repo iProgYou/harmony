@@ -36,9 +36,9 @@ class RoomForm extends React.Component {
   // Render errors if there are any
   renderErrors() {
     if(this.props.errors) return (
-      <ul>
+      <ul >
         {Object.keys(this.props.errors).map((error, i) => (
-          <li key={`error-${i}`}>
+          <li className={styles.errors} key={`error-${i}`}>
             {this.props.errors[error]}
           </li>
         ))}
