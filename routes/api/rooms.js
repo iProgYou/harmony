@@ -6,12 +6,12 @@ const passport = require('passport');
 const Room = require('../../models/Room');
 const validateRoomInput = require('../../validation/room');
 
-router.get('/', (req, res) => {
-  Room.find()
-    .sort({ date: -1 })
-    .then(room => res.json(room))
-    .catch(err => res.status(404).json({ noroomsfound: 'No rooms found' }));
-});
+// router.get('/', (req, res) => {
+//   Room.find()
+//     .sort({ date: -1 })
+//     .then(room => res.json(room))
+//     .catch(err => res.status(404).json({ noroomsfound: 'No rooms found' }));
+// });
 
 router.get('/user/:user_id', (req, res) => {
   Room.find({ user: req.params.user_id })
@@ -24,12 +24,24 @@ router.get('/user/:user_id', (req, res) => {
 
 // Find room by name
 router.get('/:roomName', (req, res) => {
-  Room.find({name: req.params.roomName})
-    .then(room => res.json(room))
-    .catch(err =>
-      res.status(404).json({ noroomfound: 'No room found with that ID' })
-    );
-});
+  Room.find({ name: req.params.roomName }, (err, room) => {
+    console.log(room instanceof Array)
+    if (!(room instanceof Array)) {
+      res.json(room)
+    } else {
+      return res.status(404).json({ name: "That room does not exist" })
+    }
+  }
+  )
+})
+    
+    
+//     )
+//     .then(room => res.json(room))
+//     .catch(err =>
+//       res.status(404).json({ noroomfound: 'No room found with that ID' })
+//     );
+// });
 
 router.post('/', passport.authenticate('jwt', { session: false }), 
   (req, res) => {
@@ -87,16 +99,18 @@ router.patch('/:id',
   }
 );
 
-router.delete('/:roomId', passport.authenticate('jwt', { session: false }),
+router.delete('/delete/:roomId', passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Room.findById(req.body.roomId), (err, room) => {
-      if (room) {
-        room.delete();
-      } else {
-        res.send('room was not found');
+    Room.findById(req.params.roomId, (err, room) => {
+        if (room) {
+          room.delete();
+        } else {
+          console.log('room was not found')
+          res.send('room was not found');
+        }
       }
-    }
-  }
+    )
+  } 
 )
 
 module.exports = router;
