@@ -262,7 +262,7 @@ class MasterGrid extends React.Component {
   
     return(
 
-      <div className={styles.gridOuter}>
+      <div className={(this.props.beats !== 8) ? styles.gridOuter : styles.gridEight}>
         <div ref = {this.gridRef} className={styles.grid}>
           {beats}
         </div>
