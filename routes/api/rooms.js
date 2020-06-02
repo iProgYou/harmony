@@ -64,18 +64,25 @@ router.post('/', passport.authenticate('jwt', { session: false }),
 router.patch('/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    // could not do the Room.update method outlined in MongoDB docs - possibly due to socket.IO
     Room.findById(req.body.roomId, (err, room) => {
-      if (room) {
+      if (room && !req.body.removeId) {
         room.memberIds.push(req.body.userId);
+        
         room.save()
           .then((room) => {
             return res.json(room)
           })
           .catch(() => console.log('room was not updated'));
-      } else {
-        res.send('Room not found');
-      }
+          } else if (room && req.body.removeId ) {
+            room.memberIds = room.memberIds.splice(room.memberIds.indexOf(room.userId), 1)
+            room.save()
+            .then((room) => {
+              return res.json(room)
+            })
+            .catch(() => console.log('room was not updated'));
+          } else {
+            res.send('Room not found');
+          }
     })
   }
 );

@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 
 export const RECEIVE_ROOMS = "RECEIVE_ROOMS";
 export const RECEIVE_ROOM = "RECEIVE_ROOM";
+export const CLEAR_ROOM = "CLEAR_ROOM";
 export const RECEIVE_ROOM_ERRORS = 'RECEIVE_ROOM_ERRORS';
 
 export const receiveRooms = rooms => ({
@@ -18,6 +19,10 @@ export const receiveRoom = room => ({
 export const receiveErrors = errors => ({
   type: RECEIVE_ROOM_ERRORS,
   errors
+})
+
+export const clearRoom = () => ({
+  type: CLEAR_ROOM 
 })
 
 export const fetchRooms = () => (dispatch) => {
