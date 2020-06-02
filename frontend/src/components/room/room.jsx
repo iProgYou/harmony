@@ -86,9 +86,8 @@ class Room extends React.Component {
             }
         }
         let grid = {instrument, notes, beats, userId }
-        console.log(this.props.currentRoom._id)
-        let roomData = { userId: userId, roomId: this.props.currentRoom._id }
-        debugger
+        let roomData = { userId: userId, roomId: this.props.currentRoom._id}
+
         this.props.updateRoom(roomData)
             .then((stuff) => {
                 console.log(stuff)
@@ -116,6 +115,8 @@ class Room extends React.Component {
                     beats = {this.props.currentRoom.beats}
                     currentRoom = {this.props.currentRoom}
                     receiveRoom = {this.props.receiveRoom}
+                    updateRoom = {this.props.updateRoom}
+                    clearRoom = {this.props.clearRoom}
                     
                 />
         ) : (

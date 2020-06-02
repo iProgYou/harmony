@@ -4,13 +4,11 @@ import React from 'react';
 // import DrumGrid from '../single_grid/drum_grid'
 import BassGrid from '../single_grid/bass_grid'
 import { ProtectedRoute } from '../../util/route_util';
-import MiniGrid from '../single_grid/mini_grid_partial';
 import RoomContainer from '../room/room_container';
 import styles from './main.module.css'
-import ChatRoom from '../chat/chat_room'
-import socketIOClient from "socket.io-client";
 import { Switch,Route } from 'react-router-dom';
-import { receiveInstrument } from '../../actions/instrument_actions'
+// import { receiveInstrument } from '../../actions/instrument_actions'
+import { clearRoom } from '../../actions/room_actions'
 import { connect } from 'react-redux'
 
 class MainPage extends React.Component {
@@ -18,10 +16,13 @@ class MainPage extends React.Component {
     super(props)
   }
 
+  // componentDidUpdate() {
+  //   this.props.clearRoom()
+  // }
+
   render() {
     return (
       <div>
-
         <Switch>
           <ProtectedRoute path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
           <Route path="/" component={() => <BassGrid beats={8}/>} />
@@ -41,7 +42,8 @@ class MainPage extends React.Component {
 const mDTP = dispatch => {
 
   return {
-    receiveInstrument: instrument => dispatch(receiveInstrument(instrument)),
+    clearRoom: () => dispatch(clearRoom())
+    // receiveInstrument: instrument => dispatch(receiveInstrument(instrument)),
   }
 }
 

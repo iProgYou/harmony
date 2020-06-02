@@ -1,6 +1,7 @@
 import {
   RECEIVE_ROOMS,
-  RECEIVE_ROOM
+  RECEIVE_ROOM,
+  CLEAR_ROOM
 } from "../../actions/room_actions";
 
 // room = id: { id: 0, hostId: 0, jamId:  }
@@ -11,6 +12,8 @@ const roomsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_ROOM:
       return Object.assign({}, action.room);
+    case CLEAR_ROOM:
+      return Object.assign({})
     default:
       return state;
   }

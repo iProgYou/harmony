@@ -21,9 +21,8 @@ class ChatRoom extends React.Component {
     }
     
     componentDidMount() {
-        // this.props.socket.connect()
         this.props.socket.emit('joinRoom', this.props.match.params.roomName)
-
+        
         this.props.socket.on('chat message', (msg) => {
             let newMessageList = [...this.state.messageList]
             newMessageList.push(msg)   
