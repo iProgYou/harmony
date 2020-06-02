@@ -22,6 +22,7 @@ class MasterGrid extends React.Component {
       pauseInt: null,
       replay: false
     }
+    
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
@@ -44,7 +45,6 @@ class MasterGrid extends React.Component {
       "piano": { "A1": "A2", "B1": "B2", "C#2": "C2", "E2": "D2", "F#2": "E2", "A2": "F2" },
       "bass": { "A1": "A1", "B1": "B1", "C#2": "C1", "E2": "D1", "F#2": "E1", "A2": "F1" },
       "drums": { "A1": "A4", "B1": "B4", "C#2": "C4", "E2": "D4", "F#2": "E4", "A2": "F4" }
-
     }
   }
 
@@ -115,7 +115,6 @@ class MasterGrid extends React.Component {
   
   
   handleStart(loop) {
-
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
       let i = 0;

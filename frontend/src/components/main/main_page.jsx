@@ -28,8 +28,8 @@ class MainPage extends React.Component {
           <Route path="/about" component={() => <AboutPage />} />
 
           <ProtectedRoute path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
-          
-          <Route path="/" component={() => <BassGrid beats={8}/>} />
+          {/* <Route path="/" component={() => <DrumGrid beats={8}/>} /> */}
+          <Route path="/" component={() => <QuadGrid beats={8}/>} />
           {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
         </Switch>
 
