@@ -5,7 +5,7 @@ import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
 import { connect } from 'react-redux';
 import {receiveGrid} from '../../actions/grid_actions'
-import {receiveRoom} from '../../actions/room_actions'
+import { receiveRoom, deleteRoom} from '../../actions/room_actions'
 import { FaPlay, FaPause, FaRedo ,FaUserFriends } from 'react-icons/fa';
 import { BsFillStopFill } from 'react-icons/bs';
 import socketIOClient from "socket.io-client";
@@ -65,16 +65,18 @@ class MasterGrid extends React.Component {
   componentCleanup() {
 
     const {currentRoom, currentUserId} = this.props
-    
-    if (currentRoom.memberIds.length > 1) {
+
+    if (currentRoom && currentRoom.memberIds.length > 1) {
       let roomDataRemove = { userId: currentUserId, roomId: this.props.currentRoom._id, removeId: true }
       this.props.updateRoom(roomDataRemove)
 
       let updatedRoom = { ...currentRoom }
       updatedRoom.memberIds = currentRoom.memberIds.splice(currentRoom.memberIds.indexOf(currentUserId), 1)
       this.props.socket.emit('update room', updatedRoom)
-    }else if (currentRoom.memberIds.length === 1) {
 
+    } else if (currentRoom && currentRoom.memberIds.length === 1) {
+      // console.log("ASDFASDFASDFASDFASDFASDF", currentRoom.memberIds.length, currentRoom._id)
+      this.props.deleteRoom(currentRoom._id)
     }
 
     this.socket.disconnect(true)
@@ -337,7 +339,8 @@ const mDTP = dispatch => {
 
   return {
     receiveGrid: (grid) => dispatch(receiveGrid(grid)),
-    receiveRoom: (room) => dispatch(receiveRoom(room))
+    receiveRoom: (room) => dispatch(receiveRoom(room)),
+    deleteRoom: (id) => dispatch(deleteRoom(id))
   }
 
 }

@@ -28,7 +28,7 @@ export const clearRoom = () => ({
 export const fetchRooms = () => (dispatch) => {
   return RoomsAPIUtil.fetchRooms()
     .then(rooms => dispatch(receiveRooms(rooms)),
-    err => (dispatch(receiveErrors(err.response.data))))
+    err => (dispatch(receiveErrors(err.response.data)))) 
 };
 
 export const fetchRoom = (roomName) => (dispatch) => {
@@ -36,9 +36,9 @@ export const fetchRoom = (roomName) => (dispatch) => {
     .then(room => {
       // needs to be indexed because findOne returns an array
       dispatch(receiveRoom(room.data[0]))
-    },
-    err => (dispatch(receiveErrors(err.response.data))))
+    })
 };
+
 
 export const createRoom = (room) => (dispatch) => {
   return RoomsAPIUtil.createRoom(room)
@@ -55,8 +55,8 @@ export const updateRoom = (roomData) => (dispatch) => {
 
 export const deleteRoom = (roomId) => (dispatch) => {
   return RoomsAPIUtil.deleteRoom(roomId)
-    .then(room => {
-      dispatch(receiveRoom(roomId))
-    })
+    // .then(room => {
+    //   dispatch(receiveRoom(roomId))
+    // })
     .catch(err => dispatch(receiveErrors(err.response.data)))
 }

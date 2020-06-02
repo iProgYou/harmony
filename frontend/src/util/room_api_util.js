@@ -17,5 +17,5 @@ export const updateRoom = (roomData) => {
 }
 
 export const deleteRoom = (roomId) => {
-  return axios.delete(`/api/rooms/${roomId}`)
+  return axios.delete(`/api/rooms/delete/${roomId}`)
 }

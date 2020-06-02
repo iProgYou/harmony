@@ -220,11 +220,17 @@ select{
   margin-bottom: 12px;
 }
 
+.errorMessage {
+  position: absolute;
+  bottom: -20px;
+  color: white;
+
 .formInner{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+  
 .errors{
   margin: 10px;
   border: #4b0202 1px solid;

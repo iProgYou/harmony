@@ -50,9 +50,9 @@ const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
 
-  socket.on('disconnect', (data) => {
-    console.log(data);
-  });
+  // socket.on('disconnect', () => {
+  //   console.log(data);
+  // });
 
   socket.on('joinRoom', (room) => {
     console.log(`you have joined room ${room}`)
@@ -61,7 +61,6 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (data) => {
     // io.to(data['room']).emit('chat message', data);
-    console.log(data['room'])
     io.to(data['room']).emit('chat message', data);
   });
   socket.on('grid update', (data) => {

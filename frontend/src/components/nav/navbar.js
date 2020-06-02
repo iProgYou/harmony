@@ -28,7 +28,7 @@ class NavBar extends React.Component {
     window.setTimeout(() => this.setState({ formDisplay: false }), 150)
   }
   showSearch(){
-    this.setState({searchDisplay:true})
+    this.setState({searchDisplay: true})
   }
   hideSearch(){
     const searchbar = document.getElementById(styles.searchbar)
@@ -73,7 +73,7 @@ class NavBar extends React.Component {
           <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A ROOM</h2>
           {createRoom} 
           {(this.state.searchDisplay) ?
-            <SearchBar fetchRoom={this.props.fetchRoom} hideSearch = {() => this.hideSearch()}/> : null}
+            <SearchBar receiveErrors = {this.props.receiveErrors} fetchRoom={this.props.fetchRoom} hideSearch = {() => this.hideSearch()}/> : null}
         </div>
         {(this.state.formDisplay) ? 
         <RoomForm

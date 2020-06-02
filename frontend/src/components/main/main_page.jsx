@@ -45,7 +45,8 @@ class MainPage extends React.Component {
 const mDTP = dispatch => {
 
   return {
-    clearRoom: () => dispatch(clearRoom())
+    clearRoom: () => dispatch(clearRoom()),
+
     // receiveInstrument: instrument => dispatch(receiveInstrument(instrument)),
   }
 }
