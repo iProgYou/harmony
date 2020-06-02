@@ -62,3 +62,11 @@
   transition: 0.2s;
   border-style: inset;
 }
+
+.errors{
+  margin: 10px;
+  border: #4b0202 1px solid;
+  border-radius: 3px;
+  padding:4px;
+  background-color: #6f104962;
+}
