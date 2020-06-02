@@ -73,7 +73,7 @@ class NavBar extends React.Component {
           <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A ROOM</h2>
           {createRoom} 
           {(this.state.searchDisplay) ?
-          <SearchBar hideSearch = {() => this.hideSearch()}/> : null}
+            <SearchBar fetchRoom={this.props.fetchRoom} hideSearch = {() => this.hideSearch()}/> : null}
         </div>
         {(this.state.formDisplay) ? 
         <RoomForm
@@ -81,6 +81,8 @@ class NavBar extends React.Component {
          hostId={this.props.hostId}
          hideModal ={() => this.hideModal()}
         /> : null}
+          
+        {(this.state.formDisplay) ? <RoomForm createRoom={this.props.createRoom} receiveErrors={this.props.receiveErrors} errors={this.props.errors}  hostId={this.props.hostId} hideModal ={()=>this.hideModal()}/> : null}
         <Link to={'/'}><h1 className={styles.title}>harmony</h1></Link>
         {this.getLinks()}
       </div>

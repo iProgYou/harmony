@@ -59,8 +59,11 @@ table {
 /* Track */
 ::-webkit-scrollbar-track {
 	background: rgba(30, 44, 62, 0); 
-	border: solid black 1px;
 }
+::-webkit-scrollbar-track:hover {
+	border: solid black 1px; 
+}
+
  
 /* Handle */
 ::-webkit-scrollbar-thumb {

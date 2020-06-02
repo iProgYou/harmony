@@ -94,6 +94,7 @@
 html  {
   background: radial-gradient(circle 50vw at bottom right, #AA45AC, #712F79, transparent),
             radial-gradient(circle 50vw at bottom left, #4487E0, #004BA8, black);
+
 }
 html * {
   font-family: 'Montserrat';

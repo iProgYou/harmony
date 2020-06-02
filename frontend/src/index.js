@@ -6,9 +6,11 @@ import configureStore from './store/store';
 // TESTING
 
 import { createJam } from './util/jam_api_util';
+// import { createRoom } from './util/room_api_util';
 // import { fetchJams, createJam } from './actions/jams_actions';
 
 import { receiveRoom, fetchRooms, createRoom } from './actions/room_actions';
+// import { receiveRoom, fetchRooms,  } from './actions/room_actions';
 import { receiveGrid, receiveGrids } from './actions/grid_actions';
 // END TESTING
 
@@ -44,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (decodedUser.exp < currentTime) {
       // Logout the user and redirect to the login page
       store.dispatch(logout());
-      window.location.href = '/login';
+      // window.location.href = '/login';
     }
   } else {
     // If this is a first time user, start with an empty store

@@ -26,10 +26,24 @@ export const fetchRooms = () => (dispatch) => {
     err => (dispatch(receiveErrors(err.response.data))))
 };
 
-export const createRoom = (room) => (dispatch) => (
-  RoomsAPIUtil.createRoom(room)
-    .then(room => dispatch(receiveRoom(room)))
-    .catch(err => {
-      dispatch(receiveErrors(err.response.data));
+export const fetchRoom = (roomName) => (dispatch) => {
+  return RoomsAPIUtil.fetchRoom(roomName)
+    .then(room => {
+      // needs to be indexed because findOne returns an array
+      dispatch(receiveRoom(room.data[0]))
+    },
+    err => (dispatch(receiveErrors(err.response.data))))
+};
+
+export const createRoom = (room) => (dispatch) => {
+  return RoomsAPIUtil.createRoom(room)
+    .then(room => dispatch(receiveRoom(room.data)))
+}
+
+export const updateRoom = (roomData) => (dispatch) => {
+  return RoomsAPIUtil.updateRoom(roomData)
+    .then(room => {
+      dispatch(receiveRoom(room.data))
     })
-)
+    .catch(err => dispatch(receiveErrors(err.response.data)))
+}
