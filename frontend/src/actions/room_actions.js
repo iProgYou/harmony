@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 
 export const RECEIVE_ROOMS = "RECEIVE_ROOMS";
 export const RECEIVE_ROOM = "RECEIVE_ROOM";
+export const CLEAR_ROOM = "CLEAR_ROOM";
 export const RECEIVE_ROOM_ERRORS = 'RECEIVE_ROOM_ERRORS';
 
 export const receiveRooms = rooms => ({
@@ -18,6 +19,10 @@ export const receiveRoom = room => ({
 export const receiveErrors = errors => ({
   type: RECEIVE_ROOM_ERRORS,
   errors
+})
+
+export const clearRoom = () => ({
+  type: CLEAR_ROOM 
 })
 
 export const fetchRooms = () => (dispatch) => {
@@ -44,6 +49,14 @@ export const updateRoom = (roomData) => (dispatch) => {
   return RoomsAPIUtil.updateRoom(roomData)
     .then(room => {
       dispatch(receiveRoom(room.data))
+    })
+    .catch(err => dispatch(receiveErrors(err.response.data)))
+}
+
+export const deleteRoom = (roomId) => (dispatch) => {
+  return RoomsAPIUtil.deleteRoom(roomId)
+    .then(room => {
+      dispatch(receiveRoom(roomId))
     })
     .catch(err => dispatch(receiveErrors(err.response.data)))
 }

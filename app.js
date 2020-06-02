@@ -49,7 +49,10 @@ const server = app.listen(port, () => console.log(`Server is running on port ${p
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-  console.log(`A user has connected`)
+
+  socket.on('disconnect', (data) => {
+    console.log(data);
+  });
 
   socket.on('joinRoom', (room) => {
     console.log(`you have joined room ${room}`)
