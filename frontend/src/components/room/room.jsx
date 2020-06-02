@@ -106,18 +106,17 @@ class Room extends React.Component {
         if (!this.state.isLoaded) return null;
         const masterGrid = this.state.instrumentSelected ? (
             <MasterGrid
-                    socket = {this.socket}
-                    mainGridNotes={this.props.mainGridNotes}
-                    allNotes={this.props.allNotes}
-                    sampler={this.sampler}
-                    instrument={this.state.instrument}
-                    isLoaded={this.state.isLoaded}
-                    currentUserId = {this.props.currentUserId}
-                    beats = {this.props.currentRoom.beats}
-                    currentRoom = {this.props.currentRoom}
-                    receiveRoom = {this.props.receiveRoom}
-                    
-                />
+                socket = {this.socket}
+                mainGridNotes={this.props.mainGridNotes}
+                allNotes={this.props.allNotes}
+                sampler={this.sampler}
+                instrument={this.state.instrument}
+                isLoaded={this.state.isLoaded}
+                currentUserId = {this.props.currentUserId}
+                beats = {this.props.currentRoom.beats}
+                currentRoom = {this.props.currentRoom}
+                receiveRoom = {this.props.receiveRoom}
+            />
         ) : (
             null
         )

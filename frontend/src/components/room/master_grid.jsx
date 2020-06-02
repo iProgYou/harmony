@@ -20,6 +20,7 @@ class MasterGrid extends React.Component {
       pauseNote: 0,
       pauseInt: null
     }
+    
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);

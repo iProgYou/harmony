@@ -19,7 +19,7 @@ export default class Grid extends React.Component {
     }
    
     this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handleRestart = this.handleRestart.bind(this)
@@ -55,9 +55,9 @@ export default class Grid extends React.Component {
     this.setState({selected: arr})
   }
 
-  handleClick(note) {
-    this.props.sampler.triggerAttack(note);
-  }
+  // handleClick(note) {
+  //   this.props.sampler.triggerAttack(note);
+  // }
 
   handleStart(loop) {
     this.setState({ startBtn: false })
@@ -144,7 +144,7 @@ export default class Grid extends React.Component {
           key={colNumber}
           handleUpdate = {index => this.handleUpdate(colNumber, index)}
           noteNames={this.noteNames}
-          handleClick={this.handleClick}
+          // handleClick={this.handleClick}
           isLoaded={this.props.isLoaded}
       />
     )

@@ -36,6 +36,8 @@ export default class BassGrid extends React.Component {
         isLoaded={ this.state.isLoaded }
         beats={ this.props.beats }
         sampler={ this.sampler }
+        instrument={this.instrument}
+        processNote={this.props.processNote}
       />
     )
   }
