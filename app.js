@@ -60,11 +60,10 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat message', (data) => {
-    // io.to(data['room']).emit('chat message', data);
     io.to(data['room']).emit('chat message', data);
   });
   socket.on('grid update', (data) => {
-    io.emit('grid update', data);
+    io.to(data['room']).emit('grid update', data);
   });
 
   socket.on('update room', data => {

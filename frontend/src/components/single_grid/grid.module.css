@@ -161,6 +161,7 @@ html * {
 #mini .grid{
   max-width: 25vw;
   max-height: 20vw;  
+  justify-content: center;
 }
  #mini .gridItem{
   width: 20px;
