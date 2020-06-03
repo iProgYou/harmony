@@ -32,6 +32,7 @@ import dCs2 from "../../notes/drums/hh.mp3";
 import dE2 from "../../notes/drums/hho.mp3";
 import dFs2 from "../../notes/drums/agogoHigh.mp3";
 import dA2 from "../../notes/drums/agogoLow.mp3";
+import styles from "./quad_grid_parts/grid.module.css"
 
 class QuadGrid extends React.Component {
     constructor(props) {
@@ -153,6 +154,7 @@ class QuadGrid extends React.Component {
                     />
                 </button>
                 
+            <div className = {styles.quadGrid}>
                 {this.singleInst.map((instrument,i) => (
                     <Grid
                         key={i}

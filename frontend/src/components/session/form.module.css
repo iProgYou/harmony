@@ -8,7 +8,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 100px);
+  height: calc(100vh);
+  position: absolute;
+  left: calc(50vw - 350px);
+  top: 0px;
   width: 700px;
   background-color: #c2cfe9;
   box-shadow: 0px 2px 10px #dadce0;
@@ -21,21 +24,22 @@
 
 .formHeader {
   font-weight: 700;
-  font-size: 25px;
+  font-size: 45px;
 }
 
 .formInputText {
-  font-size: 15px;
+  font-size: 21px;
   font-weight: 700;
 }
 
 .formInput {
   width: 300px;
-  height: 40px;
+  height: 55px;
   background-color: #c2cfe9;
   border: none;
   border-bottom: 1px solid white;
   color: black;
+  font-size: 21px;
 }
 
 .formButtonsContainer {
@@ -45,28 +49,36 @@
 
 .formSubmitButton {
   width: 300px;
-  height: 25px;
+  height: 40px;
+  border: 1px outset;
   border-radius: 25px;
+  font-size: 25px;
   background: linear-gradient(to right, #4487E0 , #AA45AC);
 }
 
 .formSubmitButton:hover {
   background: linear-gradient(to right, rgba(68, 136, 224, 0.726) , rgba(170, 69, 172, 0.733));
   transition: 0.2s;
-  border-style: outset;
+  border: 3px outset;
   cursor: pointer;
 }
 
 .formSubmitButton:active {
   background: linear-gradient(to right, rgba(68, 136, 224, 0.404) , rgba(170, 69, 172, 0.37));
   transition: 0.2s;
-  border-style: inset;
+  border: 4px inset;
 }
 
 .errors{
-  margin: 10px;
+  margin-top: 0px;
+  margin-bottom: 6px;
   border: #4b0202 1px solid;
   border-radius: 3px;
   padding:4px;
   background-color: #6f104962;
+}
+.outerErrors{
+  margin-top: 15px;
+  width: 304px;
+  height: 95px;
 }
