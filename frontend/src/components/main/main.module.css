@@ -74,3 +74,10 @@
   height: 4vw;
 }
 
+.aboutLink{
+  font-size: 20px;
+  color: #8faadd;
+}
+.aboutLink:active{
+  color: #6f86b3;
+}

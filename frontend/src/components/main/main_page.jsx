@@ -32,7 +32,7 @@ class MainPage extends React.Component {
 
         <h1 className={styles.blurb}>Make Music</h1>
         <footer className={styles.footer}>
-          <Link to="/about">About Us</Link>
+          <Link className={styles.aboutLink} to="/about">About Us</Link>
           <br />
           <div>Copyright &copy; 2020 Harmony</div>
         </footer>
