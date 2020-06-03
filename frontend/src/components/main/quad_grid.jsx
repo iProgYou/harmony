@@ -1,6 +1,8 @@
 import React from 'react';
 import Grid from './quad_grid_parts/grid_partial'
 import * as Tone from 'tone';
+import { FaPlay, FaUserFriends } from 'react-icons/fa';
+import { BsFillStopFill } from 'react-icons/bs';
 
 // bass
 import bA1 from "../../notes/bass_a_pentatonic/A1.mp3";
@@ -35,7 +37,8 @@ class QuadGrid extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoaded: false
+            isLoaded: false,
+            isPlaying: false
         }
         this.allNotes = Array.from( new Array(props.beats), function() { return []; } );
         console.log(this.allNotes)
@@ -65,6 +68,9 @@ class QuadGrid extends React.Component {
 
         this.processNote = this.processNote.bind(this);
         this.getInstrumentNotes = this.getInstrumentNotes.bind(this);
+        this.togglePlay = this.togglePlay.bind(this)
+        this.btnRef = React.createRef()
+        this.resetBtnRef = React.createRef()
     }
 
     processNote(instrumentName,note,remove,column) {
@@ -117,10 +123,32 @@ class QuadGrid extends React.Component {
         return currentInstNoteArr
     }
 
+   togglePlay() {
+    this.setState({isPlaying: !this.state.isPlaying})
+   }
+
     render() {
         if (!this.state.isLoaded) return null;
         return(
             <div>
+                {
+                    this.state.isPlaying ? (
+                        <button ref={this.resetBtnRef} onClick={this.togglePlay}>
+                            <BsFillStopFill
+                                size={30}
+                            />
+                        </button>
+                    ) : ( 
+                        <button ref={this.btnRef} onClick={this.togglePlay}>
+                            <FaPlay
+                                size={20}
+                                />
+                            <FaUserFriends
+                                size={24}
+                                />
+                        </button>
+                    )
+                }
                 {this.singleInst.map((instrument,i) => (
                     <Grid
                         key={i}
@@ -131,6 +159,10 @@ class QuadGrid extends React.Component {
                         processNote={this.processNote}
                         sampler={this.sampler}
                         getInstrumentNotes={this.getInstrumentNotes}
+                        btnRef = {this.btnRef}
+                        allNotes = {this.allNotes}
+                        resetBtnRef = {this.resetBtnRef}
+                       
                     />
                 ))}
                 {/* <DrumGrid

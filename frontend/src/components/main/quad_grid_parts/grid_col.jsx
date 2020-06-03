@@ -23,7 +23,7 @@ class GridColumn extends React.Component{
   render() {
     const selected = this.state.selected;
     const colStyles = (this.props.idx === 0 || this.props.idx % 8 !== 0) ? styles.gridCol : [styles.gridCol, styles.eighth].join(" ")
-    return (<div id = {this.props.idx} className={colStyles}>
+    return (<div id = {`${this.props.idx}` + `${this.props.instrument}`} className={colStyles}>
       {this.props.noteNames.map((note, idx) => (
         <GridItem
           key={idx}

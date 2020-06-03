@@ -21,6 +21,7 @@ export default class Grid extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     // this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
+    this.handleStartAll = this.handleStartAll.bind(this)
     this.handlePause = this.handlePause.bind(this);
     this.handleRestart = this.handleRestart.bind(this)
     this.animateNote = this.animateNote.bind(this)
@@ -37,6 +38,10 @@ export default class Grid extends React.Component {
       arrBeats.push("")
     }
     this.setState({ selected: arrBeats })
+
+    this.props.btnRef.current.addEventListener('click', this.handleStartAll )
+    // this.props.resetBtnRef.current.addEventListener('click', this.handleRestart )
+
   }
 
   //handle update updates the state of the grid, taking in the number of the column,
@@ -97,12 +102,12 @@ export default class Grid extends React.Component {
   }
 
   animateNote(i) {
-    document.getElementById(`${i}`).style.opacity = ".7"
+    document.getElementById(`${i}` + `${this.props.instrument}`).style.opacity = ".7"
     let k = i
     const pauseInt = setTimeout(() => {
-      document.getElementById(`${k}`).style.opacity = "1"
+      document.getElementById(`${k}` + `${this.props.instrument}`).style.opacity = "1"
     }, 250)
-    this.setState({ startSlide: true, pauseNote: i, pauseInt: pauseInt })
+    this.setState({ startSlide: true, pauseNote: i.toString() + `${this.props.instrument}`, pauseInt: pauseInt })
   }
 
   handlePause() {
@@ -129,17 +134,32 @@ export default class Grid extends React.Component {
      } 
   }
 
-
-  updateLast() {
-    let lastIdx = 0
-    for (let i = this.state.selected.length-1; i>=0; i--) {
-      if (this.state.selected[i] !== "") {
-        lastIdx = i;
-        break;
+  handleStartAll() {
+    Tone.Transport.toggle();
+    this.setState({ playing: !this.state.playing });
+    let i = 0;
+    const interval = Tone.Transport.scheduleRepeat(() => {
+      this.animateNote(i)
+      if (i === 0) {
+        this.setState({ scheduleInterval: interval });
       }
-    }
-    this.setState( { last: lastIdx })
+      if (this.props.allNotes[i]) {
+        this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
+      }
+      i += 1
+      if (i === this.props.allNotes.length) {
+        Tone.Transport.clear(interval);
+        Tone.Transport.toggle();
+        this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+      } 
+      // else if (i === this.props.allNotes.length && loop) {
+      //   i = 0;
+      // }
+    }, "8n");
+
   }
+
+
 
 
   render(){
@@ -152,6 +172,7 @@ export default class Grid extends React.Component {
           key={colNumber}
           handleUpdate = {index => this.handleUpdate(colNumber, index)}
           noteNames={this.noteNames}
+          instrument = {this.props.instrument}
           // handleClick={this.handleClick}
           isLoaded={this.props.isLoaded}
       />
@@ -175,7 +196,7 @@ export default class Grid extends React.Component {
         <div className={styles.buttons}>
         {
           this.state.scheduleInterval === null ? (
-            <button className={styles.button} onClick={() => this.handleStart(false)} disabled={!this.props.isLoaded}>
+            <button  className={styles.button} onClick={() => this.handleStart(false)} disabled={!this.props.isLoaded}>
               <FaPlay 
                 size={20}
               />
