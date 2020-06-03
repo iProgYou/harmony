@@ -16,6 +16,7 @@ export default class Grid extends React.Component {
       pauseSlide: false,
       pauseNote: 0,
       pauseInt: null,
+      loop: false
     }
    
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -25,6 +26,7 @@ export default class Grid extends React.Component {
     this.handlePause = this.handlePause.bind(this);
     this.handleRestart = this.handleRestart.bind(this)
     this.animateNote = this.animateNote.bind(this)
+    this.toggleLoop = this.toggleLoop.bind(this)
 
     this.pauseBtn = React.createRef()
 
@@ -39,10 +41,20 @@ export default class Grid extends React.Component {
     }
     this.setState({ selected: arrBeats })
 
-    this.props.btnRef.current.addEventListener('click', this.handleStartAll )
-    // this.props.resetBtnRef.current.addEventListener('click', this.handleRestart )
+    // if (this.props.instrument === 'piano') {
+      this.props.btnRef.current.addEventListener('click', () => this.handleStart(this.state.loop) )
+      this.props.resetBtnRef.current.addEventListener('click', this.handleRestart)
+      this.props.replayBtnRef.current.addEventListener('click', this.toggleLoop)
+    // }
 
   }
+
+  // componentDidUpdate() {
+  //   if (this.props.resetBtnRef.current) {
+  //     this.props.resetBtnRef.current.addEventListener('click', this.handleRestart)
+
+  //   }
+  // }
 
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
@@ -77,6 +89,8 @@ export default class Grid extends React.Component {
     this.setState({ startBtn: false })
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
+      this.props.togglePlay()   
+
       let i = 0;
       const interval = Tone.Transport.scheduleRepeat(() => {
         this.animateNote(i)
@@ -87,15 +101,15 @@ export default class Grid extends React.Component {
         if (currentInstNotes[i]) {
           this.props.sampler.triggerAttackRelease(currentInstNotes[i], "8n");
         }
-        // console.log(i, loop)
+
         i += 1
         if (i === currentInstNotes.length && !loop) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
-          this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
+          this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+          this.props.togglePlay()   
         } else if (i === currentInstNotes.length && loop) {
           i = 0
-
         }
       }, "8n");
     
@@ -130,11 +144,12 @@ export default class Grid extends React.Component {
       Tone.Transport.clear(this.state.scheduleInterval);
       Tone.Transport.toggle();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-      this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
-     } 
+      this.props.togglePlay()   
+      this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+    } 
   }
 
-  handleStartAll() {
+  handleStartAll(loop) {
     Tone.Transport.toggle();
     this.setState({ playing: !this.state.playing });
     let i = 0;
@@ -147,16 +162,20 @@ export default class Grid extends React.Component {
         this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
       }
       i += 1
-      if (i === this.props.allNotes.length) {
+      if (i === this.props.allNotes.length && !loop) {
         Tone.Transport.clear(interval);
         Tone.Transport.toggle();
         this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
-      } 
-      // else if (i === this.props.allNotes.length && loop) {
-      //   i = 0;
-      // }
+        this.props.togglePlay()
+      } else if (i === this.props.allNotes.length && loop) {
+        i = 0;
+      }
     }, "8n");
 
+  }
+
+  toggleLoop() {
+    this.setState({loop: !this.state.loop})
   }
 
 
@@ -196,7 +215,7 @@ export default class Grid extends React.Component {
         <div className={styles.buttons}>
         {
           this.state.scheduleInterval === null ? (
-            <button  className={styles.button} onClick={() => this.handleStart(false)} disabled={!this.props.isLoaded}>
+            <button  className={styles.button} onClick={() => this.handleStart(this.state.loop)} disabled={!this.props.isLoaded}>
               <FaPlay 
                 size={20}
               />
@@ -207,7 +226,8 @@ export default class Grid extends React.Component {
             </button>
           )
         }
-      {
+
+      {/* {
         this.state.scheduleInterval === null ? (
             <button className={styles.button} onClick={() => this.handleStart(true)} disabled={!this.props.isLoaded}>
             Repeat
@@ -217,12 +237,12 @@ export default class Grid extends React.Component {
             {pauseBtn}
           </button>
           )
-        }
-        <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
+        } */}
+        {/* <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
           <BsFillStopFill
             size={30}
           />
-        </button>
+        </button> */}
         </div>
       </div>
     )

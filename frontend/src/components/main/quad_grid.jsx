@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from './quad_grid_parts/grid_partial'
 import * as Tone from 'tone';
-import { FaPlay, FaUserFriends } from 'react-icons/fa';
+import { FaPlay, FaUserFriends, FaRedo } from 'react-icons/fa';
 import { BsFillStopFill } from 'react-icons/bs';
 
 // bass
@@ -71,6 +71,7 @@ class QuadGrid extends React.Component {
         this.togglePlay = this.togglePlay.bind(this)
         this.btnRef = React.createRef()
         this.resetBtnRef = React.createRef()
+        this.replayBtnRef = React.createRef()
     }
 
     processNote(instrumentName,note,remove,column) {
@@ -85,8 +86,7 @@ class QuadGrid extends React.Component {
             }
             this.allNotes[column].push(currentNote)
         } else {
-            console.log(this.allNotes)
-            console.log(this.decode[instrumentName])
+            
             this.allNotes[column] = this.allNotes[column]
                 .filter(eachNote => eachNote[1] !== this.decode[instrumentName])
         }
@@ -106,7 +106,6 @@ class QuadGrid extends React.Component {
         //     }
         // // }
         // // this.allNotes = newAllNotes
-        console.log(this.allNotes)
     }
 
     getInstrumentNotes(instrument) {
@@ -131,15 +130,15 @@ class QuadGrid extends React.Component {
         if (!this.state.isLoaded) return null;
         return(
             <div>
-                {
-                    this.state.isPlaying ? (
-                        <button ref={this.resetBtnRef} onClick={this.togglePlay}>
+                
+                    {/* // this.state.isPlaying ? ( */}
+                        <button disabled = {!this.state.isPlaying} ref={this.resetBtnRef} onClick={this.togglePlay}>
                             <BsFillStopFill
                                 size={30}
                             />
                         </button>
-                    ) : ( 
-                        <button ref={this.btnRef} onClick={this.togglePlay}>
+                    {/* // ) : (  */}
+                        <button disabled = {this.state.isPlaying} ref={this.btnRef} onClick={this.togglePlay}>
                             <FaPlay
                                 size={20}
                                 />
@@ -147,8 +146,13 @@ class QuadGrid extends React.Component {
                                 size={24}
                                 />
                         </button>
-                    )
-                }
+                    {/* // ) */}
+                <button disabled={this.state.isPlaying} ref={this.replayBtnRef}>
+                    <FaRedo
+                        size={30}
+                    />
+                </button>
+                
                 {this.singleInst.map((instrument,i) => (
                     <Grid
                         key={i}
@@ -162,6 +166,8 @@ class QuadGrid extends React.Component {
                         btnRef = {this.btnRef}
                         allNotes = {this.allNotes}
                         resetBtnRef = {this.resetBtnRef}
+                        togglePlay = {this.togglePlay}
+                        replayBtnRef = {this.replayBtnRef}
                        
                     />
                 ))}
