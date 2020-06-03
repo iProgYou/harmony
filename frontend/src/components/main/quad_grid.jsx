@@ -39,7 +39,8 @@ class QuadGrid extends React.Component {
         super(props)
         this.state = {
             isLoaded: false,
-            isPlaying: false
+            isPlaying: false,
+            currentlyPlaying: null
         }
         this.allNotes = Array.from( new Array(props.beats), function() { return []; } );
         console.log(this.allNotes)
@@ -70,6 +71,7 @@ class QuadGrid extends React.Component {
         this.processNote = this.processNote.bind(this);
         this.getInstrumentNotes = this.getInstrumentNotes.bind(this);
         this.togglePlay = this.togglePlay.bind(this)
+        this.togglePlaying = this.togglePlaying.bind(this)
         this.btnRef = React.createRef()
         this.resetBtnRef = React.createRef()
         this.replayBtnRef = React.createRef()
@@ -127,6 +129,10 @@ class QuadGrid extends React.Component {
     this.setState({isPlaying: !this.state.isPlaying})
    }
 
+   togglePlaying(instrument) {
+    this.setState({currentlyPlaying: instrument})
+   }
+
     render() {
         if (!this.state.isLoaded) return null;
         return(
@@ -170,6 +176,8 @@ class QuadGrid extends React.Component {
                         resetBtnRef = {this.resetBtnRef}
                         togglePlay = {this.togglePlay}
                         replayBtnRef = {this.replayBtnRef}
+                        currentlyPlaying = {this.state.currentlyPlaying}
+                        togglePlaying = {this.togglePlaying}
                        
                     />
                 ))}
