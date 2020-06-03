@@ -90,7 +90,7 @@ class LoginForm extends React.Component {
   // Render the session errors if there are any
   renderErrors() {
     return (
-      <ul>
+      <ul className={formStyle.outerErrors}>
         {Object.keys(this.state.errors).map((error, i) => (
           <li className={formStyle.errors} key={`error-${i}`}>
             {this.state.errors[error]}
@@ -108,7 +108,7 @@ class LoginForm extends React.Component {
           onSubmit={this.handleSubmit} 
           className={formStyle.form}
         >
-          <div className={formStyle.formHeader}>Login</div>
+          <div className={formStyle.formHeader}>Log In</div>
           <br />
           <br />
 
