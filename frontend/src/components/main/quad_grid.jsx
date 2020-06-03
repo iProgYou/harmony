@@ -173,17 +173,9 @@ class QuadGrid extends React.Component {
                        
                     />
                 ))}
-                {/* <DrumGrid
-                    isLoaded={ this.state.isLoaded }
-                    instrument={'drums'} 
-                    beats={this.props.beats}
-                    // quadGrid={true}
-                    processNote={this.processNote}
-                    sampler={this.sampler}
-                    getInstrumentNotes={this.getInstrumentNotes}
-                /> */}
-                {/* <Grid beats={this.props.beats} quadGrid={true} processNote={this.processNote}/> */}
+
             </div>
+        </div>
         )
     }
 };
