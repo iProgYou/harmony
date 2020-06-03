@@ -85,6 +85,7 @@ export default class Grid extends React.Component {
   // }
 
   handleStart(loop) {
+    this.props.togglePlaying(this.props.instrument)
     let currentInstNotes = this.props.getInstrumentNotes(this.props.instrument)
     this.setState({ startBtn: false })
       Tone.Transport.toggle();
@@ -107,7 +108,8 @@ export default class Grid extends React.Component {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
           this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
-          this.props.togglePlay()   
+          this.props.togglePlay()
+          this.props.togglePlaying(null)
         } else if (i === currentInstNotes.length && loop) {
           i = 0
         }
@@ -145,6 +147,7 @@ export default class Grid extends React.Component {
       Tone.Transport.toggle();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
       this.props.togglePlay()   
+      this.props.togglePlaying(null)
       this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
     } 
   }
@@ -213,19 +216,26 @@ export default class Grid extends React.Component {
           {beats}
         </div>
         <div className={styles.buttons}>
-        {
-          this.state.scheduleInterval === null ? (
-            <button  className={styles.button} onClick={() => this.handleStart(this.state.loop)} disabled={!this.props.isLoaded}>
+        
+          {/* this.state.scheduleInterval === null ? ( */}
+            <button className={styles.button} onClick={() => this.handleStart(this.state.loop)} 
+            disabled={!this.props.isLoaded || this.state.playing || (this.props.instrument !== this.props.currentlyPlaying && this.props.currentlyPlaying !== null )}>
               <FaPlay 
                 size={20}
               />
             </button>
-          ) : (
-            <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
-              {pauseBtn}
+            {/* <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
+              <BsFillStopFill
+                size={30}
+              />
             </button>
-          )
-        }
+          ) */}
+          {/* /* ) 
+          // : (
+          //   <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
+          //     {pauseBtn}
+          //   </button>
+          // ) */}
 
       {/* {
         this.state.scheduleInterval === null ? (

@@ -39,7 +39,8 @@ class QuadGrid extends React.Component {
         super(props)
         this.state = {
             isLoaded: false,
-            isPlaying: false
+            isPlaying: false,
+            currentlyPlaying: null
         }
         this.allNotes = Array.from( new Array(props.beats), function() { return []; } );
         console.log(this.allNotes)
@@ -70,6 +71,7 @@ class QuadGrid extends React.Component {
         this.processNote = this.processNote.bind(this);
         this.getInstrumentNotes = this.getInstrumentNotes.bind(this);
         this.togglePlay = this.togglePlay.bind(this)
+        this.togglePlaying = this.togglePlaying.bind(this)
         this.btnRef = React.createRef()
         this.resetBtnRef = React.createRef()
         this.replayBtnRef = React.createRef()
@@ -127,11 +129,16 @@ class QuadGrid extends React.Component {
     this.setState({isPlaying: !this.state.isPlaying})
    }
 
+   togglePlaying(instrument) {
+    this.setState({currentlyPlaying: instrument})
+   }
+
     render() {
         if (!this.state.isLoaded) return null;
         return(
             <div>
                 
+                <div id = {styles.topButtons}className={styles.buttons}>
                     {/* // this.state.isPlaying ? ( */}
                         <button disabled = {!this.state.isPlaying} ref={this.resetBtnRef} onClick={this.togglePlay}>
                             <BsFillStopFill
@@ -153,6 +160,7 @@ class QuadGrid extends React.Component {
                         size={30}
                     />
                 </button>
+                </div>
                 
             <div className = {styles.quadGrid}>
                 {this.singleInst.map((instrument,i) => (
@@ -170,6 +178,8 @@ class QuadGrid extends React.Component {
                         resetBtnRef = {this.resetBtnRef}
                         togglePlay = {this.togglePlay}
                         replayBtnRef = {this.replayBtnRef}
+                        currentlyPlaying = {this.state.currentlyPlaying}
+                        togglePlaying = {this.togglePlaying}
                        
                     />
                 ))}
