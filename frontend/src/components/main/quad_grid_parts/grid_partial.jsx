@@ -186,7 +186,6 @@ export default class Grid extends React.Component {
 
   render(){
     if (!this.state.selected) return null;
-    // console.log(this.state.selected)
     const beats = this.state.selected.map( (ele, colNumber) => 
       <GridColumn
           selected={ele}

@@ -73,7 +73,6 @@ export default class Grid extends React.Component {
         if (this.state.selected[i]) {
           this.props.sampler.triggerAttackRelease(this.state.selected[i], "8n");
         }
-        // console.log(i, loop)
         i += 1
         if (i === this.state.selected.length && !loop) {
           Tone.Transport.clear(interval);
@@ -136,7 +135,6 @@ export default class Grid extends React.Component {
   render(){
 
     if (!this.state.selected) return null;
-    // console.log(this.state.selected)
     const beats = this.state.selected.map( (ele, colNumber) => 
       <GridColumn
           selected={ele}
@@ -158,7 +156,6 @@ export default class Grid extends React.Component {
         size={20}
       />
     )
-    console.log(this.props.beats)
     return(
 
       <div className={(this.props.beats !== 8) ? styles.gridOuter : styles.gridEight}>

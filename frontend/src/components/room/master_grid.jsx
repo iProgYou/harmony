@@ -75,7 +75,6 @@ class MasterGrid extends React.Component {
       this.props.socket.emit('update room', updatedRoom)
 
     } else if (currentRoom && currentRoom.memberIds.length === 1) {
-      // console.log("ASDFASDFASDFASDFASDFASDF", currentRoom.memberIds.length, currentRoom._id)
       this.props.deleteRoom(currentRoom._id)
     }
 

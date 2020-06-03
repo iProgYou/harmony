@@ -65,8 +65,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
       
           newRoom.save()
             .then(room => res.json(room))
-            // .then(room => console.log("success"))
-            .catch(err => console.log(err));
+            // .catch(err => console.log(err));
         }
       })
   }
@@ -83,14 +82,14 @@ router.patch('/:id',
           .then((room) => {
             return res.json(room)
           })
-          .catch(() => console.log('room was not updated'));
+          // .catch(() => console.log('room was not updated'));
           } else if (room && req.body.removeId ) {
             room.memberIds = room.memberIds.splice(room.memberIds.indexOf(room.userId), 1)
             room.save()
             .then((room) => {
               return res.json(room)
             })
-            .catch(() => console.log('room was not updated'));
+            // .catch(() => console.log('room was not updated'));
           } else {
             res.send('Room not found');
           }

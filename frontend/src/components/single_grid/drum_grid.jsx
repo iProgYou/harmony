@@ -70,7 +70,6 @@ export default class DrumGrid extends React.Component {
     }
    
     handleStart() {
-      console.log(this.state.selected)
       if (this.state.last !== 0) {
         Tone.Transport.toggle();
         this.setState({ playing: !this.state.playing, disableStart: true});

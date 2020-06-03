@@ -43,8 +43,6 @@ class QuadGrid extends React.Component {
             currentlyPlaying: null
         }
         this.allNotes = Array.from( new Array(props.beats), function() { return []; } );
-        console.log(this.allNotes)
-        console.log(props.beats)
         this.singleInst = ['piano','keyboard','bass'];
         this.sampler = new Tone.Sampler(
             {
