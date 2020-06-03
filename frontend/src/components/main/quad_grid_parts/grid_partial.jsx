@@ -16,14 +16,17 @@ export default class Grid extends React.Component {
       pauseSlide: false,
       pauseNote: 0,
       pauseInt: null,
+      loop: false
     }
    
     this.handleUpdate = this.handleUpdate.bind(this);
     // this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
+    this.handleStartAll = this.handleStartAll.bind(this)
     this.handlePause = this.handlePause.bind(this);
     this.handleRestart = this.handleRestart.bind(this)
     this.animateNote = this.animateNote.bind(this)
+    this.toggleLoop = this.toggleLoop.bind(this)
 
     this.pauseBtn = React.createRef()
 
@@ -37,7 +40,21 @@ export default class Grid extends React.Component {
       arrBeats.push("")
     }
     this.setState({ selected: arrBeats })
+
+    // if (this.props.instrument === 'piano') {
+      this.props.btnRef.current.addEventListener('click', () => this.handleStart(this.state.loop) )
+      this.props.resetBtnRef.current.addEventListener('click', this.handleRestart)
+      this.props.replayBtnRef.current.addEventListener('click', this.toggleLoop)
+    // }
+
   }
+
+  // componentDidUpdate() {
+  //   if (this.props.resetBtnRef.current) {
+  //     this.props.resetBtnRef.current.addEventListener('click', this.handleRestart)
+
+  //   }
+  // }
 
   //handle update updates the state of the grid, taking in the number of the column,
   //and the selected index
@@ -72,6 +89,8 @@ export default class Grid extends React.Component {
     this.setState({ startBtn: false })
       Tone.Transport.toggle();
       this.setState({ playing: !this.state.playing});
+      this.props.togglePlay()   
+
       let i = 0;
       const interval = Tone.Transport.scheduleRepeat(() => {
         this.animateNote(i)
@@ -82,27 +101,27 @@ export default class Grid extends React.Component {
         if (currentInstNotes[i]) {
           this.props.sampler.triggerAttackRelease(currentInstNotes[i], "8n");
         }
-        // console.log(i, loop)
+
         i += 1
         if (i === currentInstNotes.length && !loop) {
           Tone.Transport.clear(interval);
           Tone.Transport.toggle();
-          this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
+          this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+          this.props.togglePlay()   
         } else if (i === currentInstNotes.length && loop) {
           i = 0
-
         }
       }, "8n");
     
   }
 
   animateNote(i) {
-    document.getElementById(`${i}`).style.opacity = ".7"
+    document.getElementById(`${i}` + `${this.props.instrument}`).style.opacity = ".7"
     let k = i
     const pauseInt = setTimeout(() => {
-      document.getElementById(`${k}`).style.opacity = "1"
+      document.getElementById(`${k}` + `${this.props.instrument}`).style.opacity = "1"
     }, 250)
-    this.setState({ startSlide: true, pauseNote: i, pauseInt: pauseInt })
+    this.setState({ startSlide: true, pauseNote: i.toString() + `${this.props.instrument}`, pauseInt: pauseInt })
   }
 
   handlePause() {
@@ -125,21 +144,41 @@ export default class Grid extends React.Component {
       Tone.Transport.clear(this.state.scheduleInterval);
       Tone.Transport.toggle();
       document.getElementById(`${this.state.pauseNote}`).style.opacity = "1"
-      this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });   
-     } 
+      this.props.togglePlay()   
+      this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+    } 
   }
 
-
-  updateLast() {
-    let lastIdx = 0
-    for (let i = this.state.selected.length-1; i>=0; i--) {
-      if (this.state.selected[i] !== "") {
-        lastIdx = i;
-        break;
+  handleStartAll(loop) {
+    Tone.Transport.toggle();
+    this.setState({ playing: !this.state.playing });
+    let i = 0;
+    const interval = Tone.Transport.scheduleRepeat(() => {
+      this.animateNote(i)
+      if (i === 0) {
+        this.setState({ scheduleInterval: interval });
       }
-    }
-    this.setState( { last: lastIdx })
+      if (this.props.allNotes[i]) {
+        this.props.sampler.triggerAttackRelease(this.props.allNotes[i], "8n");
+      }
+      i += 1
+      if (i === this.props.allNotes.length && !loop) {
+        Tone.Transport.clear(interval);
+        Tone.Transport.toggle();
+        this.setState({ playing: !this.state.playing, scheduleInterval: null, pauseNote: 0, pauseInt: null });
+        this.props.togglePlay()
+      } else if (i === this.props.allNotes.length && loop) {
+        i = 0;
+      }
+    }, "8n");
+
   }
+
+  toggleLoop() {
+    this.setState({loop: !this.state.loop})
+  }
+
+
 
 
   render(){
@@ -152,6 +191,7 @@ export default class Grid extends React.Component {
           key={colNumber}
           handleUpdate = {index => this.handleUpdate(colNumber, index)}
           noteNames={this.noteNames}
+          instrument = {this.props.instrument}
           // handleClick={this.handleClick}
           isLoaded={this.props.isLoaded}
       />
@@ -175,7 +215,7 @@ export default class Grid extends React.Component {
         <div className={styles.buttons}>
         {
           this.state.scheduleInterval === null ? (
-            <button className={styles.button} onClick={() => this.handleStart(false)} disabled={!this.props.isLoaded}>
+            <button  className={styles.button} onClick={() => this.handleStart(this.state.loop)} disabled={!this.props.isLoaded}>
               <FaPlay 
                 size={20}
               />
@@ -186,7 +226,8 @@ export default class Grid extends React.Component {
             </button>
           )
         }
-      {
+
+      {/* {
         this.state.scheduleInterval === null ? (
             <button className={styles.button} onClick={() => this.handleStart(true)} disabled={!this.props.isLoaded}>
             Repeat
@@ -196,12 +237,12 @@ export default class Grid extends React.Component {
             {pauseBtn}
           </button>
           )
-        }
-        <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
+        } */}
+        {/* <button className={styles.button} disabled={!this.props.isLoaded} onClick={this.handleRestart}>
           <BsFillStopFill
             size={30}
           />
-        </button>
+        </button> */}
         </div>
       </div>
     )
