@@ -15,6 +15,9 @@
 }
 
 .title{
+  position: fixed;
+  top: 20px;
+  left: calc(50vw - 70px);
   font-size: 45px;
   color: #dadce0;
   font-family: 'Parisienne', cursive;
