@@ -178,3 +178,10 @@ html * {
    flex-wrap: wrap;
    justify-content: center;
  }
+
+ #topButtons{
+   display: flex;
+   justify-content: center;
+   max-width: none;
+   width: inherit;
+ }

@@ -138,6 +138,7 @@ class QuadGrid extends React.Component {
         return(
             <div>
                 
+                <div id = {styles.topButtons}className={styles.buttons}>
                     {/* // this.state.isPlaying ? ( */}
                         <button disabled = {!this.state.isPlaying} ref={this.resetBtnRef} onClick={this.togglePlay}>
                             <BsFillStopFill
@@ -159,6 +160,7 @@ class QuadGrid extends React.Component {
                         size={30}
                     />
                 </button>
+                </div>
                 
             <div className = {styles.quadGrid}>
                 {this.singleInst.map((instrument,i) => (
