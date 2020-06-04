@@ -103,7 +103,6 @@ router.delete('/delete/:roomId', passport.authenticate('jwt', { session: false }
         if (room) {
           room.delete();
         } else {
-          console.log('room was not found')
           res.send('room was not found');
         }
       }
