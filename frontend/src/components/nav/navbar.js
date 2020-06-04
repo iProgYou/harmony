@@ -69,12 +69,12 @@ class NavBar extends React.Component {
 
     return (
       <div className={styles.navbar}>
-        <div className={styles.joinDiv}>
+        {(!this.props.history.location.pathname.includes("room")) ?  <div className={styles.joinDiv}>
           <h2  className={styles.joinRoom} onClick={(e)=> this.toggleSearch(e)}> JOIN A ROOM</h2>
           {createRoom} 
           {(this.state.searchDisplay) ?
             <SearchBar receiveErrors = {this.props.receiveErrors} fetchRoom={this.props.fetchRoom} hideSearch = {() => this.hideSearch()}/> : null}
-        </div>
+        </div> : <div className={styles.userLinks}> <Link to={'/'}>LEAVE ROOM</Link> </div>}
         {(this.state.formDisplay) ? 
         <RoomForm
          createRoom={this.props.createRoom}

@@ -24,22 +24,22 @@
 
 .formHeader {
   font-weight: 700;
-  font-size: 45px;
+  font-size: 37px;
 }
 
 .formInputText {
-  font-size: 21px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .formInput {
   width: 300px;
-  height: 55px;
+  height: 31px;
   background-color: #c2cfe9;
   border: none;
   border-bottom: 1px solid white;
   color: black;
-  font-size: 21px;
+  font-size: 16px;
 }
 
 .formButtonsContainer {
@@ -52,7 +52,7 @@
   height: 40px;
   border: 1px outset;
   border-radius: 25px;
-  font-size: 25px;
+  font-size: 18px;
   background: linear-gradient(to right, #4487E0 , #AA45AC);
 }
 
