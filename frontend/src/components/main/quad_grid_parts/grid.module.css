@@ -61,6 +61,11 @@
 
   transition: .2s;
 }
+
+.buttons > button:disabled{
+  background: #2b3a4b;
+}
+
 .gridItem{
   width: 60px;
   height:60px;
