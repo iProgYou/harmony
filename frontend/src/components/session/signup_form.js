@@ -81,8 +81,6 @@ class SignupForm extends React.Component {
               className={formStyle.formInput}
             />
 
-            <br />
-            <br />
 
             <div className={formStyle.formInputText}>Password:</div>
             <input type="password"
@@ -92,7 +90,7 @@ class SignupForm extends React.Component {
               className={formStyle.formInput}
             />
 
-            <br />
+     
 
             <input type="password"
               value={this.state.password2}
@@ -101,9 +99,7 @@ class SignupForm extends React.Component {
               className={formStyle.formInput}
             />
 
-            <br />
-            <br />
-
+   
             <input 
               type="submit" 
               value="Submit"
