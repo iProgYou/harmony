@@ -72,7 +72,7 @@ class MasterGrid extends React.Component {
 
       let updatedRoom = { ...currentRoom }
       updatedRoom.memberIds = currentRoom.memberIds.splice(currentRoom.memberIds.indexOf(currentUserId), 1)
-      this.props.socket.emit('update room', updatedRoom)
+      this.props.socket.emit('update room', { ...updatedRoom, roomName: this.props.match.params.roomName })
 
     } else if (currentRoom && currentRoom.memberIds.length === 1) {
       this.props.deleteRoom(currentRoom._id)

@@ -50,7 +50,7 @@ class SearchBar extends React.Component{
           placeholder="Search"
           />
           {
-            this.state.errors ? (
+            (this.state.errors && this.state.errors.name) ? (
             <div className = {styles.errorMessage}>
               {this.state.errors.name}
             </div>
