@@ -172,7 +172,9 @@
 }
 #searchbar .modal{
   position: fixed;
-  z-index: -99;
+  top: 0px;
+  left: 0px;
+  z-index:-1;
   width: 100vw;
   height: 100vh;
 
@@ -225,8 +227,13 @@ select{
 
 .errorMessage {
   position: absolute;
-  bottom: -20px;
+  bottom: -45px;
   color: white;
+  border: #4b0202 1px solid;
+  border-radius: 3px;
+  
+  background-color: #6f104962;
+  
 }
 
 .formInner{
