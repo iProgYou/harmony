@@ -165,6 +165,7 @@
 }
 #searchbar input{
   border-top-right-radius: 10px;
+  background-color: #dadce0;
   border-bottom-right-radius: 10px;
 }
 #searchbar img{
@@ -228,7 +229,7 @@ select{
 .errorMessage {
   position: absolute;
   bottom: -45px;
-  color: white;
+  color: #dadce0;
   border: #4b0202 1px solid;
   border-radius: 3px;
   
