@@ -18,10 +18,15 @@
   position: fixed;
   top: 20px;
   left: calc(50vw - 70px);
+  text-decoration: underline purple;
   font-size: 45px;
   color: #dadce0;
   font-family: 'Parisienne', cursive;
 }
+.title:hover{
+  text-decoration: underline rgb(199, 15, 199);
+}
+
 .userLinks{
   display: flex;
   align-items: center;
