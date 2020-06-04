@@ -170,6 +170,7 @@
 }
 #searchbar input{
   border-top-right-radius: 10px;
+  background-color: #dadce0;
   border-bottom-right-radius: 10px;
 }
 #searchbar img{
@@ -177,7 +178,9 @@
 }
 #searchbar .modal{
   position: fixed;
-  z-index: -99;
+  top: 0px;
+  left: 0px;
+  z-index:-1;
   width: 100vw;
   height: 100vh;
 
@@ -230,8 +233,13 @@ select{
 
 .errorMessage {
   position: absolute;
-  bottom: -20px;
-  color: white;
+  bottom: -45px;
+  color: #dadce0;
+  border: #4b0202 1px solid;
+  border-radius: 3px;
+  
+  background-color: #6f104962;
+  
 }
 
 .formInner{
