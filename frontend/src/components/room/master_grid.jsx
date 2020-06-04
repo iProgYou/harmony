@@ -58,7 +58,7 @@ class MasterGrid extends React.Component {
       this.props.receiveRoom(room)
     })
 
-    this.props.socket.emit('update room', this.props.currentRoom);
+    this.props.socket.emit('update room', {room: this.props.currentRoom, roomName: this.props.match.params.roomName});
     window.addEventListener("beforeunload", () => this.componentCleanup());
   }
 
@@ -78,7 +78,7 @@ class MasterGrid extends React.Component {
       this.props.deleteRoom(currentRoom._id)
     }
 
-    this.socket.disconnect(true)
+    this.props.socket.disconnect(true)
   }
   componentWillUnmount() {
     this.componentCleanup()

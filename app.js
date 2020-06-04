@@ -67,7 +67,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('update room', data => {
-    io.emit('update room', data)
+    io.to(data['roomName']).emit('update room', data.room)
   })
 
   socket.on('instrument update', (data) => {
