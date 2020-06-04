@@ -53,8 +53,8 @@ class NavBar extends React.Component {
     } else {
       return (
         <div className={styles.userLinks}>
-          <Link to={'/signup'}>SIGNUP</Link>
-          <Link to={'/login'}>LOGIN</Link>
+          <Link to={'/signup'}>SIGN UP</Link>
+          <Link to={'/login'}>LOG IN</Link>
         </div>
       );
     }

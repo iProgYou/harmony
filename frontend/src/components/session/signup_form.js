@@ -65,17 +65,15 @@ class SignupForm extends React.Component {
         <div className={formStyle.placeholder}></div>
 
         <form onSubmit={this.handleSubmit} className={formStyle.form}>
-          <div className={formStyle.formHeader}>Signup</div>
           
-          <br />
-          <br />
+          <div className={formStyle.formCenteringBox}>
+          <div className={formStyle.formHeader}>Sign Up</div>
           
-          <div>
-            <br />
-            <br />
-            <br />
+     
+          <div className= {formStyle.formContents}>
+           
 
-            <div className={formStyle.formInputText}>Handle</div>
+            <div className={formStyle.formInputText}>Handle:</div>
             <input type="text"
               value={this.state.handle}
               onChange={this.update('handle')}
@@ -86,7 +84,7 @@ class SignupForm extends React.Component {
             <br />
             <br />
 
-            <div className={formStyle.formInputText}>Password</div>
+            <div className={formStyle.formInputText}>Password:</div>
             <input type="password"
               value={this.state.password}
               onChange={this.update('password')}
@@ -113,6 +111,7 @@ class SignupForm extends React.Component {
             />
 
             {this.renderErrors()}
+          </div>
           </div>
         </form>
 
