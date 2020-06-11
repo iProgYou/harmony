@@ -99,6 +99,10 @@
   animation: hideAnimation .3s;
   opacity: 0;
 }
+.outerModal.hidden .innerModal{
+  animation: hideAnimation .3s;
+  opacity: 0;
+}
 
 .innerModal{
   display: flex;
@@ -107,9 +111,10 @@
   align-items: center;
   width: 500px;
   height: 375px;
-  border-radius: 15px;
+  border-radius: 20px;
   background-color: #dadce0;
   position: relative;
+  box-shadow:0px 0px 10px #dadce0;
 }
 .xIcon{
   position: absolute;
