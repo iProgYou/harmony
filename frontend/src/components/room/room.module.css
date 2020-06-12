@@ -10,11 +10,13 @@
   justify-content: center;
   align-items: center;
 }
+
 .outerModal.hidden{
   animation: hideAnimation .3s linear;
 /* display: none; */
 visibility: hidden;
 }
+
 @keyframes hideAnimation {
     0%   {display:flex; opacity: 1;}
  
@@ -32,18 +34,22 @@ visibility: hidden;
   background-color: #dadce0;
   position: relative;
 }
+
 .buttons{
   display: flex;
   flex-direction: column;
   margin: 20px;
 }
+
 .selectTitle{
   font-size: 30px;
 }
+
 .miniGrids{
   display: flex;
   justify-content: center;
 }
+
 .miniGrids > * {
   margin: 10px;
 }

@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: column;
 }
+
 .gridCol.eighth{
  margin-left: 10px;
 }
+
 .gridOuter{
   display: flex;
   flex-direction: column;
@@ -12,13 +14,15 @@
   justify-content: center;
   margin-top: 30px;
 }
+
 .homePageGrid .buttons{
   width: 605px
-
 }
+
 .homePageGrid .grid{
   width: 608px;
 }
+
 .buttons{
   display: flex;
   justify-content: center;
@@ -26,9 +30,9 @@
   max-width:1227px;
   width: 85vw;
 }
+
 .buttons > button{
-  margin: 5px;
-  
+  margin: 5px; 
   width: 180px;
   height: 45px;
   background-color: #002147;
@@ -46,12 +50,14 @@
   display: flex;
   justify-content: space-around;
 }
+
 .buttons > button:hover{
   background-color: #053265;
   border-style:outset;
   transition: .2s;
   cursor: pointer;
 }
+
 .buttons > button:active{
   background-color: #000f21;
   border-style:inset;
@@ -59,6 +65,7 @@
 
   transition: .2s;
 }
+
 .gridItem{
   width: 70px;
   height:70px;
@@ -69,33 +76,35 @@
   border-radius: 5px;
   transition: .2s;
 }
+
 .gridItem:hover{
   background-color: #d5e3fe;
   transition: .2s;
   cursor: pointer;
 }
+
 .grid{
   display: flex;
   position: relative;
   max-width: 85vw;
   width:1227px;
-
   overflow-x: auto;
   z-index: 0;
   margin: auto;
   justify-content: flex-start;
   scroll-behavior: smooth;
 }
+
 .gridItem.selected{
   border-style: inset;
   transition: .2s;
 }
 
-html  {
+html {
   background: radial-gradient(circle 50vw at bottom right, #AA45AC, #712F79, transparent),
-            radial-gradient(circle 50vw at bottom left, #4487E0, #004BA8, black);
-
+  radial-gradient(circle 50vw at bottom left, #4487E0, #004BA8, black);
 }
+
 html * {
   font-family: 'Montserrat';
 }
@@ -104,22 +113,27 @@ html * {
   background-color: red;
   transition: .2s;
 }
+
 .gridItem.F\#2.selected{
   background-color: orange;
   transition: .2s;
 }
+
 .gridItem.C\#2.selected{
   background-color: rgb(9, 225, 9);
   transition: .2s;
 }
+
 .gridItem.E2.selected{
   background-color: yellow;
   transition: .2s;
 }
+
 .gridItem.B1.selected{
   background-color: rgb(12, 244, 213);
   transition: .2s;
 }
+
 .gridItem.A1.selected{
   background-color: rgb(225, 37, 225);
   transition: .2s;
@@ -132,27 +146,31 @@ html * {
   max-width: 85vw;
 }
 
-
 .gridItem.A2.selected:hover{ 
   background-color: rgb(254, 138, 138);
   transition: .2s;
 }
+
 .gridItem.F\#2.selected:hover{
   background-color: rgb(255, 212, 132);
   transition: .2s;
 }
+
 .gridItem.C\#2.selected:hover{
   background-color: rgb(183, 254, 183);
   transition: .2s;
 }
+
 .gridItem.E2.selected:hover{
   background-color: rgb(249, 249, 176);
   transition: .2s;
 }
+
 .gridItem.B1.selected:hover{
   background-color: rgb(173, 250, 240);
   transition: .2s;
 }
+
 .gridItem.A1.selected:hover{
   background-color: rgb(216, 138, 216);
   transition: .2s;
@@ -162,17 +180,16 @@ html * {
   max-width: 25vw;
   max-height: 20vw;  
 }
- #mini .gridItem{
+
+#mini .gridItem{
   width: 20px;
   height:20px;
   margin: 1px;
   border: 2px;
   border-radius: 3px;
+}
 
- }
-
-
- .gridEight{
+.gridEight{
   display: flex;
     flex-direction: column;
     align-items: center;
@@ -183,4 +200,9 @@ html * {
 .gridEight .grid{
   display: flex;
   justify-content: center;
+}
+
+.instrumentLogo {
+  width: 25px;
+  height: 25px;
 }
