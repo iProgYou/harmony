@@ -90,7 +90,6 @@ class Room extends React.Component {
 
         this.props.updateRoom(roomData)
             .then((stuff) => {
-                console.log(stuff)
                 this.props.receiveGrid(grid)
             })
             .then(() => {

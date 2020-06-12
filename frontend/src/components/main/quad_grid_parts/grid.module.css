@@ -10,7 +10,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 10px;
   margin-top: 30px;
+  
 }
 .homePageGrid .buttons{
   width: 605px
@@ -23,7 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width:1227px;
+  max-width:515px;
   width: 85vw;
 }
 .buttons > button{
@@ -59,10 +61,15 @@
 
   transition: .2s;
 }
+
+.buttons > button:disabled{
+  background: #2b3a4b;
+}
+
 .gridItem{
-  width: 70px;
-  height:70px;
-  margin: 3px;
+  width: 60px;
+  height:60px;
+  margin: 2px;
   background-color: #c2cfe9;
   border-style: outset;
   border: 4px #dadce0;
@@ -78,7 +85,7 @@
   display: flex;
   position: relative;
   max-width: 85vw;
-  width:1227px;
+  width:515px;
 
   overflow-x: auto;
   z-index: 0;
@@ -171,7 +178,21 @@ html * {
   border-radius: 3px;
 }
 
+
 .instrumentLogo {
   width: 25px;
   height: 25px;
 }
+
+.quadGrid{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+ #topButtons{
+   display: flex;
+   justify-content: center;
+   max-width: none;
+   width: inherit;
+ }

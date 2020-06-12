@@ -90,7 +90,7 @@ class LoginForm extends React.Component {
   // Render the session errors if there are any
   renderErrors() {
     return (
-      <ul>
+      <ul className={formStyle.outerErrors}>
         {Object.keys(this.state.errors).map((error, i) => (
           <li className={formStyle.errors} key={`error-${i}`}>
             {this.state.errors[error]}
@@ -103,17 +103,16 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className={formStyle.formcontainer}>
-        <div className={formStyle.placeholder}></div>
         <form 
           onSubmit={this.handleSubmit} 
           className={formStyle.form}
         >
-          <div className={formStyle.formHeader}>Login</div>
-          <br />
-          <br />
+          <div className={formStyle.formCenteringBox}>
 
-          <div>
-            <div className={formStyle.formInputText}>Handle</div>
+          <div className={formStyle.formHeader}>Log In</div>
+         
+            <div className={formStyle.formContents}>
+            <div className={formStyle.formInputText}>Handle:</div>
             <input 
               type="text"
               value={this.state.handle}
@@ -121,41 +120,37 @@ class LoginForm extends React.Component {
               placeholder="Type your handle"
               className={formStyle.formInput}
               id="login-handle"
-            />
+              />
 
-            <br />
-            <br />
-
-            <div className={formStyle.formInputText}>Password</div>
+      
+            <div className={formStyle.formInputText}>Password:</div>
             <input type="password"
               value={this.state.password}
               onChange={this.update('password')}
               placeholder="Type your password"
               className={formStyle.formInput}
               id="login-password"
-            />
+              />
 
-            <br />
-            <br />
-            <br />
+         
             <div className={formStyle.formButtonsContainer}>
               <input 
                 type="submit" 
                 value="Submit"
                 className={formStyle.formSubmitButton}
-              />
+                />
 
-              <br/>
-
+          
               <input
                 type="submit"
                 onClick={this.demoLogin}
                 value="Demo Login"
                 className={formStyle.formSubmitButton}
-              />
+                />
             </div>
 
             {this.renderErrors()}
+          </div>
           </div>
         </form>
 

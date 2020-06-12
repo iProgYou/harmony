@@ -55,20 +55,19 @@ io.on('connection', (socket) => {
   // });
 
   socket.on('joinRoom', (room) => {
-    console.log(`you have joined room ${room}`)
+    // console.log(`you have joined room ${room}`)
     socket.join(room);
   });
 
   socket.on('chat message', (data) => {
-    // io.to(data['room']).emit('chat message', data);
     io.to(data['room']).emit('chat message', data);
   });
   socket.on('grid update', (data) => {
-    io.emit('grid update', data);
+    io.to(data['room']).emit('grid update', data);
   });
 
   socket.on('update room', data => {
-    io.emit('update room', data)
+    io.to(data['roomName']).emit('update room', data.room)
   })
 
   socket.on('instrument update', (data) => {

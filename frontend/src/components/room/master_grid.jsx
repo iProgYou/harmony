@@ -3,6 +3,7 @@ import GridColumn from '../single_grid/grid_col';
 import MultiGridColumn from '../single_grid/grid_col_multi';
 import styles from '../single_grid/grid.module.css';
 import * as Tone from 'tone';
+import {withRouter} from 'react-router-dom'
 import { connect } from 'react-redux';
 import {receiveGrid} from '../../actions/grid_actions'
 import { receiveRoom, deleteRoom} from '../../actions/room_actions'
@@ -35,8 +36,7 @@ class MasterGrid extends React.Component {
    
     this.gridRef = React.createRef()
     this.pauseBtn = React.createRef()
-    this.socket = socketIOClient();
-
+    props.socket.emit('joinRoom', this.props.match.params.roomName)
     // this.noteNames = ["A1", "F#", "E", "C#", "B", "A2"];
     this.noteNames = ["A1", "B1", "C#2", "E2", "F#2", "A2"].reverse();
 
@@ -50,7 +50,7 @@ class MasterGrid extends React.Component {
 
 
   componentDidMount() {
-    // this.socket = socketIOClient();
+  
     this.props.socket.on('grid update', (grid) => {
       this.props.receiveGrid(grid)
     });
@@ -58,8 +58,8 @@ class MasterGrid extends React.Component {
       this.props.receiveRoom(room)
     })
 
-    this.props.socket.emit('update room', this.props.currentRoom);
-    window.addEventListener("beforeunload", () => this.componentCleanup() );
+    this.props.socket.emit('update room', {room: this.props.currentRoom, roomName: this.props.match.params.roomName});
+    window.addEventListener("beforeunload", () => this.componentCleanup());
   }
 
   componentCleanup() {
@@ -72,14 +72,13 @@ class MasterGrid extends React.Component {
 
       let updatedRoom = { ...currentRoom }
       updatedRoom.memberIds = currentRoom.memberIds.splice(currentRoom.memberIds.indexOf(currentUserId), 1)
-      this.props.socket.emit('update room', updatedRoom)
+      this.props.socket.emit('update room', { ...updatedRoom, roomName: this.props.match.params.roomName })
 
     } else if (currentRoom && currentRoom.memberIds.length === 1) {
-      // console.log("ASDFASDFASDFASDFASDFASDF", currentRoom.memberIds.length, currentRoom._id)
       this.props.deleteRoom(currentRoom._id)
     }
 
-    this.socket.disconnect(true)
+    this.props.socket.disconnect(true)
   }
   componentWillUnmount() {
     this.componentCleanup()
@@ -102,7 +101,8 @@ class MasterGrid extends React.Component {
       notes: this.state.selected,
       instrument: this.props.instrument,
       userId: this.props.currentUserId,
-      beats: this.props.beats
+      beats: this.props.beats,
+      room: this.props.match.params.roomName
     }
     // this.props.receiveGrid({grid})
     this.props.socket.emit('grid update', grid);
@@ -356,4 +356,4 @@ const mDTP = dispatch => {
 
 }
 
-export default connect(null, mDTP)(MasterGrid)
+export default withRouter(connect(null, mDTP)(MasterGrid))

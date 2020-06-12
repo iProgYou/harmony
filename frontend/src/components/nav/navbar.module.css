@@ -15,10 +15,18 @@
 }
 
 .title{
+  position: fixed;
+  top: 20px;
+  left: calc(50vw - 70px);
+  text-decoration: underline purple;
   font-size: 45px;
   color: #dadce0;
   font-family: 'Parisienne', cursive;
 }
+.title:hover{
+  text-decoration: underline rgb(199, 15, 199);
+}
+
 .userLinks{
   display: flex;
   align-items: center;
@@ -91,6 +99,10 @@
   animation: hideAnimation .3s;
   opacity: 0;
 }
+.outerModal.hidden .innerModal{
+  animation: hideAnimation .3s;
+  opacity: 0;
+}
 
 .innerModal{
   display: flex;
@@ -99,9 +111,10 @@
   align-items: center;
   width: 500px;
   height: 375px;
-  border-radius: 15px;
+  border-radius: 20px;
   background-color: #dadce0;
   position: relative;
+  box-shadow:0px 0px 10px #dadce0;
 }
 .xIcon{
   position: absolute;
@@ -141,7 +154,7 @@
 #searchbar{
  display: flex;
  position:fixed;
- top:83px;
+ top: 90px;
  transition: .2s;
  height: 30px;
  border-radius: 10px;
@@ -156,20 +169,24 @@
   animation: hideAnimation .3s linear;
 }
 #searchbar button {
-  background-color: rgb(31, 31, 121);
+  background-color: #004ba8;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 #searchbar input{
   border-top-right-radius: 10px;
+  background-color: hsl(220, 9%, 87%);
   border-bottom-right-radius: 10px;
+  padding-left: 10px;
 }
 #searchbar img{
   height: 25px;
 }
 #searchbar .modal{
   position: fixed;
-  z-index: -99;
+  top: 0px;
+  left: 0px;
+  z-index:-1;
   width: 100vw;
   height: 100vh;
 
@@ -180,6 +197,8 @@
   font-size: 45px;
   margin-bottom: 20px;
 }
+
+
 select{
   background-color: white;
     border-color: #dbdbdb;
@@ -222,14 +241,25 @@ select{
 
 .errorMessage {
   position: absolute;
-  bottom: -20px;
-  color: white;
+  bottom: -45px;
+  color: #dadce0;
+  border: #4b0202 1px solid;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: #6f104962;
+  
 }
 
 .formInner{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.formInner input{
+  padding-left: 10px;
+  margin: 5px;
+  border: solid 1px black;
+  height: 25px;
 }
   
 .errors{

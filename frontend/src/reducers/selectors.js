@@ -37,9 +37,7 @@ export const samplerReadableNotes = (state,room) => {
     let newNoteArr = []; 
     samplerNotes.forEach(noteArr => {
         newNoteArr.push(noteArr.map(note => {
-            // console.log(note)
             if (note.includes("#")) {
-                // console.log(note)
                 return encodeNotes[note.replace("#","s")]
             } else {
                 return encodeNotes[note]

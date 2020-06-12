@@ -19,6 +19,6 @@ module.exports = passport => {
         // return false since there is no user
         return done(null, false);
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   }));
 };

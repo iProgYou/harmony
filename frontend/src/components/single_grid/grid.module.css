@@ -66,6 +66,10 @@
   transition: .2s;
 }
 
+.buttons > button:disabled{
+  background: #2b3a4b;
+}
+
 .gridItem{
   width: 70px;
   height:70px;
@@ -179,6 +183,7 @@ html * {
 #mini .grid{
   max-width: 25vw;
   max-height: 20vw;  
+  justify-content: center;
 }
 
 #mini .gridItem{
