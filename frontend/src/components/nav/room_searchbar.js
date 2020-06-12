@@ -47,7 +47,7 @@ class SearchBar extends React.Component{
           type="text"
           value={this.state.search}
           onChange={(e) => this.handleChange(e)}
-          placeholder="Search"
+          placeholder="Enter a Room Name"
           />
           {
             (this.state.errors && this.state.errors.name) ? (

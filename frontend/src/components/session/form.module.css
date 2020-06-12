@@ -87,6 +87,7 @@
   position: fixed;
   margin-top: 15px;
   width: 304px;
+  top: calc(50vh + 190px)
 }
 .formCenteringBox{
   display: flex;

@@ -99,6 +99,10 @@
   animation: hideAnimation .3s;
   opacity: 0;
 }
+.outerModal.hidden .innerModal{
+  animation: hideAnimation .3s;
+  opacity: 0;
+}
 
 .innerModal{
   display: flex;
@@ -107,9 +111,10 @@
   align-items: center;
   width: 500px;
   height: 375px;
-  border-radius: 15px;
+  border-radius: 20px;
   background-color: #dadce0;
   position: relative;
+  box-shadow:0px 0px 10px #dadce0;
 }
 .xIcon{
   position: absolute;
@@ -149,7 +154,7 @@
 #searchbar{
  display: flex;
  position:fixed;
- top:83px;
+ top: 90px;
  transition: .2s;
  height: 30px;
  border-radius: 10px;
@@ -164,14 +169,15 @@
   animation: hideAnimation .3s linear;
 }
 #searchbar button {
-  background-color: rgb(31, 31, 121);
+  background-color: #004ba8;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 #searchbar input{
   border-top-right-radius: 10px;
-  background-color: #dadce0;
+  background-color: hsl(220, 9%, 87%);
   border-bottom-right-radius: 10px;
+  padding-left: 10px;
 }
 #searchbar img{
   height: 25px;
@@ -191,6 +197,8 @@
   font-size: 45px;
   margin-bottom: 20px;
 }
+
+
 select{
   background-color: white;
     border-color: #dbdbdb;
@@ -246,6 +254,12 @@ select{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.formInner input{
+  padding-left: 10px;
+  margin: 5px;
+  border: solid 1px black;
+  height: 25px;
 }
   
 .errors{
