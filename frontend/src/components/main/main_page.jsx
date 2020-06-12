@@ -8,26 +8,37 @@ import { Switch, Route, Link } from 'react-router-dom';
 // import { receiveInstrument } from '../../actions/instrument_actions'
 import { clearRoom } from '../../actions/room_actions'
 import { connect } from 'react-redux'
+import Welcome from './welcome_modal/welcome';
 
 class MainPage extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      showWelcome: true
+    }
+
+    this.closeModal = this.closeModal.bind(this)
   }
 
   // componentDidUpdate() {
   //   this.props.clearRoom()
   // }
 
+  closeModal() {
+    this.setState({showWelcome: false})
+  }
+
+
   render() {
     return (
       <div>
+        {
+          this.state.showWelcome ? <Welcome closeModal={this.closeModal} /> : null
+        }
         <Switch>
           <Route path="/about" component={() => <AboutPage />} />
-
           <ProtectedRoute path="/rooms/:roomName/" component={(props) => <RoomContainer socket = {this.socket}  {...props}/>} />
-          {/* <Route path="/" component={() => <DrumGrid beats={8}/>} /> */}
           <Route path="/" component={() => <QuadGrid beats={8}/>} />
-          {/* <Route to="/:roomName/" render={() => <RoomContainer beats={}/>} /> */}
         </Switch>
 
         <h1 className={styles.blurb}>Make Music</h1>
