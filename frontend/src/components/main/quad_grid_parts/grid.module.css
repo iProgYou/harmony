@@ -169,20 +169,26 @@ html * {
   max-width: 25vw;
   max-height: 20vw;  
 }
- #mini .gridItem{
+
+#mini .gridItem{
   width: 20px;
   height:20px;
   margin: 1px;
   border: 2px;
   border-radius: 3px;
+}
 
- }
 
- .quadGrid{
+.instrumentLogo {
+  width: 25px;
+  height: 25px;
+}
+
+.quadGrid{
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
- }
+}
 
  #topButtons{
    display: flex;

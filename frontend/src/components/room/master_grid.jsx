@@ -276,6 +276,7 @@ class MasterGrid extends React.Component {
               <FaPlay 
                 size={20}
               />
+
               <FaUserFriends
                 size={24}
               />
@@ -296,6 +297,16 @@ class MasterGrid extends React.Component {
                 <div className={styles.bbDiv}>
                   <FaPlay
                     size={20}
+                  />
+                  
+                  <img
+                    src={
+                      this.props.instrument === 'piano' ? require('../../assets/piano.png') :
+                      this.props.instrument === 'bass' ? require('../../assets/bass.png') :
+                      this.props.instrument === 'keyboard' ? require('../../assets/keyboard.png') :
+                      require('../../assets/drums.png')
+                    }
+                    className={styles.instrumentLogo}
                   />
                 </div>
               </button>
