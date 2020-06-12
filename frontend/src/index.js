@@ -3,18 +3,6 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 
-// TESTING
-
-import { createJam } from './util/jam_api_util';
-// import { createRoom } from './util/room_api_util';
-// import { fetchJams, createJam } from './actions/jams_actions';
-
-import { receiveRoom, fetchRooms, createRoom } from './actions/room_actions';
-// import { receiveRoom, fetchRooms,  } from './actions/room_actions';
-import { receiveGrid, receiveGrids } from './actions/grid_actions';
-// END TESTING
-
-
 //use this to parse the user's session token
 import jwt_decode from 'jwt-decode';
 
@@ -54,28 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Render our root component and pass in the store as a prop
   const root = document.getElementById('root');
-
-
-  // TESTING
-
-
-    window.dispatch = store.dispatch;
-    // window.fetchJams = fetchJams;
-    window.createJam = createJam;
-    window.getState = store.getState;
-    window.receiveRoom = receiveRoom;
-    window.fetchRooms = fetchRooms;
-    window.createRoom = createRoom;
-    window.receiveGrid = receiveGrid;
-    window.receiveGrids = receiveGrids;
-  // END TESTING
-
-
-  // about page images
-
-
-
-  // end images
 
 
   ReactDOM.render(<Root store={store} />, root);
