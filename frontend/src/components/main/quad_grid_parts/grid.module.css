@@ -162,11 +162,16 @@ html * {
   max-width: 25vw;
   max-height: 20vw;  
 }
- #mini .gridItem{
+
+#mini .gridItem{
   width: 20px;
   height:20px;
   margin: 1px;
   border: 2px;
   border-radius: 3px;
+}
 
- }
+.instrumentLogo {
+  width: 25px;
+  height: 25px;
+}

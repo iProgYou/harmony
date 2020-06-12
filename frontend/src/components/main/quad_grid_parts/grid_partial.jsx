@@ -158,21 +158,6 @@ export default class Grid extends React.Component {
       />
     )
 
-    let imagePath;
-
-    switch (this.props.instrument) {
-      case 'piano':
-        imagePath = './frontend/assets/piano.png';
-      case 'keyboard':
-        imagePath = '../../../assets/keyboard';
-      case 'drums':
-        imagePath = '../../../assets/drums';
-      case 'bass':
-        imagePath = '../../../assets/bass';
-      default:
-        imagePath = ''
-    }
-
     const pauseBtn = !this.state.playing ? (
       < FaPlay size={20} />
     ) : (
@@ -191,7 +176,19 @@ export default class Grid extends React.Component {
               <FaPlay 
                 size={20}
               />
-              < img src='../../../assets/piano.png' className={styles.instrumentLogo} />
+
+              &nbsp;
+              &nbsp;
+
+              < img 
+                src = {
+                  this.props.instrument === 'piano' ? require('../../../assets/piano.png') :
+                  this.props.instrument === 'bass' ? require('../../../assets/bass.png') :
+                  this.props.instrument === 'keyboard' ? require('../../../assets/keyboard.png') :
+                  require('../../../assets/drums.png')    
+                }
+                className={styles.instrumentLogo} 
+              />
             </button>
           ) : (
             <button className={styles.button} ref={this.pauseBtn} disabled={!this.props.isLoaded} onClick={this.handlePause}>
