@@ -19,7 +19,7 @@ const PersonDisplay = ({image, name, title, links}) => {
   }
   return (
     <div className= {styles.personDisplay}>
-      <img className = {styles.personImage} src={image}/> 
+      <img className = {styles.personImage} src={image}/>  
       <h2 className = {styles.name}>{name}</h2>
       <h3 className = {styles.title}>{title}</h3>
       <ul>
