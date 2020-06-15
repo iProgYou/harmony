@@ -32,6 +32,8 @@
   margin-bottom: 20px;
   margin-top: 10px;
   animation-name: fadeIn;
+  text-align: center;
+
   animation-timing-function: ease-in;
   animation-duration: 1.5s;
 }
@@ -44,6 +46,14 @@
   animation-name: fadeIn;
   animation-timing-function: ease-in;
   animation-delay: .4s;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+.modalChild svg{
+  animation-name: fadeIn;
+  animation-timing-function: ease-in;
+  animation-delay: .8s;
   animation-duration: 1.5s;
   animation-fill-mode: forwards;
   opacity: 0;
@@ -61,6 +71,7 @@
   animation-duration: 1.5s;
   animation-fill-mode: forwards;
   opacity: 0;
+  margin-bottom: 50px;
   
 }  
 

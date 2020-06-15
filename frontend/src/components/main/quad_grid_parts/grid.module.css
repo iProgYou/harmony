@@ -38,6 +38,9 @@
   font-size: 19px;
   border-radius:5px;
   z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttons > button.bigButton{
@@ -180,8 +183,8 @@ html * {
 
 
 .instrumentLogo {
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
 }
 
 .quadGrid{
