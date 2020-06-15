@@ -14,7 +14,7 @@ class MainPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showWelcome: true
+      showWelcome: !props.isLoggedIn
     }
 
     this.closeModal = this.closeModal.bind(this)
@@ -52,6 +52,12 @@ class MainPage extends React.Component {
   }
 }
 
+const mSTP = state => {
+  debugger
+  return{
+    isLoggedIn: state.session.isAuthenticated 
+  }
+}
 
 const mDTP = dispatch => {
 
@@ -62,4 +68,4 @@ const mDTP = dispatch => {
   }
 }
 
-export default connect(null, mDTP)(MainPage);
+export default connect(mSTP, mDTP)(MainPage);
