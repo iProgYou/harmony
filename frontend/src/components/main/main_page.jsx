@@ -53,7 +53,7 @@ class MainPage extends React.Component {
 }
 
 const mSTP = state => {
-  debugger
+  
   return{
     isLoggedIn: state.session.isAuthenticated 
   }
