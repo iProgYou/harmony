@@ -1,6 +1,6 @@
 [![alt text](https://github.com/iProgYou/harmony/blob/master/frontend/public/harmony_logo.png "Go to Harmony")](https://harmony-music.herokuapp.com/)
 :----------------:
-**A collaborative music creation experience**
+**a collaborative music creation experience**
 
 [William Sexton](https://github.com/williamsexton/) - [Charles Coombs-Esmail](https://github.com/ccoombsesmail) - [Isaac Yoon](https://github.com/isaac-yoon) - [Zack Barbieri](https://github.com/iProgYou/)
 
