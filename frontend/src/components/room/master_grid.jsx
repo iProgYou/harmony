@@ -104,7 +104,6 @@ class MasterGrid extends React.Component {
       beats: this.props.beats,
       room: this.props.match.params.roomName
     }
-    // this.props.receiveGrid({grid})
     this.props.socket.emit('grid update', grid);
 
   }
