@@ -29,7 +29,6 @@ When you open the sight you will notice several grids. Feel free to play around 
 
 <!-- Under the Hood -->
 
-
 ### Playback and Real-Time User Interaction
 
 Harmony makes use of the Tone.js library with its Transport time keeping facilities to allow for playback of user input. Both single instrument and multiple instrument playback are supported, along with pause, restart and loop functionality. The primary function used for playback is the Tone provided scheduleRepeat function, which will fire periodically. In the code below, it is set to repeat every eigth note (8n). The input to the start button for playback is a boolean which determines whether the playback will loop indefinitely.
@@ -87,7 +86,64 @@ Synchronizing grid state across clients in real-time was accomplished using WebS
   });
 
 ```
+### Note Extraction 
 
+The samplerNoteArr function takes in the redux state which houses all of the different users' notes, and combines them all into an array. It does this by using a for loop to iterate over the specific rooms number of beats and then keying into each user's note array at that specific index. 
+
+```javascript
+const samplerNoteArr = (state, room) => {
+    // if (room.memberIds.length === 0) return;
+    let samplerNotes = [];
+    for (let i = 0; i < room.beats; i++) {
+        samplerNotes.push([])
+        room.memberIds.forEach(gridId => {
+            if (!state.entities.grids[gridId]) return;
+            let notes = state.entities.grids[gridId].notes;
+            let inst = state.entities.grids[gridId].instrument;
+            if (inst === "drums") {
+                let drumArr = [];
+                // debugger
+                if (notes[i]) notes[i].forEach(note => {
+                    drumArr.push(inst[0] + note)
+                });
+                samplerNotes[i].push(...drumArr)
+            } else {
+                if (notes[i] !== "") {
+                    samplerNotes[i].push(inst[0] + notes[i])
+                };
+            };
+        });
+    };
+    return samplerNotes
+};
+```
+### Note Conversion
+
+After running through the note extraction process, the notes are in a format that is not readable by Tone.js. The function samplerReadableNotes gets the note array from smaplerNoteArr, and then does its own magic to convert each note into a format that the sampler can read. The primary mechanism it uses is that of a hash. A forEach loop is used to iterate over the note array, and then that note is passed through the hash and pushed into a new array. Once completed, the sampler can read the new array.
+
+```javascript
+export const samplerReadableNotes = (state,room) => {
+    // debugger
+    let samplerNotes = samplerNoteArr(state,room)
+    let encodeNotes = {
+        bA1: "A1", bB1: "B1", bCs2: "C1", bE2: "D1", bFs2: "E1", bA2: "F1", 
+        pA1: "A2", pB1: "B2", pCs2: "C2", pE2: "D2", pFs2: "E2", pA2: "F2",
+        kA1: "A3", kB1: "B3", kCs2: "C3", kE2: "D3", kFs2: "E3", kA2: "F3", 
+        dA1: "A4", dB1: "B4", dCs2: "C4", dE2: "D4", dFs2: "E4", dA2: "F4"
+    }
+    let newNoteArr = []; 
+    samplerNotes.forEach(noteArr => {
+        newNoteArr.push(noteArr.map(note => {
+            if (note.includes("#")) {
+                return encodeNotes[note.replace("#","s")]
+            } else {
+                return encodeNotes[note]
+            }
+        }));
+    })
+    return newNoteArr
+}
+```
 
 Future Updates
 * Add save functionality to created musical compositions
