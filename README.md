@@ -144,6 +144,40 @@ export const samplerReadableNotes = (state,room) => {
     return newNoteArr
 }
 ```
+### Routing
+
+The project makes use of Express router to keep the code DRY and separate resources. There is a clear division of labor and Express router makes the code easily readable while also enabling flexibility for future middleware incorporation. Passport is also highlighted here and used to create a route that is only accessible if a user is logged in.
+Finally, the project uses MongoDB, a document-based NoSQL database for its scalability and flexibility. If more room information needs to be saved to the database in the future, it is simple to add the properties as opposed to a SQL-based database where the schema needs to be planned extensively before proceeding with a project.
+```javascript
+router.post('/', passport.authenticate('jwt', { session: false }), 
+  (req, res) => {
+    const { errors, isValid } = validateRoomInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    Room.findOne({ name: req.body.name })
+      .then(room => {
+        if (room) {
+          return res.status(422).json({name: "A room with that name already exists" })
+        } else {
+          const newRoom = new Room({
+            name: req.body.name,
+            hostId: req.user.id,
+            beats: req.body.beats,
+            // memberIds: [req.user.id]
+            // more additions to come?
+          });
+      
+          newRoom.save()
+            .then(room => res.json(room))
+            // .catch(err => console.log(err));
+        }
+      })
+  }
+);
+```
 
 Future Updates
 * Add save functionality to created musical compositions
